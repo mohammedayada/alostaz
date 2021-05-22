@@ -1,0 +1,451 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap");
+html {
+  scroll-behavior: smooth;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 0 !important;
+}
+
+body {
+  font-family: "Cairo", sans-serif;
+  direction: rtl;
+}
+
+.clear {
+  clear: both;
+}
+
+img {
+  max-width: 100%;
+  width: 100%;
+}
+
+.top-header {
+  padding: 15px 0 15px 0;
+}
+.top-header .logo {
+  padding-top: 5px;
+  text-align: center;
+}
+.top-header .logo img {
+  max-height: 100px;
+  width: auto;
+}
+.top-header .for-ad {
+  text-align: center;
+}
+.top-header .for-ad .btn {
+  width: 200px;
+  background-color: #c31e1e;
+  color: #fff;
+}
+.top-header .for-ad .btn:hover {
+  background-color: transparent;
+  border: 1px solid #c31e1e;
+  color: #c31e1e;
+}
+.top-header .date-time {
+  text-align: center;
+  padding-top: 7px;
+}
+.top-header .date-time i {
+  color: red;
+}
+.top-header #date {
+  margin-left: 30px;
+}
+
+.navbar {
+  background-color: #ddd;
+}
+.navbar .nav-item .nav-link {
+  color: #000;
+}
+.navbar .nav-item .nav-link:hover {
+  border-bottom: 2px solid #c31e1e;
+}
+.navbar .active .nav-link {
+  border-bottom: 2px solid #c31e1e;
+}
+
+.social-search {
+  padding-top: 30px;
+}
+.social-search .social {
+  margin-top: 10px;
+  text-align: center;
+}
+.social-search .social a i {
+  color: #555;
+  font-size: 25px;
+  margin-left: 10px;
+}
+.social-search .social a .fa-facebook-f {
+  color: #4064ac;
+}
+.social-search .social a .fa-google-plus {
+  color: #c31e1e;
+}
+.social-search .social a .fa-youtube {
+  color: #f70000;
+}
+.social-search .social a .fa-twitter {
+  color: #1c9cea;
+}
+.social-search .social a .fa-instagram {
+  color: #c636aa;
+}
+.social-search .input-group .form-control {
+  height: 40px;
+}
+.social-search .input-group .form-control:focus {
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+.social-search .input-group .btn {
+  background-color: #c31e1e;
+  border: 0;
+}
+.social-search .input-group .btn i {
+  color: #fff;
+}
+.social-search .input-group .btn:focus {
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+.social-search .sign-in-sign-up {
+  text-align: center;
+  margin-top: 3px;
+}
+.social-search .sign-in-sign-up a {
+  display: inline-block;
+  margin: 5px;
+}
+.social-search .sign-in-sign-up a i {
+  color: #c31e1e;
+}
+.social-search .sign-in-sign-up a span {
+  color: #000;
+}
+
+.newline {
+  background-color: #c31e1e;
+  padding: 10px 0 10px 0;
+}
+.newline .slider-item a {
+  color: #fff;
+}
+
+.main {
+  padding-top: 30px;
+  background-color: #eee;
+}
+.main .spaces img {
+  margin-top: 10px;
+}
+.main .content .carousel .carousel-item {
+  background-position: center;
+  background-size: cover;
+  height: 400px;
+}
+.main .content .carousel .carousel-item .carousel-caption {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 5px;
+}
+.main .content .books-article {
+  margin-top: 40px;
+}
+.main .content .books-article .card-books {
+  position: relative;
+  padding-right: 110px;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  height: 120px;
+}
+.main .content .books-article .card-books .card-img {
+  height: 120px;
+  width: 100px;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  right: 0;
+}
+.main .content .books-article .card-books .card-body {
+  padding-right: 0;
+  padding: 0;
+}
+.main .content .books-article .card-books .card-title {
+  display: inline-block;
+}
+.main .content .gallery {
+  margin-top: 30px;
+}
+.main .content .gallery img {
+  margin-top: 10px;
+}
+.main .content .gallery .main-gallery img {
+  height: 260px;
+}
+.main .content .gallery .side-gallery img {
+  max-height: 125px;
+}
+.main .content .gallery .btn-more {
+  margin-top: 20px;
+  background-color: #c31e1e;
+  color: #fff;
+}
+.main .content .gallery .btn-more:hover {
+  background-color: transparent;
+  border: 1px solid #c31e1e;
+  color: #c31e1e;
+}
+.main .content .news-classifications {
+  margin-top: 30px;
+}
+.main .content .news-classifications .nav-pills {
+  margin-top: 10px;
+}
+.main .content .news-classifications .nav-pills .nav-item .nav-link {
+  margin-left: 10px;
+  background-color: transparent;
+  border: 1px solid #c31e1e;
+  color: #c31e1e;
+}
+.main .content .news-classifications .nav-pills .nav-item .active {
+  background-color: #c31e1e;
+  color: #fff;
+}
+.main .content .news-classifications .news-cards .new-card {
+  margin-bottom: 20px;
+}
+.main .content .news-classifications .news-cards .new-card .card-img img {
+  border-radius: 5px;
+}
+.main .content .news-classifications .news-cards .new-card .card-text {
+  display: inline-block;
+  color: #c31e1e;
+  font-size: 18px;
+  margin-top: 5px;
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.main .content .news-classifications .btn-more {
+  text-align: center;
+  margin-top: 10px;
+}
+.main .content .news-classifications .btn-more .btn {
+  background-color: #c31e1e;
+  color: #fff;
+  width: 120px;
+}
+.main .content .boll-subscripe {
+  margin-top: 50px;
+}
+.main .content .boll-subscripe .boll h5, .main .content .boll-subscripe .subscripe h5 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.main .content .boll-subscripe .boll .form-group, .main .content .boll-subscripe .subscripe .form-group {
+  margin-bottom: 0;
+}
+.main .content .boll-subscripe .boll .btn-submit, .main .content .boll-subscripe .subscripe .btn-submit {
+  background-color: #c31e1e;
+  color: #fff;
+}
+.main .content .boll-subscripe .boll .btn-submit:hover, .main .content .boll-subscripe .subscripe .btn-submit:hover {
+  background-color: transparent;
+  border: 1px solid #c31e1e;
+  color: #c31e1e;
+}
+.main .content .boll-subscripe .subscripe .form-control {
+  margin-bottom: 20px;
+}
+.main .content .boll-subscripe .subscripe .form-control:focus {
+  outline: 0;
+  box-shadow: none !important;
+}
+
+.manager {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.manager h6 {
+  font-size: 13px;
+}
+.manager h5 {
+  font-size: 25px;
+  font-weight: 600;
+  color: #c31e1e;
+}
+
+.card-news-img-right .card {
+  position: relative;
+}
+.card-news-img-right .card .card-img {
+  position: absolute;
+  right: 0;
+}
+
+.who-us {
+  margin-top: 30px;
+}
+.who-us img {
+  width: 200px;
+  margin-bottom: 30px;
+}
+.who-us p {
+  line-height: 40px;
+}
+
+footer {
+  background-color: #000;
+  margin-top: 100px;
+  padding-top: 70px;
+}
+footer .footer-top {
+  margin-bottom: 20px;
+}
+footer .footer-top .number {
+  color: #fff;
+  text-align: right;
+}
+footer .footer-top .support {
+  text-align: left;
+}
+footer .footer-top img {
+  width: 200px;
+}
+footer ul li {
+  margin-top: 8px;
+  transition: 0.5s;
+  font-size: 14px;
+  color: #fff;
+  position: relative;
+  padding-right: 10px;
+}
+footer ul li::before {
+  position: absolute;
+  font-family: "Font Awesome 5 Free";
+  content: "";
+  font-weight: 900;
+  right: 0;
+}
+footer ul li i {
+  margin-left: 5px;
+}
+footer ul li:hover {
+  transform: translateX(-4px);
+}
+footer ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+footer ul li a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+footer .logo {
+  text-align: right;
+}
+footer .logo img {
+  max-height: 100px;
+  max-width: 150px;
+}
+footer .logo p {
+  color: #fff;
+  font-size: 13px;
+  margin-top: 10px;
+  line-height: 30px;
+}
+footer .important-links h5 {
+  color: #fff;
+  font-size: 18px;
+  margin-bottom: 15px;
+  margin-top: 20px;
+}
+footer .important-links ul li {
+  width: 50%;
+  float: right;
+}
+footer .about-site h5 {
+  color: #fff;
+  font-size: 18px;
+  margin-bottom: 15px;
+  margin-top: 20px;
+}
+footer .about-site img {
+  width: auto;
+  margin-bottom: 10px;
+}
+footer .copy {
+  margin-top: 40px;
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+footer .copy .copy-content {
+  text-align: right;
+}
+footer .copy .copy-content h5 {
+  color: #fff;
+  font-size: 15px;
+}
+footer .copy .copy-develop {
+  text-align: left;
+}
+footer .copy .copy-develop h5 {
+  color: #fff;
+  font-size: 15px;
+}
+footer .social {
+  text-align: center;
+  margin-top: 30px;
+}
+footer .social a {
+  margin: 5px;
+  color: #fff;
+}
+footer .social a i {
+  font-size: 20px;
+}
+
+.section-header {
+  background-color: #555;
+  color: #fff;
+  padding: 10px;
+  position: relative;
+}
+.section-header .more {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translate(0, -50%);
+  color: #fff;
+}
+
+#signin .close:focus {
+  outline: 0 !important;
+}
+#signin .btn {
+  background-color: #c31e1e;
+  border: 1px solid #c31e1e;
+}
+#signin .btn:hover {
+  background-color: transparent;
+  color: #c31e1e;
+}
+
+@media (max-width: 524px) {
+  .top-header .for-ad {
+    margin: 10px 0 10px 0;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

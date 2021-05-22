@@ -1,0 +1,474 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'assets/css/bootstrap-ar.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/slick-theme.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/all.min.css' %}">
+  <link href="https://prayertimes.date/css/widget.api.v1.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+  <title>{% block title %} {% endblock %}</title>
+</head>
+
+<body>
+
+  <!-- top-header -->
+  <div class="top-header">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-3">
+          <div class="logo">
+            <!-- <img src="./assets/images/logo.png" alt=""> -->
+            <h5 style="color: red;">الوسيط الدولي</h5>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3">
+          <a href="" class="spaces">
+            <img src="{% static 'assets/images/7101668883051653025.png' %}" alt="">
+          </a>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-2">
+          <a href="" class="spaces">
+            <img src="{% static 'assets/images/7101668883051653025.png' %}" alt="">
+          </a>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-2">
+          <div class="date-time">
+            <span id="date">
+              <i class="far fa-calendar-alt"></i>
+            </span>
+            <!-- <span class="datetime playsound">
+              <i class="far fa-clock"></i>
+              <span>11:02:34 PM</span><br>
+            </span> -->
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-2">
+          <div class="sign-in-sign-up">
+            <a class="sign-in" type="button" data-toggle="modal" data-target="#signin">
+              <i class="fas fa-user"></i>
+              <span href="">تسجيل الدخول</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">الرئيسية</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">محليات</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              عرب وعالم
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">عرب</a></li>
+              <li><a class="dropdown-item" href="#">عالم</a></li>
+              <li><a class="dropdown-item" href="#">افريقا</a></li>
+              <li><a class="dropdown-item" href="#">الصين</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              محافظات
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">الوادي الجديد</a></li>
+              <li><a class="dropdown-item" href="#">المنيا</a></li>
+              <li><a class="dropdown-item" href="#">المنوفية</a></li>
+              <li><a class="dropdown-item" href="#">مرسى مطروح</a></li>
+              <li><a class="dropdown-item" href="#">كفر الشيخ</a></li>
+              <li><a class="dropdown-item" href="#">قنا</a></li>
+              <li><a class="dropdown-item" href="#">القليوبية</a></li>
+              <li><a class="dropdown-item" href="#">القاهرة</a></li>
+              <li><a class="dropdown-item" href="#">الفيوم</a></li>
+              <li><a class="dropdown-item" href="#">الغربية</a></li>
+              <li><a class="dropdown-item" href="#">شمال سينا</a></li>
+              <li><a class="dropdown-item" href="#">الشرقية</a></li>
+              <li><a class="dropdown-item" href="#">السويس</a></li>
+              <li><a class="dropdown-item" href="#">سوهاج</a></li>
+              <li><a class="dropdown-item" href="#">دمياط</a></li>
+              <li><a class="dropdown-item" href="#">الدقهليه</a></li>
+              <li><a class="dropdown-item" href="#">الجيزة</a></li>
+              <li><a class="dropdown-item" href="#">جنوب سينا</a></li>
+              <li><a class="dropdown-item" href="#">بورسعيد</a></li>
+              <li><a class="dropdown-item" href="#">بني سويف</a></li>
+              <li><a class="dropdown-item" href="#">البحيرة</a></li>
+              <li><a class="dropdown-item" href="#">البحر الاحمر</a></li>
+              <li><a class="dropdown-item" href="#">الاقصر</a></li>
+              <li><a class="dropdown-item" href="#">اسيوط</a></li>
+              <li><a class="dropdown-item" href="#">اسوان</a></li>
+              <li><a class="dropdown-item" href="#">الاسماعلية</a></li>
+              <li><a class="dropdown-item" href="#">الاسكندرية</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              حوادث وتحقيقات
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">حوادث </a></li>
+              <li><a class="dropdown-item" href="#">تحقيقات </a></li>
+              <li><a class="dropdown-item" href="#">ملفات ساخنة </a></li>
+              <li><a class="dropdown-item" href="#">جرائم </a></li>
+              <li><a class="dropdown-item" href="#">محاكم </a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              سياسة واقتصاد
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">اسعار واسواق</a></li>
+              <li><a class="dropdown-item" href="#">بورصة وشركات</a></li>
+              <li><a class="dropdown-item" href="#">بنوك واستثمار</a></li>
+              <li><a class="dropdown-item" href="#">نقل وملاحة</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              رياضة
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">رياضة محلية</a></li>
+              <li><a class="dropdown-item" href="#">رياضة عربية</a></li>
+              <li><a class="dropdown-item" href="#">رياضة عالمية</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              ثقافة وفنون
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">بورتريه </a></li>
+              <li><a class="dropdown-item" href="#">تراث</a></li>
+              <li><a class="dropdown-item" href="#">اعلام</a></li>
+              <li><a class="dropdown-item" href="#">اصدارات</a></li>
+              <li><a class="dropdown-item" href="#">كاركاتير</a></li>
+              <li><a class="dropdown-item" href="#">كتب</a></li>
+              <li><a class="dropdown-item" href="#">ثقافات</a></li>
+              <li><a class="dropdown-item" href="#">نصوص</a></li>
+              <li><a class="dropdown-item" href="#">فنون</a></li>
+              <li><a class="dropdown-item" href="#">اراء ومقالات</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              منوعات
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">سيدتى وطفلك </a></li>
+              <li><a class="dropdown-item" href="#">خدمات ومجتمع </a></li>
+              <li><a class="dropdown-item" href="#">كاريكاتير ورسوم </a></li>
+              <li><a class="dropdown-item" href="#">صحافة و تليفزيون </a></li>
+              <li><a class="dropdown-item" href="#">علوم وتكنولوجيا</a></li>
+              <li><a class="dropdown-item" href="#">صحة وجمال </a></li>
+              <li><a class="dropdown-item" href="#">صور وفيديوهات</a></li>
+              <li><a class="dropdown-item" href="#">عقارات وسيارات </a></li>
+              <li><a class="dropdown-item" href="#">تريندات وهاشتاجات عربية </a></li>
+              <li><a class="dropdown-item" href="#">دعاية وإعلانات </a></li>
+              <li><a class="dropdown-item" href="#">مواهب وهوايات</a></li>
+              <li><a class="dropdown-item" href="#">صوت وصورة</a></li>
+              <li><a class="dropdown-item" href="#">ناس ومجتمع</a></li>
+              <li class="dropdown-submenu">
+                <a class="dropdown-item dropdown-toggle" href="#">دعاية واعلان</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">أسواق ومعارض</a></li>
+                  <li><a class="dropdown-item" href="#">عروض وخصومات </a></li>
+                  <li><a class="dropdown-item" href="#">شركات ومصانع</a></li>
+                  <li><a class="dropdown-item" href="#">تدريب وتسويق </a></li>
+                  <li><a class="dropdown-item" href="#">تأمين واستثمار </a></li>
+                  <li><a class="dropdown-item" href="#">محلات تجارية وافتتاحات</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              عقارات وسيارات
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">عقارات</a>
+              <a class="dropdown-item" href="#">سيارات</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              مواهب وهوايات
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">مواهب </a></li>
+              <li><a class="dropdown-item" href="#">هوايات </a></li>
+              <li><a class="dropdown-item" href="#">غرائب وطرائف</a></li>
+              <li><a class="dropdown-item" href="#">مسابقات وتسالى</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              ناس ومجتمع
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">انفوجراف</a></li>
+              <li><a class="dropdown-item" href="#">حياة كريمة</a></li>
+              <li><a class="dropdown-item" href="#">خدمات وأدلة</a></li>
+              <li><a class="dropdown-item" href="#">حياة الناس</a></li>
+              <li><a class="dropdown-item" href="#">أهل الخير</a></li>
+              <li><a class="dropdown-item" href="#">وفيات</a></li>
+              <li><a class="dropdown-item" href="#">مفقودات</a></li>
+              <li><a class="dropdown-item" href="#">تهانى ومناسبات</a></li>
+              <li><a class="dropdown-item" href="#">الصلح خير</a></li>
+              <li><a class="dropdown-item" href="#">خطابك وصل</a></li>
+              <li><a class="dropdown-item" href="#">تسالى وابتسامات</a></li>
+              <li><a class="dropdown-item" href="#">مخترعات وابتكارات </a></li>
+              <li><a class="dropdown-item" href="#">استغاثات ومتابعات </a></li>
+              <li><a class="dropdown-item" href="#">جمعيات ونقابات </a></li>
+              <li><a class="dropdown-item" href="#">حدوتة مصرية </a></li>
+            </ul>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="#">دعاية واعلان</a>
+          </li> -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              المزيد
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">عاجل</a></li>
+              <li><a class="dropdown-item" href="#">دنيا ودين</a></li>
+              <li><a class="dropdown-item" href="#">سياحة وطيران</a></li>
+              <li><a class="dropdown-item" href="#">فيروس كورونا</a></li>
+              <li><a class="dropdown-item" href="#">قنصليات وسفارات</a></li>
+              <li class="dropdown-submenu">
+                <a class="dropdown-item dropdown-toggle" href="#">صوت وصورة</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">فيديوهات </a></li>
+                  <li><a class="dropdown-item" href="#">ألبومات صور </a></li>
+                  <li><a class="dropdown-item" href="#">راديو الأستاذ</a></li>
+                  <li><a class="dropdown-item" href="#">تليفزيون الأستاذ</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- social & search -->
+  <div class="social-search">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-2">
+          <div class="social">
+            <a href=""><i class="fab fa-facebook-f"></i></a>
+            <a href=""><i class="fab fa-twitter"></i></a>
+            <a href=""><i class="fab fa-google-plus"></i></a>
+            <a href=""><i class="fab fa-youtube"></i></a>
+            <a href=""><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <a href="" class="spaces">
+            <img src="{% static 'assets/images/7101668883051653025.png' %}" alt="">
+          </a>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="ابحث هنا" aria-label="Recipient's username"
+              aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% block contain %}
+  {% endblock %}
+  <!-- start footer -->
+  <footer>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <div class="important-links an-links">
+            <!-- <h5>أقسام الموقع</h5> -->
+            <ul class="list-unstyled">
+              <li><a href="#">الرئيسية</a></li>
+              <li><a href="#">محليات</a></li>
+              <li><a href="#">عرب وعالم</a></li>
+              <li><a href="#">محافظات</a></li>
+              <li><a href="#">حوادث وتحقسقات</a></li>
+              <li><a href="">سياسة واقتصاد</a></li>
+              <li><a href="">رياضة</a></li>
+              <li><a href="">ثقافة وفنون</a></li>
+              <li><a href="">منوعات</a></li>
+              <li><a href="">عقارات وسيارات</a></li>
+              <li><a href="">مواهب وهوايات</a></li>
+              <li><a href="">صوت وصورة</a></li>
+              <li><a href="">ناس ومجتمع</a></li>
+              <li><a href="">دعاية واعلان</a></li>
+              <!-- <li><a href="">المزيد</a></li> -->
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-3">
+          <div class="logo mt-3">
+            <img src="{% static 'assets/images/logo.png' %}" alt="">
+            <p>
+              الأستاذ هى جريدة ورقية وإلكترونية ، تأسست عام 2010 ، متخصصة فى نشر الموضوعات التحريرية المتنوعة فى كافة
+              المجالات وكذلك الإعلانات والخدمات المجانية التى تخدم القارىء والمعلن وكل أفراد الأسرة العربية ، تصدر
+              أسبوعيا ، تقوم بتوزيعها داخل مصر " جريدة الجمهورية " وخارج مصر " الشركة القومية للتوزيع " تعمل وفق ميثاق
+              الشرف الصحفى ، بلا انتماءات سياسية أو حزبية أو انحيازات عقائدية أو مذهبية أو طائفية وهى بمثابة دليل
+              استرشادى فى كافة الموضوعات التى تخدم الفرد والمجتمع العربى ، كما تهدف إلى توفير خدمة فعالة متبادلة بين
+              عملائها وقرائها وتطمح إلى توسيع مساحة نشاطها لتصل إلى كافة الدول
+            </p>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <!-- <div class="about-site">
+            <h5>حمل التطبيق</h5>
+            <a href="">
+              <img src="./assets/images/play.png" alt="">
+            </a>
+            <a href="">
+              <img src="./assets/images/apple.png" alt="">
+            </a>
+          </div> -->
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-5">
+          <div class="important-links">
+            <h5>روابط</h5>
+            <ul class="list-unstyled">
+              <li><a href="">اتصل بنا</a></li>
+              <li><a href="#">اتصل بنا</a></li>
+              <li><a href="">كيف تصل الينا</a></li>
+              <li><a href="">اعلن معنا</a></li>
+              <li><a href="#">شروط الاستخدام</a></li>
+              <li><a href="#">سياية الخصوصية</a></li>
+              <li><a href="">ارسل خبرا</a></li>
+              <li><a href="">انشر صورك</a></li>
+              <li><a href="">تابع أخرالأخبار عبر الاشتراك بالجريدة الإلكترونية </a></li>
+              <li><a href="">اشترك في خدمة الواتساب</a></li>
+              <li><a href="">اشترك فى النشرة الإخبارية </a></li>
+              <li><a href="">امسح الكود وحمل التطبيق </a></li>
+              <li><a href="#">عن الموقع</a></li>
+              <li><a href="#">خدمة الرسائل</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <div class="about-site text-right">
+            <span>حمل التطبيق</span>
+            <a href="">
+              <img src="{% static 'assets/images/play.png' %}" alt="">
+            </a>
+            <a href="">
+              <img src="{% static 'assets/images/apple.png' %}" alt="">
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="social">
+        <a href=""><i class="fab fa-facebook-f"></i></a>
+        <a href=""><i class="fab fa-twitter"></i></a>
+        <a href=""><i class="fab fa-instagram"></i></a>
+        <a href=""><i class="fab fa-google-plus"></i></a>
+        <a href=""><i class="fab fa-whatsapp"></i></a>
+      </div>
+      <div class="copy">
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-6">
+            <div class="copy-content">
+              <h5>جميع الحقوق محفوظة لموقع جريدة الأستاذ &copy;</h5>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6">
+            <div class="copy-develop">
+              <h5>تصميم وتطوير قسم تقنية المعلومات </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- end footer -->
+
+
+  <!-- sign in modal -->
+  <div class="modal fade" id="signin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">تسجيل الدخول</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="">
+            <div class="form-group">
+              <label for="username">اسم المستخدم</label>
+              <input type="text" name="" id="" class="form-control" placeholder="اسم المستخدم">
+            </div>
+            <div class="form-group">
+              <label for="username">كلمة المرور</label>
+              <input type="text" name="" id="" class="form-control" placeholder="كلمة المرور">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary btn-block">الدخول</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'assets/js/popper.min.js' %}"></script>
+  <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'assets/js/slick.min.js' %}"></script>
+  <script src="https://prayertimes.date/js/widget.api.v1.min.js"></script>
+  <script src="{% static 'assets/js/simplemarquee.js' %}"></script>
+  <script src="{% static 'assets/js/main.js' %}"></script>
+  <script>
+    function httpAjax(url, mFunction) { var xhttp = new XMLHttpRequest(); xhttp.onreadystatechange = function () { if (this.readyState == 4 && this.status == 200) { mFunction(JSON.parse(this.responseText)) } }; xhttp.open("GET", url, true); xhttp.send() } function changeCountry() { var c_value = document.getElementById("cid").value; httpAjax('//timesprayer.com/ajax.php?do=loadCities&language=ar&cid=' + c_value, function (result) { if (result.status == 1) { document.getElementById("ciid").innerHTML = result.msg } }) } function changecity() { var ci_value = document.getElementById("ciid").value; var thisurl = window.location.href; var newUrl = thisurl.replace("name=assiut", "name=" + ci_value); window.location.href = newUrl } var city_offset = "2"; var reminingtime = 17066000; var soundfile = "fajer"; var douration_sound = "280"; var clean_url = 'timesprayer.com';</script>
+  <script src="{% static 'assets/js/timerprayer.js' %}"></script>
+  <script>(function (i, s, o, g, r, a, m) { i.GoogleAnalyticsObject = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o), m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m) })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga'); ga('create', 'UA-51636779-1', 'timesprayer.com'); ga('send', 'pageview');</script>
+</body>
+
+</html>
