@@ -63,6 +63,55 @@ def Home(request):
          | Q(category=arab_sports)
          | Q(category=world_sport)
          | Q(category=sport))).order_by('-Publish_date')[:9]
+
+    # Culture and arts ثقافه وفنون
+    portrait = Category.objects.filter(name='بورترية').last()
+    heritage = Category.objects.filter(name='تراث').last()
+    information = Category.objects.filter(name='اعلام').last()
+    publications = Category.objects.filter(name='اصدارات').last()
+    caricature = Category.objects.filter(name='كاركاتير').last()
+    books = Category.objects.filter(name='كتب').last()
+    cultures = Category.objects.filter(name='ثقافات').last()
+    texts = Category.objects.filter(name='نصوص').last()
+    arts = Category.objects.filter(name='فنون').last()
+    reviews_and_articles = Category.objects.filter(name='اراء ومقالات').last()
+    cultures_arts = Category.objects.filter(name='ثقافة وفنون').last()
+    culture_and_arts = News.objects.filter(
+        Q(approval=True) &
+        (Q(category=portrait)
+         | Q(category=heritage)
+         | Q(category=information)
+         | Q(category=publications)
+         | Q(category=caricature)
+         | Q(category=books)
+         | Q(category=cultures)
+         | Q(category=texts)
+         | Q(category=arts)
+         | Q(category=reviews_and_articles)
+         | Q(category=cultures_arts))).order_by('-Publish_date')[:9]
+
+    # Talents and identities مواهب وهوايات
+    talents = Category.objects.filter(name='مواهب').last()
+    identities = Category.objects.filter(name='هوايات').last()
+    oddity_and_odds = Category.objects.filter(name='غرائب وطرائف').last()
+    contests_and_fun = Category.objects.filter(name='مسابقات وتسالى').last()
+    talents_identities = Category.objects.filter(name='مواهب وهوايات').last()
+    talents_and_identities = News.objects.filter(
+        Q(approval=True) &
+        (Q(category=talents)
+         | Q(category=identities)
+         | Q(category=oddity_and_odds)
+         | Q(category=contests_and_fun)
+         | Q(category=talents_identities))).order_by('-Publish_date')[:9]
+    # Real Estate and Cars عقارات وسيارات
+    real_estate = Category.objects.filter(name='عقارات').last()
+    cars = Category.objects.filter(name='سيارات').last()
+    real_estate_cars = Category.objects.filter(name='عقارات وسيارات').last()
+    real_estate_and_cars = News.objects.filter(
+        Q(approval=True) &
+        (Q(category=real_estate)
+         | Q(category=cars)
+         | Q(category=real_estate_cars))).order_by('-Publish_date')[:9]
     # Most read الأكثر قراءه
     most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
     # Images الصور
@@ -76,6 +125,9 @@ def Home(request):
         'accidents_and_investigations': accidents_and_investigations,
         'politics_and_economy': politics_and_economy,
         'sports': sports,
+        'culture_and_arts': culture_and_arts,
+        'talents_and_identities': talents_and_identities,
+        'real_estate_and_cars': real_estate_and_cars,
         'breaking_news0': breaking_news0,
         'breaking_news1': breaking_news1,
         'most_read': most_read,

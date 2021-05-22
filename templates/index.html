@@ -294,94 +294,24 @@
                     </div>
                   </div>
                   {% endif %}
+                  {% if culture_and_arts%}
                   <div class="main-section-news arts">
                     <h5 class="section-header"> ثقافة وفنون
                       <a href="" class="more">المزيد</a>
                     </h5>
                     <div class="row">
+                      {% for news in culture_and_arts%}
                       <div class="col-sm-12 col-md-6 col-lg-4">
                         <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-1.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
+                          <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
+                          <h5 class="card-title">{{news.title}}</h5>
+                          <p class="card-text">{{news.details}}</p>
                         </a>
                       </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-2.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
-                        </a>
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-3.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
-                        </a>
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-1.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
-                        </a>
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-2.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
-                        </a>
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-3.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
-                        </a>
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-1.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
-                        </a>
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-2.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
-                        </a>
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-3.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
-                        </a>
-                      </div>
+                      {% endfor %}
                     </div>
                   </div>
+                  {% endif %}
                   <div class="main-section-news mix">
                     <h5 class="section-header"> منوعات
                       <a href="" class="more">المزيد</a>
@@ -470,182 +400,42 @@
                       </div>
                     </div>
                   </div>
+                  {%if real_estate_and_cars%}
                   <div class="main-section-news car-building">
                     <h5 class="section-header"> عقارات وسيارات
                       <a href="" class="more">المزيد</a>
                     </h5>
                     <div class="row">
+                      {% for news in real_estate_and_cars%}
                       <div class="col-sm-12 col-md-6 col-lg-4">
                         <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-1.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
+                          <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
+                          <h5 class="card-title">{{news.title}}</h5>
+                          <p class="card-text">{{news.details}}</p>
                         </a>
                       </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-2.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
-                        </a>
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-3.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
-                        </a>
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-1.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
-                        </a>
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-2.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
-                        </a>
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-3.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
-                        </a>
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-1.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
-                        </a>
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-2.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
-                        </a>
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-3.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
-                        </a>
-                      </div>
+                      {% endfor %}
                     </div>
                   </div>
+                  {% endif %}
+                  {% if talents_and_identities%}
                   <div class="main-section-news car-building">
                     <h5 class="section-header"> مواهب وهوايات
                       <a href="" class="more">المزيد</a>
                     </h5>
                     <div class="row">
+                      {% for news in talents_and_identities%}
                       <div class="col-sm-12 col-md-6 col-lg-4">
                         <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-1.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
+                          <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
+                          <h5 class="card-title">{{news.title}}</h5>
+                          <p class="card-text">{{news.details}}</p>
                         </a>
                       </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-2.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
-                        </a>
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-3.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
-                        </a>
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-1.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
-                        </a>
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-2.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
-                        </a>
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-3.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
-                        </a>
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-1.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
-                        </a>
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-2.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
-                        </a>
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="./assets/images/galley-3.jpg" alt=""></div>
-                          <h5 class="card-title">عنوان الخبر</h5>
-                          <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من
-                            الأمن للمواطن ثم إجراء الانتخابات
-                          </p>
-                        </a>
-                      </div>
+                      {% endfor %}
                     </div>
                   </div>
+                  {% endif %}
                   <div class="main-section-news soud-pic">
                     <h5 class="section-header"> صوت وصورة
                       <a href="" class="more">المزيد</a>
