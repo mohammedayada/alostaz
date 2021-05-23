@@ -286,3 +286,18 @@ def Home(request):
         'notes': notes,
                }
     return render(request, 'index.html', context)
+
+
+# News details page
+def News_details(request, pk):
+    news = News.objects.filter(pk=pk).last()
+    # To increament news count
+    news.incrementViewCount()
+    # Most read الأكثر قراءه
+    most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
+
+    context = {
+        'news': news,
+        'most_read': most_read,
+    }
+    return render(request, 'news-details.html', context)
