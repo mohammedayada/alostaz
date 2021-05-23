@@ -1,7 +1,23 @@
 from django.shortcuts import render
-from .models import News, Category, Photo, Note
+from .models import News, Category, Photo, Note, Comment, Tag_news, Tag
 from django.db.models import Q
+from django.core import serializers
+from django.http import JsonResponse
+import re
 # Create your views here.
+# Make a regular expression
+# for validating an Email
+regex = '^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
+# Define a function for
+# for validating an Email
+def check(email):
+    # pass the regular expression
+    # and the string in search() method
+    if re.search(regex, email):
+        return True
+    else:
+        return False
+
 # Home functions
 def Home(request):
     # Latest news أحدث الأخبار
@@ -295,11 +311,30 @@ def News_details(request, pk):
     news.incrementViewCount()
     # Most read الأكثر قراءه
     most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
+    # comments for this post
+    comments = Comment.objects.filter(news=news, approval=True)
+    # Tags
+    tag_news = Tag_news.objects.filter(news=news)
 
     context = {
         'news': news,
         'most_read': most_read,
+        'comments': comments,
+        'tag_news': tag_news,
     }
     return render(request, 'news-details.html', context)
 
 # Add Comment to news
+def postComment(request, pk):
+    # request should be ajax and method should be POST.
+    if request.is_ajax and request.method == "POST":
+        if ('comment' and 'email' and 'name') in request.POST:
+            if (request.POST['comment']!="") and (request.POST['email']!="") and (request.POST['name']!="") and check(request.POST['email']):
+                news = News.objects.filter(pk=pk).last()
+                if news:
+                    comment = Comment.objects.create(email=request.POST['email'], text=request.POST['comment'], news=news, auther=request.POST['name'])
+                    if comment:
+                        return JsonResponse({"comment": "done"}, status=200)
+
+    # some error occured
+    return JsonResponse({"error": "من فضلك ادخل بيانات صحيحة"}, status=400)

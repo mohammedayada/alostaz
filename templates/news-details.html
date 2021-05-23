@@ -27,7 +27,7 @@
                     {{news.title}}
                   </h5>
                   <div class="name">
-                    <h6>عمر علي سليمان</h6>
+                    <h6>{{news.user.name}}</h6>
                   </div>
                   <div class="date">
                     <i class="fas fa-calendar-alt"></i>
@@ -47,47 +47,53 @@
                   <div class="blog-details-content-par">
                     <p>{{news.details}}</p>
                   </div>
+                  {% if tag_news%}
                   <div class="key-words">
-                    <a href="">كلمات دلالية</a>
-                    <a href="">كلمات دلالية</a>
-                    <a href="">كلمات </a>
-                    <a href=""> دلالية</a>
-                    <a href="">كلمة</a>
-                    <a href="">كلمة دلالية طويلة</a>
+                    {% for tag in tag_news%}
+                    <a href="">{{tag.tag.text}}</a>
+                    {% endfor %}
                   </div>
+                  {% endif %}
                   <div class="leave-comment">
                     <h5 class="section-header">اترك تعليق</h5>
-                    <form action="">
+                    <form action="" id="comment-form">
+                       {% csrf_token %}
                       <div class="row">
                         <div class="col-sm-12 col-md-6 col-lg-6">
                           <div class="form-group">
                             <label for="">الاسم</label>
-                            <input type="text" name="" id="" class="form-control" placeholder="الاسم">
+                            <input type="text" name="name" id="name" class="form-control" placeholder="الاسم">
                           </div>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6">
                           <div class="form-group">
                             <label for="">الايميل</label>
-                            <input type="email" name="" id="" class="form-control" placeholder="الايميل">
+                            <input type="email" name="email" id="email" class="form-control" placeholder="الايميل">
                           </div>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-12">
                           <div class="form-group">
-                            <textarea name="" id="" rows="3" class="form-control" placeholder="نص التعليق"></textarea>
+                            <textarea name="comment" id="comment" rows="3" class="form-control" placeholder="نص التعليق"></textarea>
                           </div>
                         </div>
                       </div>
+                      <input type="submit" class="btn btn-danger mb-2 ml-2 section-header" value="تعليق" />
                     </form>
                   </div>
+                  {% if comments%}
                   <div class="all-comments">
                     <h5 class="section-header">التعليقات</h5>
+                    {% for comment in comments%}
                     <div class="comment-text">
+
                       <div class="card">
-                        <h5 class="card-title">اسم صاحب التعليق</h5>
-                        <p class="card-text">نص التعليق يظهر هنا</p>
+                        <h5 class="card-title">{{comment.text}}</h5>
+                        <p class="card-text">{{comment.auther}}</p>
                       </div>
                     </div>
+                    {% endfor %}
                   </div>
+                  {% endif %}
                   <div class="section-header">الموضوعات المتعلقة</div>
                   <div class="arab-news card-news-img-right">
                     <div class="card">
@@ -126,7 +132,7 @@
                   <div class="section-header">الاكثر قراءة</div>
                   {% for news in most_read%}
                   <div class="card card-most-read">
-                    <a href="" class="card-text">{{news.title}}</a>
+                    <a href="{% url 'news_details' news.pk %}" class="card-text">{{news.title}}</a>
                   </div>
                   {% endfor %}
                 </div>
@@ -153,3 +159,35 @@
   </div>
 {% endblock contain%}
 
+{% block javascript %}
+<script>
+    /*
+        On submiting the form, send the POST ajax
+        request to server and after successfull submission
+        display the object.
+    */
+    $("#comment-form").submit(function (e) {
+        // preventing from page reload and default actions
+        e.preventDefault();
+        // serialize the data for sending the form data.
+        var serializedData = $(this).serialize();
+        // make POST ajax call
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'post_comment' news.pk %}",
+            data: serializedData,
+            success: function (response) {
+                // on successfull creating object
+                // 1. clear the form.
+                $("#comment-form").trigger('reset');
+               alert("تمت اضافه التعليق بنجاح سيتم المراجعه من قبل ادارة الموقع");
+
+            },
+            error: function (response) {
+                // alert the error if any error occured
+                alert(response["responseJSON"]["error"]);
+            }
+        })
+    })
+</script>
+{% endblock javascript %}

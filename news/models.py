@@ -38,9 +38,10 @@ class News(models.Model):
 
 
 class Comment(models.Model):
+    news = models.ForeignKey(News, on_delete=models.CASCADE)
     email = models.EmailField()
     text = models.TextField()
-    news = models.ForeignKey(News, on_delete=models.CASCADE)
+    auther = models.CharField(max_length=100)
     Publish_date = models.DateTimeField(auto_now_add=True)
     approval = models.BooleanField(default=False)
 
@@ -72,3 +73,18 @@ class Note(models.Model):
     link = models.URLField(blank=True)
     def __str__(self):
         return f'Title: {self.title} user: {self.user}'
+
+class Tag(models.Model):
+    text = models.CharField(max_length=20)
+
+    def __str__(self):
+        return f'Text: {self.text}'
+
+class Tag_news(models.Model):
+    news = models.ForeignKey(News, on_delete=models.CASCADE)
+    tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('news', 'tag',)
+    def __str__(self):
+        return f'Tag: {self.tag} news: {self.news}'
