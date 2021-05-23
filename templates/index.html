@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title%}الوسيط الدولي{% endblock title%}
 {% block contain %}
   <div id='HLvD'>
     <div id='Marqs' class="marqueed WAITcss">
@@ -83,7 +84,7 @@
                   <div class="row">
                     {%for news in breaking_news0%}
                     <div class="col-sm-12 col-md-6 col-lg-3">
-                      <a href="" class="card new-card-of-main-section">
+                      <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                         <div class="card-img"><img src="{% static 'assets/images/galley-1.jpg' %}" alt=""></div>
                         <h5 class="card-title">{{news.title}}</h5>
                         <p class="card-text">{{news.details}}</p>
@@ -97,7 +98,7 @@
                   <div class="row">
                     {%for news in breaking_news1%}
                     <div class="col-sm-12 col-md-6 col-lg-3">
-                      <a href="" class="card new-card-of-main-section">
+                      <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                         <div class="card-img"><img src="{% static 'assets/images/galley-1.jpg' %}" alt=""></div>
                         <h5 class="card-title">{{news.title}}</h5>
                         <p class="card-text">{{news.details}}</p>
@@ -121,7 +122,7 @@
                     <div class="row">
                       {% for local in local_news%}
                       <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
+                        <a href="{% url 'news_details' local.pk%}" class="card new-card-of-main-section">
                           <div class="card-img"><img src="{{local.img.url}}" alt=""></div>
                           <h5 class="card-title">{{local.title}}</h5>
                           <p class="card-text">{{local.details}}
@@ -141,7 +142,7 @@
                     <div class="row">
                       {% for news in arab_and_world%}
                       <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
+                        <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                           <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                           <h5 class="card-title">{{news.title}}</h5>
                           <p class="card-text">{{news.details}}</p>
@@ -159,7 +160,7 @@
                     <div class="row">
                       {% for news in cites%}
                       <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
+                        <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                           <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                           <h5 class="card-title">{{news.title}}</h5>
                           <p class="card-text">{{news.details}}</p>
@@ -177,7 +178,7 @@
                     <div class="row">
                       {% for news in accidents_and_investigations%}
                       <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
+                        <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                           <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                           <h5 class="card-title">{{news.title}}</h5>
                           <p class="card-text">{{news.details}}</p>
@@ -196,7 +197,7 @@
                     <div class="row">
                       {% for news in politics_and_economy%}
                       <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
+                        <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                           <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                           <h5 class="card-title">{{news.title}}</h5>
                           <p class="card-text">{{news.details}}</p>
@@ -214,7 +215,7 @@
                     <div class="row">
                       {% for news in sports%}
                       <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
+                        <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                           <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                           <h5 class="card-title">{{news.title}}</h5>
                           <p class="card-text">{{news.details}}</p>
@@ -232,7 +233,7 @@
                     <div class="row">
                       {% for news in culture_and_arts%}
                       <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
+                        <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                           <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                           <h5 class="card-title">{{news.title}}</h5>
                           <p class="card-text">{{news.details}}</p>
@@ -250,7 +251,7 @@
                     <div class="row">
                       {% for news in mixs%}
                       <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
+                        <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                           <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                           <h5 class="card-title">{{news.title}}</h5>
                           <p class="card-text">{{news.details}}</p>
@@ -268,7 +269,7 @@
                     <div class="row">
                       {% for news in real_estate_and_cars%}
                       <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
+                        <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                           <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                           <h5 class="card-title">{{news.title}}</h5>
                           <p class="card-text">{{news.details}}</p>
@@ -286,7 +287,7 @@
                     <div class="row">
                       {% for news in talents_and_identities%}
                       <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
+                        <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                           <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                           <h5 class="card-title">{{news.title}}</h5>
                           <p class="card-text">{{news.details}}</p>
@@ -304,7 +305,7 @@
                     <div class="row">
                       {%for news in video_and_audio%}
                       <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
+                        <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                           <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                           <h5 class="card-title">{{news.title}}</h5>
                           <p class="card-text">{{news.details}}</p>
@@ -322,7 +323,7 @@
                     <div class="row">
                       {% for news in people_and_society%}
                       <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="" class="card new-card-of-main-section">
+                        <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                           <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                           <h5 class="card-title">{{news.title}}</h5>
                           <p class="card-text">{{news.details}}</p>

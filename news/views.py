@@ -301,3 +301,5 @@ def News_details(request, pk):
         'most_read': most_read,
     }
     return render(request, 'news-details.html', context)
+
+# Add Comment to news
