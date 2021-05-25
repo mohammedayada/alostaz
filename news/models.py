@@ -27,6 +27,9 @@ class News(models.Model):
     approval = models.BooleanField(default=False)
     viewCount = models.IntegerField(default=0)
 
+    class Meta:
+        ordering = ['-Publish_date']
+
     def __str__(self):
         return f'Title: {self.title} user: {self.user}'
 

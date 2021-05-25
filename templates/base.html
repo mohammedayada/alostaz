@@ -75,10 +75,10 @@
             <a class="nav-link" href="{% url 'home' %}">الرئيسية</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">محليات</a>
+            <a class="nav-link" href="{% url 'news_category' 1 1 %}">محليات</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            <a class="nav-link dropdown-toggle" href="{% url 'news_category' 2 1 %}" id="navbarDropdown" role="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
               عرب وعالم
             </a>
@@ -90,7 +90,7 @@
             </ul>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            <a class="nav-link dropdown-toggle" href="{% url 'news_category' 78 1 %}" id="navbarDropdown" role="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
               محافظات
             </a>
@@ -125,7 +125,7 @@
             </ul>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            <a class="nav-link dropdown-toggle" href="{% url 'news_category' 7 1 %}" id="navbarDropdown" role="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
               حوادث وتحقيقات
             </a>
@@ -138,7 +138,7 @@
             </ul>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            <a class="nav-link dropdown-toggle" href="{% url 'news_category' 13 1 %}" id="navbarDropdown" role="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
               سياسة واقتصاد
             </a>
@@ -150,7 +150,7 @@
             </ul>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            <a class="nav-link dropdown-toggle" href="{% url 'news_category' 18 1 %}" id="navbarDropdown" role="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
               رياضة
             </a>
@@ -161,7 +161,7 @@
             </ul>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            <a class="nav-link dropdown-toggle" href="{% url 'news_category' 22 1 %}" id="navbarDropdown" role="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
               ثقافة وفنون
             </a>
@@ -179,7 +179,7 @@
             </ul>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            <a class="nav-link dropdown-toggle" href="{% url 'news_category' 62 1 %}" id="navbarDropdown" role="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
               منوعات
             </a>
@@ -208,7 +208,7 @@
             </ul>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            <a class="nav-link dropdown-toggle" href="{% url 'news_category' 40 1 %}" id="navbarDropdown" role="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
               عقارات وسيارات
             </a>
@@ -218,7 +218,7 @@
             </div>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            <a class="nav-link dropdown-toggle" href="{% url 'news_category' 33 1 %}" id="navbarDropdown" role="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
               مواهب وهوايات
             </a>
@@ -230,7 +230,7 @@
             </ul>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            <a class="nav-link dropdown-toggle" href="{% url 'news_category' 46 1 %}" id="navbarDropdown" role="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
               ناس ومجتمع
             </a>
@@ -267,7 +267,7 @@
               <li><a class="dropdown-item" href="#">فيروس كورونا</a></li>
               <li><a class="dropdown-item" href="#">قنصليات وسفارات</a></li>
               <li class="dropdown-submenu">
-                <a class="dropdown-item dropdown-toggle" href="#">صوت وصورة</a>
+                <a class="dropdown-item dropdown-toggle" href="{% url 'news_category' 41 1 %}">صوت وصورة</a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="#">فيديوهات </a></li>
                   <li><a class="dropdown-item" href="#">ألبومات صور </a></li>

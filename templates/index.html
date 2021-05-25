@@ -117,7 +117,7 @@
                   {% if local_news %}
                   <div class="main-section-news localy">
                     <h5 class="section-header">محليات
-                      <a href="" class="more">المزيد</a>
+                      <a href="{% url 'news_category' local_news.first.category.pk 1 %}" class="more">المزيد</a>
                     </h5>
                     <div class="row">
                       {% for local in local_news%}
@@ -137,7 +137,7 @@
                   {% if arab_and_world%}
                   <div class="main-section-news arab-and-world">
                     <h5 class="section-header">عرب وعالم
-                      <a href="" class="more">المزيد</a>
+                      <a href="{% url 'news_category' 2 1 %}" class="more">المزيد</a>
                     </h5>
                     <div class="row">
                       {% for news in arab_and_world%}
@@ -155,7 +155,7 @@
                   {% if cites %}
                   <div class="main-section-news goverment">
                     <h5 class="section-header"> محافظات
-                      <a href="" class="more">المزيد</a>
+                      <a href="{% url 'news_category' 78 1 %}" class="more">المزيد</a>
                     </h5>
                     <div class="row">
                       {% for news in cites%}
@@ -173,7 +173,7 @@
                   {% if accidents_and_investigations%}
                   <div class="main-section-news accident">
                     <h5 class="section-header"> حوادث وتحقيقات
-                      <a href="" class="more">المزيد</a>
+                      <a href="{% url 'news_category' 7 1 %}" class="more">المزيد</a>
                     </h5>
                     <div class="row">
                       {% for news in accidents_and_investigations%}
@@ -192,7 +192,7 @@
                   {% if politics_and_economy%}
                   <div class="main-section-news economics">
                     <h5 class="section-header"> سياسة واقتصاد
-                      <a href="" class="more">المزيد</a>
+                      <a href="{% url 'news_category' 13 1 %}" class="more">المزيد</a>
                     </h5>
                     <div class="row">
                       {% for news in politics_and_economy%}
@@ -210,7 +210,7 @@
                   {%if sports%}
                   <div class="main-section-news sports">
                     <h5 class="section-header"> رياضة
-                      <a href="" class="more">المزيد</a>
+                      <a href="{% url 'news_category' 18 1 %}" class="more">المزيد</a>
                     </h5>
                     <div class="row">
                       {% for news in sports%}
@@ -228,7 +228,7 @@
                   {% if culture_and_arts%}
                   <div class="main-section-news arts">
                     <h5 class="section-header"> ثقافة وفنون
-                      <a href="" class="more">المزيد</a>
+                      <a href="{% url 'news_category' 22 1 %}" class="more">المزيد</a>
                     </h5>
                     <div class="row">
                       {% for news in culture_and_arts%}
@@ -246,7 +246,7 @@
                   {% if mixs%}
                   <div class="main-section-news mix">
                     <h5 class="section-header"> منوعات
-                      <a href="" class="more">المزيد</a>
+                      <a href="{% url 'news_category' 62 1 %}" class="more">المزيد</a>
                     </h5>
                     <div class="row">
                       {% for news in mixs%}
@@ -264,7 +264,7 @@
                   {%if real_estate_and_cars%}
                   <div class="main-section-news car-building">
                     <h5 class="section-header"> عقارات وسيارات
-                      <a href="" class="more">المزيد</a>
+                      <a href="{% url 'news_category' 40 1 %}" class="more">المزيد</a>
                     </h5>
                     <div class="row">
                       {% for news in real_estate_and_cars%}
@@ -282,7 +282,7 @@
                   {% if talents_and_identities%}
                   <div class="main-section-news car-building">
                     <h5 class="section-header"> مواهب وهوايات
-                      <a href="" class="more">المزيد</a>
+                      <a href="{% url 'news_category' 33 1 %}" class="more">المزيد</a>
                     </h5>
                     <div class="row">
                       {% for news in talents_and_identities%}
@@ -300,7 +300,7 @@
                   {% if video_and_audio%}
                   <div class="main-section-news soud-pic">
                     <h5 class="section-header"> صوت وصورة
-                      <a href="" class="more">المزيد</a>
+                      <a href="{% url 'news_category' 41 1 %}" class="more">المزيد</a>
                     </h5>
                     <div class="row">
                       {%for news in video_and_audio%}
@@ -318,7 +318,7 @@
                   {% if people_and_society%}
                   <div class="main-section-news soud-pic">
                     <h5 class="section-header"> ناس ومجتمع
-                      <a href="" class="more">المزيد</a>
+                      <a href="{% url 'news_category' 46 1 %}" class="more">المزيد</a>
                     </h5>
                     <div class="row">
                       {% for news in people_and_society%}

@@ -3,21 +3,17 @@
 {% block contain %}
   <div class="newline">
     <div class="container">
+      {% if notes%}
       <div class="my-news-slider" dir="ltr">
+        {% for note in notes%}
         <div class="slider-item">
-          <a href="">
-            مصر وليبيا يتفقان على إعادة الطيران المباشر وتوقيع 3 اتفاقيات فى الكهرباء
+          <a {%if note.link %} href='{{note.link}}' {% endif %}>
+            {{note.title}}
           </a>
         </div>
-        <div class="slider-item">
-          <a href="">مفتى الجمهورية: إذا منع الاعتكاف فى المساجد سقطت سنة "الاعتكاف"</a>
-        </div>
-        <div class="slider-item">
-          <a href="">
-            مدبولى من طرابلس: سعيد بوجودى فى ليبيا.. وسنوقع مذكرات تفاهم وتعاون
-          </a>
-        </div>
+        {% endfor %}
       </div>
+      {% endif %}
     </div>
   </div>
 
@@ -42,151 +38,58 @@
           <div class="accidents-investigations">
             <div class="row">
               <div class="col-sm-12 col-md-12 col-lg-8">
-                <div class="section-header">اسم القسم</div>
+                <div class="section-header">{{category.name}}</div>
                 <div class="arab-news card-news-img-right">
+                  {% for news in news_list%}
                   <div class="card">
-                    <div class="card-img"><img src="./assets/images/slider-1.jpg" alt=""></div>
-                    <a href="" class="card-title">الحكومة الفرنسية تطلق "مجالس عامة للعلمانية" وسياسيون يساريون
-                      ينتقدون</a>
-                    <span class="card-date">الخميس 22 ابريل</span>
-                    <p class="card-text">أعلنت الوزيرة الفرنسية المكلفة بالمواطنة، مارلين شيابا، تنظيم نقاشات
-                      حول ما أسمته "مجالس عامة للعلمانية"، تستحضر تجربة "مجالس طبقات الأمة" Etats généraux في
-                      مملكة فرنسا قبل ثورة 1789..</p>
+                    <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
+                    <a href="{% url 'news_details' news.pk%}" class="card-title">{{news.title}}</a>
+                    <span class="card-date">{{news.Publish_date.date}}</span>
+                    <p class="card-text">{{news.details}}</p>
                   </div>
-                  <div class="card">
-                    <div class="card-img"><img src="./assets/images/slider-1.jpg" alt=""></div>
-                    <a href="" class="card-title">الحكومة الفرنسية تطلق "مجالس عامة للعلمانية" وسياسيون يساريون
-                      ينتقدون</a>
-                    <span class="card-date">الخميس 22 ابريل</span>
-                    <p class="card-text">أعلنت الوزيرة الفرنسية المكلفة بالمواطنة، مارلين شيابا، تنظيم نقاشات
-                      حول ما أسمته "مجالس عامة للعلمانية"، تستحضر تجربة "مجالس طبقات الأمة" Etats généraux في
-                      مملكة فرنسا قبل ثورة 1789..</p>
-                  </div>
-                  <div class="card">
-                    <div class="card-img"><img src="./assets/images/slider-1.jpg" alt=""></div>
-                    <a href="" class="card-title">الحكومة الفرنسية تطلق "مجالس عامة للعلمانية" وسياسيون يساريون
-                      ينتقدون</a>
-                    <span class="card-date">الخميس 22 ابريل</span>
-                    <p class="card-text">أعلنت الوزيرة الفرنسية المكلفة بالمواطنة، مارلين شيابا، تنظيم نقاشات
-                      حول ما أسمته "مجالس عامة للعلمانية"، تستحضر تجربة "مجالس طبقات الأمة" Etats généraux في
-                      مملكة فرنسا قبل ثورة 1789..</p>
-                  </div>
-                  <div class="card">
-                    <div class="card-img"><img src="./assets/images/slider-1.jpg" alt=""></div>
-                    <a href="" class="card-title">الحكومة الفرنسية تطلق "مجالس عامة للعلمانية" وسياسيون يساريون
-                      ينتقدون</a>
-                    <span class="card-date">الخميس 22 ابريل</span>
-                    <p class="card-text">أعلنت الوزيرة الفرنسية المكلفة بالمواطنة، مارلين شيابا، تنظيم نقاشات
-                      حول ما أسمته "مجالس عامة للعلمانية"، تستحضر تجربة "مجالس طبقات الأمة" Etats généraux في
-                      مملكة فرنسا قبل ثورة 1789..</p>
-                  </div>
-                  <div class="card">
-                    <div class="card-img"><img src="./assets/images/slider-1.jpg" alt=""></div>
-                    <a href="" class="card-title">الحكومة الفرنسية تطلق "مجالس عامة للعلمانية" وسياسيون يساريون
-                      ينتقدون</a>
-                    <span class="card-date">الخميس 22 ابريل</span>
-                    <p class="card-text">أعلنت الوزيرة الفرنسية المكلفة بالمواطنة، مارلين شيابا، تنظيم نقاشات
-                      حول ما أسمته "مجالس عامة للعلمانية"، تستحضر تجربة "مجالس طبقات الأمة" Etats généraux في
-                      مملكة فرنسا قبل ثورة 1789..</p>
-                  </div>
-                  <div class="card">
-                    <div class="card-img"><img src="./assets/images/slider-1.jpg" alt=""></div>
-                    <a href="" class="card-title">الحكومة الفرنسية تطلق "مجالس عامة للعلمانية" وسياسيون يساريون
-                      ينتقدون</a>
-                    <span class="card-date">الخميس 22 ابريل</span>
-                    <p class="card-text">أعلنت الوزيرة الفرنسية المكلفة بالمواطنة، مارلين شيابا، تنظيم نقاشات
-                      حول ما أسمته "مجالس عامة للعلمانية"، تستحضر تجربة "مجالس طبقات الأمة" Etats généraux في
-                      مملكة فرنسا قبل ثورة 1789..</p>
-                  </div>
-                  <div class="card">
-                    <div class="card-img"><img src="./assets/images/slider-1.jpg" alt=""></div>
-                    <a href="" class="card-title">الحكومة الفرنسية تطلق "مجالس عامة للعلمانية" وسياسيون يساريون
-                      ينتقدون</a>
-                    <span class="card-date">الخميس 22 ابريل</span>
-                    <p class="card-text">أعلنت الوزيرة الفرنسية المكلفة بالمواطنة، مارلين شيابا، تنظيم نقاشات
-                      حول ما أسمته "مجالس عامة للعلمانية"، تستحضر تجربة "مجالس طبقات الأمة" Etats généraux في
-                      مملكة فرنسا قبل ثورة 1789..</p>
-                  </div>
-                  <div class="card">
-                    <div class="card-img"><img src="./assets/images/slider-1.jpg" alt=""></div>
-                    <a href="" class="card-title">الحكومة الفرنسية تطلق "مجالس عامة للعلمانية" وسياسيون يساريون
-                      ينتقدون</a>
-                    <span class="card-date">الخميس 22 ابريل</span>
-                    <p class="card-text">أعلنت الوزيرة الفرنسية المكلفة بالمواطنة، مارلين شيابا، تنظيم نقاشات
-                      حول ما أسمته "مجالس عامة للعلمانية"، تستحضر تجربة "مجالس طبقات الأمة" Etats généraux في
-                      مملكة فرنسا قبل ثورة 1789..</p>
-                  </div>
-                  <div class="card">
-                    <div class="card-img"><img src="./assets/images/slider-1.jpg" alt=""></div>
-                    <a href="" class="card-title">الحكومة الفرنسية تطلق "مجالس عامة للعلمانية" وسياسيون يساريون
-                      ينتقدون</a>
-                    <span class="card-date">الخميس 22 ابريل</span>
-                    <p class="card-text">أعلنت الوزيرة الفرنسية المكلفة بالمواطنة، مارلين شيابا، تنظيم نقاشات
-                      حول ما أسمته "مجالس عامة للعلمانية"، تستحضر تجربة "مجالس طبقات الأمة" Etats généraux في
-                      مملكة فرنسا قبل ثورة 1789..</p>
-                  </div>
-                  <div class="card">
-                    <div class="card-img"><img src="./assets/images/slider-1.jpg" alt=""></div>
-                    <a href="" class="card-title">الحكومة الفرنسية تطلق "مجالس عامة للعلمانية" وسياسيون يساريون
-                      ينتقدون</a>
-                    <span class="card-date">الخميس 22 ابريل</span>
-                    <p class="card-text">أعلنت الوزيرة الفرنسية المكلفة بالمواطنة، مارلين شيابا، تنظيم نقاشات
-                      حول ما أسمته "مجالس عامة للعلمانية"، تستحضر تجربة "مجالس طبقات الأمة" Etats généraux في
-                      مملكة فرنسا قبل ثورة 1789..</p>
-                  </div>
+                  {% endfor %}
                 </div>
                 <nav aria-label="Page navigation example">
+                  {% if news_list.has_other_pages %}
                   <ul class="pagination">
+                    {% if news_list.has_previous %}
                     <li class="page-item">
-                      <a class="page-link" href="#" aria-label="Previous">
+                      <a class="page-link" href="{% url 'news_category' category.pk news_list.previous_page_number%}" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                         <span class="sr-only">Previous</span>
                       </a>
                     </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    {% endif %}
+                    {% for i in news_list.paginator.page_range %}
+                    {% if news_list.number == i %}
+                    <li class="page-item"><a class="page-link" style="background-color:#dee2e6" href="#">{{ i }}</a></li>
+                    {% else %}
+                    <li class="page-item"><a class="page-link" href="{% url 'news_category' category.pk i %}">{{ i }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if news_list.has_next %}
                     <li class="page-item">
-                      <a class="page-link" href="#" aria-label="Next">
+                      <a class="page-link" href="{% url 'news_category' category.pk news_list.next_page_number%}" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                         <span class="sr-only">Next</span>
                       </a>
                     </li>
+                    {% endif %}
                   </ul>
+                  {% endif %}
                 </nav>
               </div>
               <div class="col-sm-12 col-md-12 col-lg-4">
+                {% if most_read%}
                 <div class="">
                   <div class="section-header">الاكثر قراءة</div>
+                  {% for news in most_read%}
                   <div class="card card-most-read">
-                    <a href="" class="card-text">رئيس الوزراء يشهد توقيع اتفاقيتين لتصنيع لقاح "سينوفاك" الصينى فى
-                      مصر</a>
+                    <a href="{% url 'news_details' news.pk%}" class="card-text">{{news.title}}</a>
                   </div>
-                  <div class="card card-most-read">
-                    <a href="" class="card-text">رئيس الوزراء يشهد توقيع اتفاقيتين لتصنيع لقاح "سينوفاك" الصينى فى
-                      مصر</a>
-                  </div>
-                  <div class="card card-most-read">
-                    <a href="" class="card-text">رئيس الوزراء يشهد توقيع اتفاقيتين لتصنيع لقاح "سينوفاك" الصينى فى
-                      مصر</a>
-                  </div>
-                  <div class="card card-most-read">
-                    <a href="" class="card-text">رئيس الوزراء يشهد توقيع اتفاقيتين لتصنيع لقاح "سينوفاك" الصينى فى
-                      مصر</a>
-                  </div>
-                  <div class="card card-most-read">
-                    <a href="" class="card-text">رئيس الوزراء يشهد توقيع اتفاقيتين لتصنيع لقاح "سينوفاك" الصينى فى
-                      مصر</a>
-                  </div>
-                  <div class="card card-most-read">
-                    <a href="" class="card-text">رئيس الوزراء يشهد توقيع اتفاقيتين لتصنيع لقاح "سينوفاك" الصينى فى
-                      مصر</a>
-                  </div>
-                  <div class="card card-most-read">
-                    <a href="" class="card-text">رئيس الوزراء يشهد توقيع اتفاقيتين لتصنيع لقاح "سينوفاك" الصينى فى
-                      مصر</a>
-                  </div>
+                  {% endfor %}
                 </div>
+                {% endif %}
               </div>
             </div>
           </div>
