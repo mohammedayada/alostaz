@@ -4,6 +4,7 @@ from .views import (
     News_details,
     postComment,
     News_page,
+    News_tag,
 )
 
 urlpatterns = [
@@ -15,5 +16,7 @@ urlpatterns = [
     path('post/ajax/comment/<int:pk>', postComment, name='post_comment'),
     # News page
     path('news-category/<int:pk>/<int:page>/', News_page, name='news_category'),
+    # News tag
+    path('news-tag/<int:pk>/<int:page>/', News_tag, name='news_tag'),
 
 ]

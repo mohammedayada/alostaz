@@ -50,7 +50,7 @@
                   {% if tag_news%}
                   <div class="key-words">
                     {% for tag in tag_news%}
-                    <a href="">{{tag.tag.text}}</a>
+                    <a href="{% url 'news_tag' tag.pk 1%}">{{tag.tag.text}}</a>
                     {% endfor %}
                   </div>
                   {% endif %}
@@ -94,36 +94,19 @@
                     {% endfor %}
                   </div>
                   {% endif %}
+                  {% if related_news%}
                   <div class="section-header">الموضوعات المتعلقة</div>
                   <div class="arab-news card-news-img-right">
+                    {% for news in related_news%}
                     <div class="card">
-                      <div class="card-img"><img src="./assets/images/slider-1.jpg" alt=""></div>
-                      <a href="" class="card-title">الحكومة الفرنسية تطلق "مجالس عامة للعلمانية" وسياسيون يساريون
-                        ينتقدون</a>
-                      <span class="card-date">الخميس 22 ابريل</span>
-                      <p class="card-text">أعلنت الوزيرة الفرنسية المكلفة بالمواطنة، مارلين شيابا، تنظيم نقاشات
-                        حول ما أسمته "مجالس عامة للعلمانية"، تستحضر تجربة "مجالس طبقات الأمة" Etats généraux في
-                        مملكة فرنسا قبل ثورة 1789..</p>
+                      <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
+                      <a href="" class="card-title">{{news.title}}</a>
+                      <span class="card-date">{{news.Publish_date}}</span>
+                      <p class="card-text">{{news.details}}</p>
                     </div>
-                    <div class="card">
-                      <div class="card-img"><img src="./assets/images/slider-1.jpg" alt=""></div>
-                      <a href="" class="card-title">الحكومة الفرنسية تطلق "مجالس عامة للعلمانية" وسياسيون يساريون
-                        ينتقدون</a>
-                      <span class="card-date">الخميس 22 ابريل</span>
-                      <p class="card-text">أعلنت الوزيرة الفرنسية المكلفة بالمواطنة، مارلين شيابا، تنظيم نقاشات
-                        حول ما أسمته "مجالس عامة للعلمانية"، تستحضر تجربة "مجالس طبقات الأمة" Etats généraux في
-                        مملكة فرنسا قبل ثورة 1789..</p>
-                    </div>
-                    <div class="card">
-                      <div class="card-img"><img src="./assets/images/slider-1.jpg" alt=""></div>
-                      <a href="" class="card-title">الحكومة الفرنسية تطلق "مجالس عامة للعلمانية" وسياسيون يساريون
-                        ينتقدون</a>
-                      <span class="card-date">الخميس 22 ابريل</span>
-                      <p class="card-text">أعلنت الوزيرة الفرنسية المكلفة بالمواطنة، مارلين شيابا، تنظيم نقاشات
-                        حول ما أسمته "مجالس عامة للعلمانية"، تستحضر تجربة "مجالس طبقات الأمة" Etats généraux في
-                        مملكة فرنسا قبل ثورة 1789..</p>
-                    </div>
+                    {% endfor %}
                   </div>
+                  {% endif %}
                 </div>
               </div>
               <div class="col-sm-12 col-md-12 col-lg-4">

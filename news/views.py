@@ -117,12 +117,15 @@ def News_details(request, pk):
     comments = Comment.objects.filter(news=news, approval=True)
     # Tags
     tag_news = Tag_news.objects.filter(news=news)
+    # Related News الموضوعات المتعلقه
+    related_news = News.objects.filter(Q(approval=True) & Q(category=news.category) & ~Q(pk=news.pk)).order_by('-Publish_date')[:3]
 
     context = {
         'news': news,
         'most_read': most_read,
         'comments': comments,
         'tag_news': tag_news,
+        'related_news': related_news
     }
     return render(request, 'news-details.html', context)
 
@@ -204,7 +207,6 @@ def News_page(request, pk, page):
 
     # Most read
     most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
-
     # Notes العناوين
     notes = Note.objects.all().order_by('-id')[:3]
 
@@ -214,3 +216,28 @@ def News_page(request, pk, page):
                'notes': notes,
                }
     return render(request, 'news-page.html', context)
+
+
+# News tag page
+def News_tag(request, pk, page):
+    tag = Tag.objects.filter(pk=pk).first()
+    news_tag_list = Tag_news.objects.filter(tag=tag)
+    paginator = Paginator(news_tag_list, 10)
+    try:
+        news_tags = paginator.page(page)
+    except PageNotAnInteger:
+        news_tags = paginator.page(1)
+    except EmptyPage:
+        news_tags = paginator.page(paginator.num_pages)
+    # Most read
+    most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
+
+    # Notes العناوين
+    notes = Note.objects.all().order_by('-id')[:3]
+    context = {
+        'news_tags': news_tags,
+        'tag': tag,
+        'most_read': most_read,
+        'notes': notes,
+               }
+    return render(request, 'news-tag.html', context)
