@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New user</title>
+</head>
+<body>
+<h1>اضف مستخدم</h1>
+<form method="post" action="{% url 'add-user' %}">
+  {% csrf_token %}
+  <div class="form-group">
+    <label>البريد الالكترونى</label>
+    <input type="email" name="email" class="form-control" placeholder="البريد الالكترونى">
+  </div>
+  <div class="form-group">
+    <label>اسم المستخدم</label>
+    <input type="text" name="name" placeholder="أسم المستخدم">
+  </div>
+  <div class="form-group">
+    <label>رقم المحمول</label>
+    <input type="text" name="phone" placeholder="رقم المحمول">
+  </div>
+  <div class="form-group">
+    <label >Password</label>
+    <input type="password" name="password" placeholder="Password">
+  </div>
+
+  <div class="input-group mb-3">
+  <select class="custom-select" name="type">
+    <option value="contributor">مساهم</option>
+    <option value="writer">كاتب</option>
+    <option value="editor">محرر</option>
+    <option value="editor_in_chief">رئيس تحرير</option>
+    <option value="chairman">رئيس مجلس اداره</option>
+  </select>
+</div>
+
+  <button type="submit" class="btn btn-primary">اضف مستخدم</button>
+</form>
+
+
+</body>
+</html>

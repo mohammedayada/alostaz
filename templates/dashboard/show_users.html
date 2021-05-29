@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New user</title>
+</head>
+<body>
+<a href="{% url 'add-user'%}">اضف مستخدم</a>
+<hr>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">النوع</th>
+      <th scope="col">رقم التليفون</th>
+      <th scope="col">البريد الألكترونى</th>
+      <th scope="col">الأسم</th>
+      <th scope="col">#</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for user in users %}
+    <tr>
+      <td>{{user.get_type_display}}</td>
+      <td>{{user.phone}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.name}}</td>
+      <th scope="row">{{forloop.counter}}</th>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+
+</body>
+</html>

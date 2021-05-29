@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>اضف ملاحظه</title>
+</head>
+<body>
+<h1>اضف ملاحظه</h1>
+<hr>
+<form method="post" action="{% url 'add-note' %}">
+  {% csrf_token %}
+  <div class="form-group">
+    <label>عنوان</label>
+    <input type="text" name="title" class="form-control" placeholder="عنوان">
+  </div>
+  <div class="form-group">
+    <label>الرابط</label>
+    <input type="url" name="link" placeholder="الرابط">
+  </div>
+
+  <button type="submit" class="btn btn-primary">اضف ملاحظه</button>
+</form>
+
+
+</body>
+</html>
