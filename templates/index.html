@@ -87,7 +87,7 @@
                       <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                         <div class="card-img"><img src="{% static 'assets/images/galley-1.jpg' %}" alt=""></div>
                         <h5 class="card-title">{{news.title}}</h5>
-                        <p class="card-text">{{news.details}}</p>
+                        <p class="card-text">{{news.details|safe}}</p>
                       </a>
                     </div>
                     {% endfor %}
@@ -101,7 +101,7 @@
                       <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                         <div class="card-img"><img src="{% static 'assets/images/galley-1.jpg' %}" alt=""></div>
                         <h5 class="card-title">{{news.title}}</h5>
-                        <p class="card-text">{{news.details}}</p>
+                        <p class="card-text">{{news.details|safe}}</p>
                       </a>
                     </div>
                     {% endfor %}
@@ -125,7 +125,7 @@
                         <a href="{% url 'news_details' local.pk%}" class="card new-card-of-main-section">
                           <div class="card-img"><img src="{{local.img.url}}" alt=""></div>
                           <h5 class="card-title">{{local.title}}</h5>
-                          <p class="card-text">{{local.details}}
+                          <p class="card-text">{{local.details|safe}}
                           </p>
                         </a>
                       </div>
@@ -145,7 +145,7 @@
                         <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                           <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                           <h5 class="card-title">{{news.title}}</h5>
-                          <p class="card-text">{{news.details}}</p>
+                          <p class="card-text">{{news.details|safe}}</p>
                         </a>
                       </div>
                       {% endfor %}
@@ -163,7 +163,7 @@
                         <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                           <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                           <h5 class="card-title">{{news.title}}</h5>
-                          <p class="card-text">{{news.details}}</p>
+                          <p class="card-text">{{news.details|safe}}</p>
                         </a>
                       </div>
                       {% endfor %}
@@ -181,7 +181,7 @@
                         <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                           <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                           <h5 class="card-title">{{news.title}}</h5>
-                          <p class="card-text">{{news.details}}</p>
+                          <p class="card-text">{{news.details|safe}}</p>
                         </a>
                       </div>
                       {% endfor %}
@@ -200,7 +200,7 @@
                         <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                           <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                           <h5 class="card-title">{{news.title}}</h5>
-                          <p class="card-text">{{news.details}}</p>
+                          <p class="card-text">{{news.details|safe}}</p>
                         </a>
                       </div>
                       {%endfor%}
@@ -218,7 +218,7 @@
                         <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                           <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                           <h5 class="card-title">{{news.title}}</h5>
-                          <p class="card-text">{{news.details}}</p>
+                          <p class="card-text">{{news.details|safe}}</p>
                         </a>
                       </div>
                       {% endfor %}
@@ -236,7 +236,7 @@
                         <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                           <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                           <h5 class="card-title">{{news.title}}</h5>
-                          <p class="card-text">{{news.details}}</p>
+                          <p class="card-text">{{news.details|safe}}</p>
                         </a>
                       </div>
                       {% endfor %}
@@ -254,7 +254,7 @@
                         <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                           <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                           <h5 class="card-title">{{news.title}}</h5>
-                          <p class="card-text">{{news.details}}</p>
+                          <p class="card-text">{{news.details|safe}}</p>
                         </a>
                       </div>
                       {% endfor %}
@@ -272,7 +272,7 @@
                         <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                           <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                           <h5 class="card-title">{{news.title}}</h5>
-                          <p class="card-text">{{news.details}}</p>
+                          <p class="card-text">{{news.details|safe}}</p>
                         </a>
                       </div>
                       {% endfor %}
@@ -290,7 +290,7 @@
                         <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                           <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                           <h5 class="card-title">{{news.title}}</h5>
-                          <p class="card-text">{{news.details}}</p>
+                          <p class="card-text">{{news.details|safe}}</p>
                         </a>
                       </div>
                       {% endfor %}
@@ -308,7 +308,7 @@
                         <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                           <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                           <h5 class="card-title">{{news.title}}</h5>
-                          <p class="card-text">{{news.details}}</p>
+                          <p class="card-text">{{news.details|safe}}</p>
                         </a>
                       </div>
                       {% endfor %}
@@ -326,7 +326,7 @@
                         <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
                           <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                           <h5 class="card-title">{{news.title}}</h5>
-                          <p class="card-text">{{news.details}}</p>
+                          <p class="card-text">{{news.details|safe}}</p>
                         </a>
                       </div>
                       {% endfor %}
@@ -510,7 +510,7 @@
                     <div class="card">
                       <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                       <h5 class="card-title">{{news.title}}</h5>
-                      <p class="card-text">{{news.details}}}</p>
+                      <p class="card-text">{{news.details|safe}}}</p>
                     </div>
                     {% endfor %}
                   </div>
@@ -526,7 +526,7 @@
                     <div class="card">
                       <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                       <h5 class="card-title">{{news.title}}</h5>
-                      <p class="card-text">{{news.details}}</p>
+                      <p class="card-text">{{news.details|safe}}</p>
                     </div>
                     {% endfor %}
                   </div>
@@ -543,7 +543,7 @@
                     <div class="card">
                       <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                       <h5 class="card-title">{{news.title}}</h5>
-                      <p class="card-text">{{news.details}}</p>
+                      <p class="card-text">{{news.details|safe}}</p>
                     </div>
                     {% endfor %}
                   </div>

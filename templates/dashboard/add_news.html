@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>اضف كلمه دلاليه</title>
+</head>
+<body>
+<h1>اضف خبر</h1>
+<hr>
+<form method="post" action="{% url 'add-news' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.media}}
+    {{form.as_p}}
+  <button type="submit" class="btn btn-primary">اضف</button>
+</form>
+
+
+</body>
+</html>

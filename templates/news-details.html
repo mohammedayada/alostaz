@@ -45,7 +45,7 @@
                     <a href="" class="fab fa-whatsapp-square"></a>
                   </div>
                   <div class="blog-details-content-par">
-                    <p>{{news.details}}</p>
+                    <p>{{news.details|safe}}</p>
                   </div>
                   {% if tag_news%}
                   <div class="key-words">
@@ -102,7 +102,7 @@
                       <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                       <a href="" class="card-title">{{news.title}}</a>
                       <span class="card-date">{{news.Publish_date}}</span>
-                      <p class="card-text">{{news.details}}</p>
+                      <p class="card-text">{{news.details|safe}}</p>
                     </div>
                     {% endfor %}
                   </div>

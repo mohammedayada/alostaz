@@ -9,6 +9,7 @@ from .views import (
     show_notes,
     add_tag,
     show_tags,
+    add_news
 
 )
 
@@ -31,5 +32,7 @@ urlpatterns = [
     path('add-tag/', add_tag, name='add-tag'),
     # show tags
     path('show-tags/', show_tags, name='show-tags'),
+    # add tag
+    path('add-news/', add_news, name='add-news'),
 
 ]

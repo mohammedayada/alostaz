@@ -196,7 +196,7 @@ def News_page(request, pk, page):
                     Q(category__parent__name='حوادث وتحقيقات') | Q(category__name='حوادث وتحقيقات'))).order_by(
             '-Publish_date')
     else:
-        news_list = News.objects.filter(category=category)
+        news_list = News.objects.filter(category=category, approval=True)
     paginator = Paginator(news_list, 10)
     try:
         news = paginator.page(page)

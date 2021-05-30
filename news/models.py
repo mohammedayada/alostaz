@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 class Category(models.Model):
@@ -13,26 +13,20 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
 
     def __str__(self):
-        full_path = [self.name]
-        k = self.parent
-        while k is not None:
-            full_path.append(k.name)
-            k = k.parent
-
-        return ' -> '.join(full_path[::-1])
+        return self.name
 
 
 class News(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
     category = models.ForeignKey(Category,
-                                 on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
+                                 on_delete=models.CASCADE, verbose_name='القسم')
+    title = models.CharField(max_length=200, verbose_name='العنوان')
     Publish_date = models.DateTimeField(auto_now_add=True)
-    details = models.TextField()
-    img = models.ImageField()
-    approval = models.BooleanField(default=False)
-    viewCount = models.IntegerField(default=0)
+    details = RichTextField(blank=True, null=True, verbose_name='البيانات')
+    img = models.ImageField(verbose_name='الصوره')
+    approval = models.BooleanField(default=False, verbose_name='الموافقه')
+    viewCount = models.IntegerField(default=0, verbose_name='عدد المشاهديين')
 
     class Meta:
         ordering = ['-Publish_date']

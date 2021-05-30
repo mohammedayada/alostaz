@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'user',
     'news',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [

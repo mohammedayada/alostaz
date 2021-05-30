@@ -3,7 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import user
-from news.models import Note, Tag
+from news.models import Note, Tag, News, Category
+from .forms import NewsForm
 
 
 # login function
@@ -90,13 +91,14 @@ def show_notes(request):
     context = {'notes': notes}
     return render(request, 'dashboard/show_notes.html', context)
 
+
 @login_required
 def add_tag(request):
     # when request POST
     msg = 'من فضلك ادخل بيانات صحيحه'
     if request.POST:
         if request.POST['text'] != "":
-            if Tag.objects.filter(text=request.POST['text']).count()==0:
+            if Tag.objects.filter(text=request.POST['text']).count() == 0:
                 Tag.objects.create(
                     title=request.POST['text'],
                 )
@@ -105,9 +107,24 @@ def add_tag(request):
     context = {'msg': msg}
     return render(request, 'dashboard/add_tag.html', context)
 
+
 # Show tags
 @login_required
 def show_tags(request):
     tags = Tag.objects.all()
     context = {'tags': tags}
     return render(request, 'dashboard/show_tags.html', context)
+
+
+# Add news
+@login_required
+def add_news(request):
+    context = {}
+    form = NewsForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        # save the form data to model
+        category = Category.objects.filter(id=request.POST['category']).last()
+        News.objects.create(img=request.FILES['img'], title=request.POST['title'], category=category,
+                            user=request.user, details=request.POST['details'])
+    context['form'] = form
+    return render(request, 'dashboard/add_news.html', context)
