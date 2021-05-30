@@ -6,7 +6,9 @@ from .views import (
     add_user,
     show_users,
     add_note,
-    show_notes
+    show_notes,
+    add_tag,
+    show_tags,
 
 )
 
@@ -25,5 +27,9 @@ urlpatterns = [
     path('add-note/', add_note, name='add-note'),
     # show notes
     path('show-notes/', show_notes, name='show-notes'),
+    # add tag
+    path('add-tag/', add_tag, name='add-tag'),
+    # show tags
+    path('show-tags/', show_tags, name='show-tags'),
 
 ]

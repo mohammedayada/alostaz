@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>show tags</title>
+</head>
+<body>
+<a href="{% url 'add-tag'%}">اضف كلمه دلاليه</a>
+<hr>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">الكلمه الدلاليه</th>
+      <th scope="col">#</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for tag in tags %}
+    <tr>
+      <td><a href="{% url 'news_tag' tag.id 1 %}">{{tag.text}}</a></td>
+      <th scope="row">{{forloop.counter}}</th>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+
+</body>
+</html>

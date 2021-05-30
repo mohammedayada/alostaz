@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>اضف كلمه دلاليه</title>
+</head>
+<body>
+<h1>اضف كلمه دلاليه</h1>
+<hr>
+<form method="post" action="{% url 'add-tag' %}">
+  {% csrf_token %}
+  <div class="form-group">
+    <label>الكلمه الدلاليه</label>
+    <input type="text" name="text" class="form-control" placeholder="الكلمه الدلاليه">
+  </div>
+
+  <button type="submit" class="btn btn-primary">اضف</button>
+</form>
+
+
+</body>
+</html>

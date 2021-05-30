@@ -3,7 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import user
-from news.models import Note
+from news.models import Note, Tag
+
 
 # login function
 def user_login(request):
@@ -27,9 +28,11 @@ def user_logout(request):
     logout(request)
     return redirect('home')
 
+
 @login_required
 def dashboard(request):
     return render(request, 'dashboard/main.html')
+
 
 # add user
 @login_required
@@ -54,26 +57,31 @@ def add_user(request):
                 msg = 'من فضلك ادخل بريد الكترونى صحيح'
     context = {'msg': msg}
     return render(request, 'dashboard/add_user.html', context)
+
+
 # Show user
 @login_required
 def show_users(request):
     users = user.objects.all()
     context = {'users': users}
     return render(request, 'dashboard/show_users.html', context)
+
+
 @login_required
 def add_note(request):
     # when request POST
     msg = 'من فضلك ادخل بيانات صحيحه'
     if request.POST:
-        if request.POST['title'] != "" and request.POST['link'] != "" :
-                Note.objects.create(
-                    user=request.user,
-                    title=request.POST['title'],
-                    link=request.POST['link'],
-                )
-                return redirect('show-notes')
+        if request.POST['title'] != "" and request.POST['link'] != "":
+            Note.objects.create(
+                user=request.user,
+                title=request.POST['title'],
+                link=request.POST['link'],
+            )
+            return redirect('show-notes')
     context = {'msg': msg}
     return render(request, 'dashboard/add_note.html', context)
+
 
 # Show user
 @login_required
@@ -81,3 +89,25 @@ def show_notes(request):
     notes = Note.objects.all()
     context = {'notes': notes}
     return render(request, 'dashboard/show_notes.html', context)
+
+@login_required
+def add_tag(request):
+    # when request POST
+    msg = 'من فضلك ادخل بيانات صحيحه'
+    if request.POST:
+        if request.POST['text'] != "":
+            if Tag.objects.filter(text=request.POST['text']).count()==0:
+                Tag.objects.create(
+                    title=request.POST['text'],
+                )
+                return redirect('show-tags')
+            msg = 'هذه الكلمه الدلاليه موجوده بالفعل'
+    context = {'msg': msg}
+    return render(request, 'dashboard/add_tag.html', context)
+
+# Show tags
+@login_required
+def show_tags(request):
+    tags = Tag.objects.all()
+    context = {'tags': tags}
+    return render(request, 'dashboard/show_tags.html', context)
