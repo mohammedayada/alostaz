@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import News, Category, Photo, Note, Comment, Tag_news, Tag
 from django.db.models import Q
 from django.core import serializers
 from django.http import JsonResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import re
+from user.models import user
 
 # Create your views here.
 # Make a regular expression
@@ -109,6 +110,14 @@ def Home(request):
 # News details page
 def News_details(request, pk):
     news = News.objects.filter(pk=pk).last()
+    if news.approval == False:
+        if request.user.is_authenticated:
+            my_user = user.objects.get(id=request.user.id)
+            if my_user.type == 'chairman' or my_user.type == 'editor_in_chief' or news.user == my_user:
+                pass
+        else:
+            return redirect('home')
+
     # To increament news count
     news.incrementViewCount()
     # Most read الأكثر قراءه
@@ -118,7 +127,8 @@ def News_details(request, pk):
     # Tags
     tag_news = Tag_news.objects.filter(news=news)
     # Related News الموضوعات المتعلقه
-    related_news = News.objects.filter(Q(approval=True) & Q(category=news.category) & ~Q(pk=news.pk)).order_by('-Publish_date')[:3]
+    related_news = News.objects.filter(Q(approval=True) & Q(category=news.category) & ~Q(pk=news.pk)).order_by(
+        '-Publish_date')[:3]
 
     context = {
         'news': news,
@@ -173,7 +183,7 @@ def News_page(request, pk, page):
             '-Publish_date')
     elif category.name == 'عقارات وسيارات':
         news_list = News.objects.filter(Q(approval=True) & (
-                    Q(category__parent__name='عقارات وسيارات') | Q(category__name='عقارات وسيارات'))).order_by(
+                Q(category__parent__name='عقارات وسيارات') | Q(category__name='عقارات وسيارات'))).order_by(
             '-Publish_date')
     elif category.name == 'مواهب وهويات':
         news_list = News.objects.filter(
@@ -189,11 +199,11 @@ def News_page(request, pk, page):
             '-Publish_date')
     elif category.name == 'سياسه وأقتصاد':
         news_list = News.objects.filter(Q(approval=True) & (
-                    Q(category__parent__name='سياسه وأقتصاد') | Q(category__name='سياسه وأقتصاد'))).order_by(
+                Q(category__parent__name='سياسه وأقتصاد') | Q(category__name='سياسه وأقتصاد'))).order_by(
             '-Publish_date')
     elif category.name == 'حوادث وتحقيقات':
         news_list = News.objects.filter(Q(approval=True) & (
-                    Q(category__parent__name='حوادث وتحقيقات') | Q(category__name='حوادث وتحقيقات'))).order_by(
+                Q(category__parent__name='حوادث وتحقيقات') | Q(category__name='حوادث وتحقيقات'))).order_by(
             '-Publish_date')
     else:
         news_list = News.objects.filter(category=category, approval=True)
@@ -239,5 +249,5 @@ def News_tag(request, pk, page):
         'tag': tag,
         'most_read': most_read,
         'notes': notes,
-               }
+    }
     return render(request, 'news-tag.html', context)

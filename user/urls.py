@@ -9,7 +9,14 @@ from .views import (
     show_notes,
     add_tag,
     show_tags,
-    add_news
+    add_news,
+    show_news,
+    approve_news,
+    delete_news,
+    edit_news,
+    show_comments,
+    approve_comment,
+    delete_comment,
 
 )
 
@@ -34,5 +41,19 @@ urlpatterns = [
     path('show-tags/', show_tags, name='show-tags'),
     # add tag
     path('add-news/', add_news, name='add-news'),
+    # show news
+    path('show-news/', show_news, name='show-news'),
+    # Approve news
+    path('approve-news/<int:pk>', approve_news, name='approve-news'),
+    # delete news
+    path('delete-news/<int:pk>', delete_news, name='delete-news'),
+    # edit news
+    path('edit-news/<int:pk>', edit_news, name='edit-news'),
+    # show comments
+    path('show-comments/', show_comments, name='show-comments'),
+    # Approve comment
+    path('approve-comment/<int:pk>', approve_comment, name='approve-comment'),
+    # delete comment
+    path('delete-comment/<int:pk>', delete_comment, name='delete-comment'),
 
 ]

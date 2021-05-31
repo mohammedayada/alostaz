@@ -44,6 +44,9 @@
                     <a href="" class="fab fa-facebook-messenger"></a>
                     <a href="" class="fab fa-whatsapp-square"></a>
                   </div>
+                  {% if user.is_authenticated%}
+                  <a class="btn btn-sm btn-danger m-2" href="{% url 'edit-news' news.pk%}">تعديل المنشور</a>
+                  {% endif %}
                   <div class="blog-details-content-par">
                     <p>{{news.details|safe}}</p>
                   </div>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show news</title>
+</head>
+<body>
+<a href="{% url 'add-news'%}">اضف منشور</a>
+<hr>
+{% if news_list%}
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      {% if cond %}
+      <th scope="col">الموافقه</th>
+      {% endif %}
+      <th scope="col">العنوان</th>
+      <th scope="col">#</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for news in news_list %}
+    <tr>
+      {% if cond %}
+      <td><a href="{% url 'delete-news' news.pk %}">حذف المنشور</a>
+        <a href="{% url 'approve-news' news.pk %}">الموافقه على المنشور</a>
+      </td>
+      {% endif %}
+      <td><a href="{% url 'news_details' news.id%}">{{news.title}}</a></td>
+      <th scope="row">{{forloop.counter}}</th>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+</body>
+</html>

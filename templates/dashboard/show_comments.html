@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>التعليقات</title>
+</head>
+<body>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">الموافقه</th>
+      <th scope="col">الخبر</th>
+      <th scope="col">اسم المستخدم</th>
+      <th scope="col">البريد الالكترونى</th>
+      <th scope="col">التعليق</th>
+      <th scope="col">#</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for comment in comments %}
+    <tr>
+      <td><a href="{% url 'approve-comment' comment.pk%}">اضافه</a> <a href="{% url 'delete-comment' comment.pk%}">حذف</a></td>
+      <td>{{comment.news.title}}</td>
+      <td>{{comment.auther}}</td>
+      <td>{{comment.email}}</td>
+      <td>{{comment.text}}</td>
+      <th scope="row">{{forloop.counter}}</th>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+
+</body>
+</html>
