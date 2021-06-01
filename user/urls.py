@@ -2,7 +2,6 @@ from django.urls import path
 from .views import (
     user_login,
     user_logout,
-    dashboard,
     add_user,
     show_users,
     add_note,
@@ -27,8 +26,6 @@ urlpatterns = [
     path('login', user_login, name='login'),
     # logout
     path('logout', user_logout, name='logout'),
-    # main dashboard
-    path('', dashboard, name='main-dashboard'),
     # add user
     path('add-user/', add_user, name='add-user'),
     # show users

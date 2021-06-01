@@ -18,7 +18,7 @@ def user_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('main-dashboard')
+            return redirect('show-news')
 
     return redirect('home')
 
@@ -28,11 +28,6 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('home')
-
-
-@login_required
-def dashboard(request):
-    return render(request, 'dashboard/main.html')
 
 
 # add user
@@ -261,6 +256,7 @@ def delete_note(request, pk):
         return redirect('show-notes')
     else:
         return redirect('home')
+
 
 # delete tag
 @login_required
