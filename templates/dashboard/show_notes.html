@@ -1,31 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>New user</title>
-</head>
-<body>
-<a href="{% url 'add-note'%}">اضف عنوان</a>
-<hr>
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">اللينك</th>
-      <th scope="col">العنوان</th>
-      <th scope="col">#</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for note in notes %}
-    <tr>
-      <td><a href="{{note.link}}">{{note.link}}</a></td>
-      <td>{{note.title}}</td>
-      <th scope="row">{{forloop.counter}}</th>
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block title %}
+عناويين الأخبار
+{% endblock title%}
+{% block contain %}
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-sm-1 col-md-4 col-lg-2">
+        </div>
+        <div class="col-sm-10 col-md-4 col-lg-8">
+            <a class="btn btn-primary" href="{% url 'add-note'%}">اضف عنوان</a>
+            <hr>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th class="text-center" scope="col">#</th>
+                    <th class="text-center" scope="col">العنوان</th>
+                    <th class="text-center" scope="col">اللينك</th>
+                    <th class="text-center" scope="col">خيارات</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for note in notes %}
+                <tr>
+                    <th class="text-center" scope="row">{{forloop.counter}}</th>
+                    <td class="text-center">{{note.title}}</td>
+                    <td class="text-center"><a href="{{note.link}}">{{note.link}}</a></td>
+                    <td class="text-center">
+                        <a class="btn btn-sm btn-danger" href="{% url 'delete-note' note.pk %}">حذف <i
+                                class="fas fa-trash"></i></a>
 
-
-</body>
-</html>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% endblock contain%}

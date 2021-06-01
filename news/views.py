@@ -83,7 +83,7 @@ def Home(request):
     # Images الصور
     images = Photo.objects.all().order_by('-id')[:4]
     # Notes العناوين
-    notes = Note.objects.all().order_by('-id')[:10]
+    notes = Note.objects.all().order_by('-id')
     context = {
         'latest_news': latest_news,
         'local_news': local_news,

@@ -1,38 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Show news</title>
-</head>
-<body>
-<a href="{% url 'add-news'%}">اضف منشور</a>
-<hr>
-{% if news_list%}
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      {% if cond %}
-      <th scope="col">الموافقه</th>
-      {% endif %}
-      <th scope="col">العنوان</th>
-      <th scope="col">#</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for news in news_list %}
-    <tr>
-      {% if cond %}
-      <td><a href="{% url 'delete-news' news.pk %}">حذف المنشور</a>
-        <a href="{% url 'approve-news' news.pk %}">الموافقه على المنشور</a>
-      </td>
-      {% endif %}
-      <td><a href="{% url 'news_details' news.id%}">{{news.title}}</a></td>
-      <th scope="row">{{forloop.counter}}</th>
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
-{% endif %}
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block title %}
+الأخبار
+{% endblock title%}
+{% block contain %}
+<div class="container-fluid mt-3">
+  <div class="row">
+    <div class="col-sm-1 col-md-4 col-lg-2">
+        </div>
+    <div class="col-sm-10 col-md-4 col-lg-8">
+      <a class="btn btn-primary" href="{% url 'add-news'%}">اضف منشور</a>
+      <hr>
+      {% if news_list%}
+      <table class="table table-borderless">
+        <thead class="thead-dark">
+        <tr>
+          <th class="text-center" scope="col">#</th>
+          <th class="text-center" scope="col">العنوان</th>
+          {% if cond %}
+          <th class="text-center" scope="col">الخيارات</th>
+          {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for news in news_list %}
+        <tr>
+          <th class="text-center" scope="row">{{forloop.counter}}</th>
+          <td class="text-center"><a href="{% url 'news_details' news.id%}">{{news.title}}</a></td>
+          {% if cond %}
+          <td class="text-center">
+            <a class="btn btn-sm btn-danger" href="{% url 'delete-news' news.pk %}">حذف <i class="fas fa-trash"></i></a>
+            <a class="btn btn-sm btn-primary" href="{% url 'approve-news' news.pk %}"> اضافه  <i class="fas fa-check"></i></a>
+          </td>
+          {% endif %}
+        </tr>
 
-</body>
-</html>
+        {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+  </div>
+  <div class="col-sm-1 col-md-4 col-lg-2">
+
+  </div>
+</div>
+{% endblock contain%}

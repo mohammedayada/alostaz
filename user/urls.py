@@ -17,6 +17,8 @@ from .views import (
     show_comments,
     approve_comment,
     delete_comment,
+    delete_note,
+    delete_tag,
 
 )
 
@@ -33,10 +35,14 @@ urlpatterns = [
     path('show-users/', show_users, name='show-users'),
     # add note
     path('add-note/', add_note, name='add-note'),
+    # delete note
+    path('delete-note/<int:pk>', delete_note, name='delete-note'),
     # show notes
     path('show-notes/', show_notes, name='show-notes'),
     # add tag
     path('add-tag/', add_tag, name='add-tag'),
+    # delete note
+    path('delete-tag/<int:pk>', delete_tag, name='delete-tag'),
     # show tags
     path('show-tags/', show_tags, name='show-tags'),
     # add tag

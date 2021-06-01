@@ -448,4 +448,10 @@ footer .social a i {
   }
 }
 
+
+.add-users .form-control{
+  height: 50px;
+  border: 0;
+}
+
 /*# sourceMappingURL=style.css.map */

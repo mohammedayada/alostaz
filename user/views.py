@@ -249,3 +249,26 @@ def delete_comment(request, pk):
         return redirect('show-comments')
     else:
         return redirect('home')
+
+
+# delete comment
+@login_required
+def delete_note(request, pk):
+    my_user = user.objects.get(id=request.user.id)
+    note = Note.objects.filter(pk=pk).last()
+    if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
+        note.delete()
+        return redirect('show-notes')
+    else:
+        return redirect('home')
+
+# delete tag
+@login_required
+def delete_tag(request, pk):
+    my_user = user.objects.get(id=request.user.id)
+    tag = Tag.objects.filter(pk=pk).last()
+    if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
+        tag.delete()
+        return redirect('show-tags')
+    else:
+        return redirect('home')

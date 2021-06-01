@@ -3,135 +3,135 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{% static 'dashboard/css/bootstrap-ar.min.css' %}">
-  <link rel="stylesheet" href="{% static 'dashboard/css/all.min.css' %}">
-  <link rel="stylesheet" href="{% static 'dashboard/css/slick.css' %}">
-  <link rel="stylesheet" href="{% static 'dashboard/css/slick-theme.css' %}">
-  <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'dashboard/css/bootstrap-ar.min.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/css/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/css/slick-theme.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}">
+    <title>Document</title>
 </head>
 
 <body style="background-color: #1F1E2E;">
 
-  <!-- navabr -->
-  <div class="container-fluid">
+<!-- navabr -->
+<div class="container-fluid">
     <nav class="navbar-dashboard navbar-expand-lg navbar-light ">
-      <a class="navbar-brand" href="#">لوحة التحكم</a>
-      <div class=" " id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              الوسيط الدولى
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">تسجيل الخروج</a>
-            </div>
-          </li>
-        </ul>
-      </div>
+        <a class="navbar-brand" href="#">لوحة التحكم</a>
+        <div class=" " id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        الوسيط الدولى
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">تسجيل الخروج</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </nav>
-  </div>
+</div>
 
-  <div class="container-fluid">
+<div class="container-fluid">
     <nav class="side-mobile-dashboard navbar-expand-lg navbar-light ">
-      <div class=" " id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <i class="fas fa-home"></i>
-            <a class="nav-link" href="#">الرئيسية <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <i class="fas fa-shopping-basket"></i>
-            <a class="nav-link" href="#">اضافه مستحدم <span class="sr-only"></span></a>
-          </li>
-          <li class="nav-item">
-            <i class="fas fa-users"></i>
-            <a class="nav-link" href="#">المستخدمين <span class="sr-only"></span></a>
-          </li>
-          <li class="nav-item">
-            <i class="fas fa-clipboard"></i>
-            <a class="nav-link" href="#">عناوين الأخبار<span class="sr-only"></span></a>
-          </li>
-          <li class="nav-item active">
-            <i class="fas fa-box"></i>
-            <a class="nav-link" href="#">المنشورات<span class="sr-only"></span></a>
-          </li>
-          <li class="nav-item active">
-            <i class="fas fa-box"></i>
-            <a class="nav-link" href="#">كتابه منشور<span class="sr-only"></span></a>
-          </li>
-        </ul>
-      </div>
+        <div class=" " id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <a class="nav-link" href="#">الرئيسية <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <i class="fas fa-shopping-basket"></i>
+                    <a class="nav-link" href="#">اضافه مستحدم <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <i class="fas fa-users"></i>
+                    <a class="nav-link" href="#">المستخدمين <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <i class="fas fa-clipboard"></i>
+                    <a class="nav-link" href="#">عناوين الأخبار<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item active">
+                    <i class="fas fa-box"></i>
+                    <a class="nav-link" href="#">المنشورات<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item active">
+                    <i class="fas fa-box"></i>
+                    <a class="nav-link" href="#">كتابه منشور<span class="sr-only"></span></a>
+                </li>
+            </ul>
+        </div>
     </nav>
-  </div>
+</div>
 
 
-  <div class="main-dasboard">
+<div class="main-dasboard">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-12 col-md-4 col-lg-3">
-          <div class="side-bar">
-            <div class="sidebar-logo">
-              <img src="./assets/images/logo.png" alt="">
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-lg-3">
+                <div class="side-bar">
+                    <div class="sidebar-logo">
+                        <img src="./assets/images/logo.png" alt="">
+                    </div>
+                    <div class="side-bar-links">
+                        <ul class="list-unstyled">
+                            <li class="">
+                                <i class="fas fa-home"></i>
+                                <a href="">الرئيسية</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-shopping-basket"></i>
+                                <a href="">الطلبات</a>
+                            </li>
+                            <li class="">
+                                <i class="fas fa-users"></i>
+                                <a href="">المستخدمين</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-clipboard"></i>
+                                <a href="">المدونة</a>
+                            </li>
+                            <li class="active">
+                                <i class="fas fa-box"></i>
+                                <a href="">الخدمات</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="side-bar-links">
-              <ul class="list-unstyled">
-                <li class="">
-                  <i class="fas fa-home"></i>
-                  <a href="">الرئيسية</a>
-                </li>
-                <li>
-                  <i class="fas fa-shopping-basket"></i>
-                  <a href="">الطلبات</a>
-                </li>
-                <li class="">
-                  <i class="fas fa-users"></i>
-                  <a href="">المستخدمين</a>
-                </li>
-                <li>
-                  <i class="fas fa-clipboard"></i>
-                  <a href="">المدونة</a>
-                </li>
-                <li class="active">
-                  <i class="fas fa-box"></i>
-                  <a href="">الخدمات</a>
-                </li>
-              </ul>
+            <div class="col-sm-12 col-md-8 col-lg-9">
+                <div class="dasboard-content">
+                    <h5 class="text-white fa-2x">اضف خدمة جديدة</h5>
+                    <form action="" class="add-new-serv-form">
+                        <div class="form-group">
+                            <label for="" class="text-white">اسم الخدمة</label>
+                            <input type="text" name="" style="height: 50px;" id=""
+                                   class="form-control" placeholder="اكتب اسم الخدمة هنا"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="text-white">صورة لخدمة</label>
+                            <input type="file" name="" style="height: 50px;" class="form-control"/>
+                        </div>
+                        <button type="submit" class="btn btn-success">اضف</button>
+                    </form>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="col-sm-12 col-md-8 col-lg-9">
-          <div class="dasboard-content">
-            <h5 class="text-white fa-2x">اضف خدمة جديدة</h5>
-            <form action="" class="add-new-serv-form">
-              <div class="form-group">
-                <label for="" class="text-white">اسم الخدمة</label>
-                <input type="text" name="" style="height: 50px;" id=""
-                  class="form-control" placeholder="اكتب اسم الخدمة هنا" />
-              </div>
-              <div class="form-group">
-                <label for="" class="text-white">صورة لخدمة</label>
-                <input type="file" name="" style="height: 50px;" class="form-control" />
-              </div>
-              <button type="submit" class="btn btn-success">اضف</button>
-            </form>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 
 
-
-  <script src="{% static 'dashboard/js/jquery-3.3.1.min.js' %}"></script>
-  <script src="{% static 'dashboard/js/popper.min.js' %}"></script>
-  <script src="{% static 'dashboard/js/bootstrap.min.js' %}"></script>
-  <script src="{% static 'dashboard/js/slick.min.js' %}"></script>
-  <script src="{% static 'dashboard/js/jquery.nicescroll.min.js' %}"></script>
-  <script src="{% static 'dashboard/js/main.js' %}"></script>
+<script src="{% static 'dashboard/js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'dashboard/js/popper.min.js' %}"></script>
+<script src="{% static 'dashboard/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'dashboard/js/slick.min.js' %}"></script>
+<script src="{% static 'dashboard/js/jquery.nicescroll.min.js' %}"></script>
+<script src="{% static 'dashboard/js/main.js' %}"></script>
 </body>
 
 </html>

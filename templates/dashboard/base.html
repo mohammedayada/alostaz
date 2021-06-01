@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'assets/css/bootstrap-ar.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/slick-theme.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+  <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'home' %}">الرئيسية</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="{% url 'show-news' %}">الأخبار</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'show-comments' %}">التعليقات</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'show-notes' %}">عناويين الأخبار</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'show-tags' %}">الكلمات الدلاليه</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'show-users' %}">المستخدمين</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    </nav>
+    {% block contain %} {% endblock %}
+</body>
+</html>

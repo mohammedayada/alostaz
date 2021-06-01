@@ -930,6 +930,174 @@ footer .social a i {
   color: #1711be;
 }
 
+
+.navbar-dashboard {
+  padding: 10px;
+  position: relative;
+  background-color: transparent;
+  z-index: 9999;
+}
+.navbar-dashboard .navbar-brand {
+  color: #fff;
+}
+.navbar-dashboard .navbar-nav .dropdown {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
+}
+.navbar-dashboard .navbar-nav .dropdown img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.navbar-dashboard .navbar-nav .dropdown .dropdown-menu {
+  right: auto;
+}
+.navbar-dashboard .dropdown-toggle::after {
+  color: #fff;
+}
+
+.side-mobile-dashboard {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  display: none;
+}
+.side-mobile-dashboard .navbar-nav .nav-item {
+  margin-left: 10px;
+  padding: 12px;
+}
+.side-mobile-dashboard .navbar-nav .nav-item i {
+  color: #fff;
+}
+.side-mobile-dashboard .navbar-nav .nav-item .nav-link {
+  color: #fff;
+  display: inline-block;
+  padding: 0;
+}
+.side-mobile-dashboard .navbar-nav .nav-item:hover {
+  background-color: rgba(86, 125, 167, 0.3);
+  border-radius: 20px;
+}
+.side-mobile-dashboard .navbar-nav .active {
+  background-color: rgba(86, 125, 167, 0.3);
+  border-radius: 20px;
+}
+
+.text-editor-content {
+  height: 570px;
+  overflow: auto;
+}
+.text-editor-content .tox-tinymce {
+  border-radius: 10px;
+}
+.text-editor-content input[type=text] {
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+.main-dasboard .side-bar {
+  height: 570px;
+  background-color: #262b40;
+  border-radius: 10px;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  padding-top: 30px;
+}
+.main-dasboard .side-bar .sidebar-logo {
+  text-align: center;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+.main-dasboard .side-bar .sidebar-logo img {
+  width: 94px;
+  max-height: 48px;
+  margin: auto;
+}
+.main-dasboard .side-bar .side-bar-links ul li {
+  margin-top: 20px;
+  font-size: 17px;
+  padding: 10px;
+}
+.main-dasboard .side-bar .side-bar-links ul li i {
+  color: #fff;
+}
+.main-dasboard .side-bar .side-bar-links ul li a {
+  color: #fff;
+  margin-right: 5px;
+  text-decoration: none;
+}
+.main-dasboard .side-bar .side-bar-links ul li:hover {
+  background-color: rgba(86, 125, 167, 0.3);
+  border-radius: 20px;
+}
+.main-dasboard .side-bar .side-bar-links ul .active {
+  background-color: rgba(86, 125, 167, 0.3);
+  border-radius: 20px;
+}
+.main-dasboard .dasboard-content {
+  height: 570px;
+  overflow-y: auto;
+}
+.main-dasboard .dasboard-content .dasboard-statics .card {
+  text-align: center;
+  padding: 20px;
+  background-color: #27293d;
+  color: #fff;
+  box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+.main-dasboard .dasboard-content .dasboard-statics .card-icon {
+  font-size: 30px;
+}
+.main-dasboard .dasboard-content .dasboard-statics .card-number {
+  font-size: 35px;
+  margin: 0;
+  margin: 5px 0 5px 0;
+}
+.main-dasboard .dasboard-content .dasboard-statics .card-title {
+  font-size: 20px;
+}
+.main-dasboard .dashboard-order-table {
+  margin-top: 20px;
+}
+.main-dasboard .dashboard-order-table h5 {
+  color: #fff;
+}
+.main-dasboard .dashboard-order-table .table {
+  color: #fff;
+  font-weight: normal !important;
+  background-color: #27293d;
+}
+
+.table-borderless tbody + tbody,
+.table-borderless td,
+.table-borderless th,
+.table-borderless thead th {
+  font-weight: normal;
+}
+
+#delete-user .modal-body,
+#delete-blog .modal-body {
+  text-align: center;
+}
+#delete-user .modal-body i,
+#delete-blog .modal-body i {
+  font-size: 25px;
+  color: #ddd;
+}
+#delete-user .modal-body h5,
+#delete-blog .modal-body h5 {
+  color: #262b40;
+  margin-top: 10px;
+}
+#delete-user .modal-body .btn,
+#delete-blog .modal-body .btn {
+  background-color: #45c3d2;
+  color: #fff;
+}
+
 @media (max-width: 800px) {
   .navbar-light .navbar-toggler {
     background-color: #fff;
@@ -964,6 +1132,17 @@ footer .social a i {
 footer .copy .copy-content {
     text-align: center;
   }
+  .main-dasboard .dashboard-order-table .table{
+    min-width: 700px;
+  }
+}
+
+.add-users .form-control{
+  height: 50px;
+  border: 0;
+}
+.add-users button{
+  width: 200px;
 }
 
 /*# sourceMappingURL=style.css.map */

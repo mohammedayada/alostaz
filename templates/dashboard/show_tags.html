@@ -1,29 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>show tags</title>
-</head>
-<body>
-<a href="{% url 'add-tag'%}">اضف كلمه دلاليه</a>
-<hr>
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">الكلمه الدلاليه</th>
-      <th scope="col">#</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for tag in tags %}
-    <tr>
-      <td><a href="{% url 'news_tag' tag.id 1 %}">{{tag.text}}</a></td>
-      <th scope="row">{{forloop.counter}}</th>
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block title %}
+الكلمات الدلاليه
+{% endblock title%}
+{% block contain %}
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-sm-1 col-md-4 col-lg-2">
+        </div>
+        <div class="col-sm-10 col-md-4 col-lg-8">
+            <a class="btn btn-primary" href="{% url 'add-tag'%}">اضف كلمه دلاليه</a>
+            <hr>
+            <table class="table table-borderless">
+                <thead class="thead-dark">
+                <tr>
+                    <th class="text-center" scope="col">#</th>
+                    <th class="text-center" scope="col">الكلمه الدلاليه</th>
+                    <th class="text-center" scope="col">الخيارات</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for tag in tags %}
+                <tr>
+                    <th class="text-center" scope="row">{{forloop.counter}}</th>
+                    <td class="text-center"><a href="{% url 'news_tag' tag.id 1 %}">{{tag.text}}</a></td>
+                    <td class="text-center"><a class="btn btn-sm btn-danger" href="{% url 'delete-tag' tag.pk %}">حذف <i
+                            class="fas fa-trash"></i></a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
 
 
-</body>
-</html>
+            {% if news_list%}
+            <table class="table table-borderless">
+                <thead class="thead-dark">
+                <tr>
+                    <th class="text-center" scope="col">#</th>
+                    <th class="text-center" scope="col">العنوان</th>
+                    {% if cond %}
+                    <th class="text-center" scope="col">الخيارات</th>
+                    {% endif %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for news in news_list %}
+                <tr>
+                    <th class="text-center" scope="row">{{forloop.counter}}</th>
+                    <td class="text-center"><a href="{% url 'news_details' news.id%}">{{news.title}}</a></td>
+                    {% if cond %}
+                    <td class="text-center">
+                        <a class="btn btn-sm btn-danger" href="{% url 'delete-news' news.pk %}">حذف <i
+                                class="fas fa-trash"></i></a>
+                        <a class="btn btn-sm btn-primary" href="{% url 'approve-news' news.pk %}"> اضافه <i
+                                class="fas fa-check"></i></a>
+                    </td>
+                    {% endif %}
+                </tr>
+
+                {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-sm-1 col-md-4 col-lg-2">
+
+    </div>
+</div>
+{% endblock contain%}
