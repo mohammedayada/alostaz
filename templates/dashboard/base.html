@@ -26,19 +26,27 @@
             <a class="nav-link" href="{% url 'home' %}">الرئيسية</a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="{% url 'show-news' %}">الأخبار</a>
+            <a class="nav-link" href="{% url 'show-news' 1 %}">الأخبار</a>
+          </li>
+          {% if is_chairman or is_chef%}
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'show-comments' 1 %}">التعليقات</a>
+          </li>
+
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'show-notes' 1 %}">عناويين الأخبار</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="{% url 'show-comments' %}">التعليقات</a>
+            <a class="nav-link" href="{% url 'show-tags' 1 %}">الكلمات الدلاليه</a>
           </li>
+          {%endif%}
+          {% if is_chairman%}
           <li class="nav-item active">
-            <a class="nav-link" href="{% url 'show-notes' %}">عناويين الأخبار</a>
+            <a class="nav-link" href="{% url 'show-users' 1 %}">المستخدمين</a>
           </li>
+          {% endif%}
           <li class="nav-item active">
-            <a class="nav-link" href="{% url 'show-tags' %}">الكلمات الدلاليه</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'show-users' %}">المستخدمين</a>
+            <a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-user"></i> تسجيل خروج</a>
           </li>
         </ul>
       </div>

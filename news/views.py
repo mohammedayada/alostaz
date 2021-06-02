@@ -110,6 +110,10 @@ def Home(request):
 # News details page
 def News_details(request, pk):
     news = News.objects.filter(pk=pk).last()
+    username = 'غير معروف'
+    name = user.objects.filter(id=news.user.id).last()
+    if name:
+        username = name.name
     if news.approval == False:
         if request.user.is_authenticated:
             my_user = user.objects.get(id=request.user.id)
@@ -132,6 +136,7 @@ def News_details(request, pk):
 
     context = {
         'news': news,
+        'username': username,
         'most_read': most_read,
         'comments': comments,
         'tag_news': tag_news,

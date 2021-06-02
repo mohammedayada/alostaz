@@ -29,23 +29,23 @@ urlpatterns = [
     # add user
     path('add-user/', add_user, name='add-user'),
     # show users
-    path('show-users/', show_users, name='show-users'),
+    path('show-users/<int:page>/', show_users, name='show-users'),
     # add note
     path('add-note/', add_note, name='add-note'),
     # delete note
     path('delete-note/<int:pk>', delete_note, name='delete-note'),
     # show notes
-    path('show-notes/', show_notes, name='show-notes'),
+    path('show-notes/<int:page>/', show_notes, name='show-notes'),
     # add tag
     path('add-tag/', add_tag, name='add-tag'),
     # delete note
     path('delete-tag/<int:pk>', delete_tag, name='delete-tag'),
     # show tags
-    path('show-tags/', show_tags, name='show-tags'),
+    path('show-tags/<int:page>/', show_tags, name='show-tags'),
     # add tag
     path('add-news/', add_news, name='add-news'),
     # show news
-    path('show-news/', show_news, name='show-news'),
+    path('show-news/<int:page>/', show_news, name='show-news'),
     # Approve news
     path('approve-news/<int:pk>', approve_news, name='approve-news'),
     # delete news
@@ -53,7 +53,7 @@ urlpatterns = [
     # edit news
     path('edit-news/<int:pk>', edit_news, name='edit-news'),
     # show comments
-    path('show-comments/', show_comments, name='show-comments'),
+    path('show-comments/<int:page>/', show_comments, name='show-comments'),
     # Approve comment
     path('approve-comment/<int:pk>', approve_comment, name='approve-comment'),
     # delete comment
