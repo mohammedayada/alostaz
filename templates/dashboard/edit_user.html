@@ -1,0 +1,45 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block title %}
+تعديل مستخدم
+{% endblock title%}
+{% block contain %}
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-sm-1 col-md-4 col-lg-2">
+        </div>
+        <div class="col-sm-10 col-md-4 col-lg-8">
+            <h1>تعديل مستخدم</h1>
+            <hr>
+            <form method="post" action="{% url 'edit-user' user.pk %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>اسم المستخدم</label><br>
+                    <input type="text" name="name" value="{{user.name}}" placeholder="أسم المستخدم">
+                </div>
+                <div class="form-group">
+                    <label>رقم المحمول</label><br>
+                    <input type="text" name="phone" value="{{user.phone}}" placeholder="رقم المحمول">
+                </div>
+                <div class="input-group mb-3">
+                    <label>النوع</label><br>
+                    <select class="custom-select" name="type">
+                        <option value="contributor" {% if user.type == "contributor" %} selected {%endif%} >مساهم</option>
+                        <option value="writer" {%if user.type == "writer" %} selected {%endif%} >كاتب</option>
+                        <option value="editor" {%if user.type == "editor" %} selected {%endif%}>محرر</option>
+                        <option value="editor_in_chief" {%if user.type == "editor_in_chief" %} selected {%endif%}>رئيس تحرير</option>
+                        <option value="chairman" {%if user.type == "chairman" %} selected {%endif%}>رئيس مجلس اداره</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">تعديل</button>
+            </form>
+            <a class="btn btn-sm btn-primary mt-3" href="{% url 'change-user-pass' user.pk%}">تعديل الرمز السرى</a>
+
+        </div>
+    </div>
+    <div class="col-sm-1 col-md-4 col-lg-2">
+
+    </div>
+</div>
+{% endblock contain%}

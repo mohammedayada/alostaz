@@ -371,3 +371,54 @@ def delete_tag(request, pk):
         return redirect('show-tags', page=1)
     else:
         return redirect('home')
+
+# delete tag
+@login_required
+def delete_user(request, pk):
+    my_user = user.objects.get(id=request.user.id)
+    user1 = user.objects.filter(pk=pk).last()
+    if my_user.type == 'chairman':
+        user1.delete()
+        return redirect('show-users', page=1)
+    else:
+        return redirect('home')
+# Edit user
+def edit_user(request, pk):
+    context = {}
+    my_user = user.objects.get(id=request.user.id)
+    is_chairman = (my_user.type == 'chairman')
+    is_chef = (my_user.type == 'editor_in_chief')
+    context['is_chairman'] = is_chairman
+    context['is_chef'] = is_chef
+    user1 = user.objects.get(pk=pk)
+    if my_user.type == 'chairman':
+        context['user'] = user1
+        if request.POST:
+            user1.name = request.POST['name']
+            user1.phone = request.POST['phone']
+            user1.type = request.POST['type']
+
+            user1.save()
+            return redirect('show-users', page=1)
+        else:
+            return render(request, 'dashboard/edit_user.html', context)
+    return redirect('home')
+
+# Change user password
+def change_user_pass(request, pk):
+    context = {}
+    my_user = user.objects.get(id=request.user.id)
+    is_chairman = (my_user.type == 'chairman')
+    is_chef = (my_user.type == 'editor_in_chief')
+    context['is_chairman'] = is_chairman
+    context['is_chef'] = is_chef
+    user1 = user.objects.get(pk=pk)
+    if my_user.type == 'chairman':
+        context['user'] = user1
+        if request.POST:
+            user1.set_password(request.POST['password'])
+            user1.save()
+            return redirect('show-users', page=1)
+        else:
+            return render(request, 'dashboard/change_user_pass.html', context)
+    return redirect('home')

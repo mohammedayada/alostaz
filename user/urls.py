@@ -18,6 +18,9 @@ from .views import (
     delete_comment,
     delete_note,
     delete_tag,
+    delete_user,
+    edit_user,
+    change_user_pass,
 
 )
 
@@ -30,6 +33,12 @@ urlpatterns = [
     path('add-user/', add_user, name='add-user'),
     # show users
     path('show-users/<int:page>/', show_users, name='show-users'),
+    # delete user
+    path('delete-user/<int:pk>', delete_user, name='delete-user'),
+    # edit user
+    path('edit-user/<int:pk>', edit_user, name='edit-user'),
+    # change user password
+    path('change-user-pass/<int:pk>', change_user_pass, name='change-user-pass'),
     # add note
     path('add-note/', add_note, name='add-note'),
     # delete note
