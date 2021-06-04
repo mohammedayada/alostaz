@@ -105,7 +105,7 @@
                       <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                       <a href="" class="card-title">{{news.title}}</a>
                       <span class="card-date">{{news.Publish_date}}</span>
-                      <p class="card-text">{{news.details|safe}}</p>
+                      <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
                     </div>
                     {% endfor %}
                   </div>
