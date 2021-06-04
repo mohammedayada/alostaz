@@ -5,6 +5,8 @@ from .views import (
     postComment,
     News_page,
     News_tag,
+    Who_us,
+    Search_news,
 )
 
 urlpatterns = [
@@ -18,5 +20,9 @@ urlpatterns = [
     path('news-category/<int:pk>/<int:page>/', News_page, name='news_category'),
     # News tag
     path('news-tag/<int:pk>/<int:page>/', News_tag, name='news_tag'),
+    # Who us
+    path('who-us/', Who_us, name='who-us'),
+    # Search page
+    path('search-news/<int:page>/', Search_news, name='search-news'),
 
 ]

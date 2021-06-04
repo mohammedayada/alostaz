@@ -256,3 +256,32 @@ def News_tag(request, pk, page):
         'notes': notes,
     }
     return render(request, 'news-tag.html', context)
+
+
+def Who_us(request):
+    return render(request, 'who-us.html')
+
+
+def Search_news(request, page):
+    if request.GET.get('search'):
+        news = News.objects.filter(title__icontains=request.GET.get('search'))
+        paginator = Paginator(news, 10)
+        try:
+            news = paginator.page(page)
+        except PageNotAnInteger:
+            news = paginator.page(1)
+        except EmptyPage:
+            news = paginator.page(paginator.num_pages)
+        # Most read
+        most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
+        # Notes العناوين
+        notes = Note.objects.all().order_by('-id')[:3]
+        context = {
+            'news_list': news,
+            'most_read': most_read,
+            'notes': notes,
+
+        }
+        return render(request, 'news-page.html', context)
+
+    return redirect('home')
