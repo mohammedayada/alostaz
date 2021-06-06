@@ -5,46 +5,48 @@
 {% endblock title%}
 {% block contain %}
 <div class="container-fluid mt-3">
-  <div class="row">
-    <div class="col-sm-1 col-md-4 col-lg-2">
+    <div class="row">
+        <div class="col-sm-1 col-md-4 col-lg-2">
         </div>
-    <div class="col-sm-10 col-md-4 col-lg-8">
-      <a class="btn btn-primary" href="{% url 'add-advertising'%}">اضف اعلان</a>
-      <hr>
-      {% if advertisings%}
-      <table class="table table-borderless">
-        <thead class="thead-dark">
-        <tr>
-          <th class="text-center" scope="col">#</th>
-          <th class="text-center" scope="col">العنوان</th>
-          <th class="text-center" scope="col">الصوره</th>
-          <th class="text-center" scope="col">الخيارات</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for advertising in advertisings %}
-        <tr>
-          <th class="text-center" scope="row">{{forloop.counter}}</th>
-          <td class="text-center">{{advertising.title}}</td>
-          <td scope="col"><img src="{{advertising.img.url}}"></td>
-          <td class="text-center">
-            <a class="btn btn-sm btn-danger" href="{% url 'delete-advertising' advertising.pk %}">حذف <i class="fas fa-trash"></i></a>
-            <a class="btn btn-sm btn-success" href="{% url 'edit-photo' advertising.pk %}"> تعديل  <i class="fas fa-edit"></i></a>
-          </td>
-        </tr>
+        <div class="col-sm-10 col-md-4 col-lg-8">
+            <a class="btn btn-primary" href="{% url 'add-advertising'%}">اضف اعلان</a>
+            <hr>
+            {% if advertisings%}
+            <table class="table table-borderless">
+                <thead class="thead-dark">
+                <tr>
+                    <th class="text-center" scope="col">#</th>
+                    <th class="text-center" scope="col">العنوان</th>
+                    <th class="text-center" scope="col">الصوره</th>
+                    <th class="text-center" scope="col">الخيارات</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for advertising in advertisings %}
+                <tr>
+                    <th class="text-center" scope="row">{{forloop.counter}}</th>
+                    <td class="text-center">{{advertising.title}}</td>
+                    <td scope="col"><img src="{{advertising.img.url}}"></td>
+                    <td class="text-center">
+                        <a class="btn btn-sm btn-danger" href="{% url 'delete-advertising' advertising.pk %}">حذف <i
+                                class="fas fa-trash"></i></a>
+                        <a class="btn btn-sm btn-success" href="{% url 'edit-photo' advertising.pk %}"> تعديل <i
+                                class="fas fa-edit"></i></a>
+                    </td>
+                </tr>
 
-        {% endfor %}
-        </tbody>
-      </table>
-      {% endif %}
-    </div>
-    <div class="col-sm-1 col-md-4 col-lg-2">
-
-  </div>
-    <div class="col-sm-1 col-md-4 col-lg-2">
+                {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+        <div class="col-sm-1 col-md-4 col-lg-2">
 
         </div>
-    <div class="col-sm-10 col-md-4 col-lg-8">
+        <div class="col-sm-1 col-md-4 col-lg-2">
+
+        </div>
+        <div class="col-sm-10 col-md-4 col-lg-8">
             <nav aria-label="Page navigation example">
                 {% if advertisings.has_other_pages %}
                 <ul class="pagination">
@@ -61,12 +63,14 @@
                     {% if advertisings.number == i %}
                     <li class="page-item"><a class="page-link" style="background-color:gray" href="#">{{ i }}</a></li>
                     {% else %}
-                    <li class="page-item"><a class="page-link" href="{% url 'show-all-advertisings'  i %}">{{ i }}</a></li>
+                    <li class="page-item"><a class="page-link" href="{% url 'show-all-advertisings'  i %}">{{ i }}</a>
+                    </li>
                     {% endif %}
                     {% endfor %}
                     {% if advertisings.has_next %}
                     <li class="page-item">
-                        <a class="page-link" href="{% url 'show-all-advertisings' advertisings.next_page_number%}" aria-label="Next">
+                        <a class="page-link" href="{% url 'show-all-advertisings' advertisings.next_page_number%}"
+                           aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                             <span class="sr-only">Next</span>
                         </a>
@@ -76,11 +80,11 @@
                 {% endif %}
             </nav>
         </div>
-    <div class="col-sm-1 col-md-4 col-lg-2">
+        <div class="col-sm-1 col-md-4 col-lg-2">
 
         </div>
 
-  </div>
+    </div>
 
 </div>
 {% endblock contain%}

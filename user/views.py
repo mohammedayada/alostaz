@@ -2,10 +2,28 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .models import user, Photo, Advertising
+from .models import user, Photo, Advertising, Subscriber
 from news.models import Note, Tag, News, Category, Comment
 from .forms import NewsForm, PhotoForm, AdvertisingForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import JsonResponse
+import re
+
+# Create your views here.
+# Make a regular expression
+# for validating an Email
+regex = '^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
+
+
+# Define a function for
+# for validating an Email
+def check(email):
+    # pass the regular expression
+    # and the string in search() method
+    if re.search(regex, email):
+        return True
+    else:
+        return False
 
 
 # login function
@@ -621,3 +639,58 @@ def show_all_advertising(request, page):
         return render(request, 'dashboard/show_all_advertisings.html', context)
     else:
         return redirect('home')
+
+
+# Delete Subscriber
+@login_required
+def delete_subscriber(request, pk):
+    my_user = user.objects.get(id=request.user.id)
+    subscriber = Subscriber.objects.filter(pk=pk).last()
+    if my_user.type == 'chairman':
+        subscriber.delete()
+        return redirect('show-all-advertising', page=1)
+    else:
+        return redirect('home')
+
+
+# show all subscribers
+@login_required
+def show_subscribers(request, page):
+    my_user = user.objects.get(id=request.user.id)
+    is_chairman = (my_user.type == 'chairman')
+    is_chef = (my_user.type == 'editor_in_chief')
+    if my_user.type == 'chairman':
+        subscribers = Subscriber.objects.all()
+        paginator = Paginator(subscribers, 10)
+        try:
+            subscribers = paginator.page(page)
+        except PageNotAnInteger:
+            subscribers = paginator.page(1)
+        except EmptyPage:
+            subscribers = paginator.page(paginator.num_pages)
+        context = {
+            'subscribers': subscribers,
+            'is_chairman': is_chairman,
+            'is_chef': is_chef,
+        }
+        return render(request, 'dashboard/show_subscribers.html', context)
+    else:
+        return redirect('home')
+
+
+# Add subscriber
+def postSubscriber(request):
+    # request should be ajax and method should be POST.
+    if request.is_ajax and request.method == "POST":
+        if 'email' in request.POST:
+            if (request.POST['email'] != "") and check(request.POST['email']):
+                subscriber = Subscriber.objects.filter(email=request.POST['email']).count()
+                if subscriber < 1:
+                    Subscriber.objects.create(email=request.POST['email'])
+                    return JsonResponse({"Subscriber": "done"}, status=200)
+                else:
+                    # some error occured
+                    return JsonResponse({"error": "هذا البريد مشترك بالفعل"}, status=400)
+
+    # some error occured
+    return JsonResponse({"error": "من فضلك ادخل بريد الكترونى صحيح "}, status=400)

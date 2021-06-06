@@ -338,16 +338,17 @@
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4">
                 <form method="GET" action="{% url 'search-news' 1 %}">
-                <div class="input-group mb-3">
-                    <input type="search" class="form-control" name="search" placeholder="ابحث هنا" aria-label="Recipient's username"
-                           aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
+                    <div class="input-group mb-3">
+                        <input type="search" class="form-control" name="search" placeholder="ابحث هنا"
+                               aria-label="Recipient's username"
+                               aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
 
-                </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -510,10 +511,12 @@
 <script>
     function httpAjax(url, mFunction) { var xhttp = new XMLHttpRequest(); xhttp.onreadystatechange = function () { if (this.readyState == 4 && this.status == 200) { mFunction(JSON.parse(this.responseText)) } }; xhttp.open("GET", url, true); xhttp.send() } function changeCountry() { var c_value = document.getElementById("cid").value; httpAjax('//timesprayer.com/ajax.php?do=loadCities&language=ar&cid=' + c_value, function (result) { if (result.status == 1) { document.getElementById("ciid").innerHTML = result.msg } }) } function changecity() { var ci_value = document.getElementById("ciid").value; var thisurl = window.location.href; var newUrl = thisurl.replace("name=assiut", "name=" + ci_value); window.location.href = newUrl } var city_offset = "2"; var reminingtime = 17066000; var soundfile = "fajer"; var douration_sound = "280"; var clean_url = 'timesprayer.com';
 
+
 </script>
 <script src="{% static 'assets/js/timerprayer.js' %}"></script>
 <script>
     (function (i, s, o, g, r, a, m) { i.GoogleAnalyticsObject = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o), m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m) })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga'); ga('create', 'UA-51636779-1', 'timesprayer.com'); ga('send', 'pageview');
+
 
 </script>
 {% block javascript %}

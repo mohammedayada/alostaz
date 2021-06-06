@@ -5,51 +5,54 @@
 {% endblock title%}
 {% block contain %}
 <div class="container-fluid mt-3">
-  <div class="row">
-    <div class="col-sm-1 col-md-4 col-lg-2">
+    <div class="row">
+        <div class="col-sm-1 col-md-4 col-lg-2">
         </div>
-    <div class="col-sm-10 col-md-4 col-lg-8">
-      <a class="btn btn-primary" href="{% url 'add-news'%}">اضف منشور</a>
-      <hr>
-      {% if news_list%}
-      <table class="table table-borderless">
-        <thead class="thead-dark">
-        <tr>
-          <th class="text-center" scope="col">#</th>
-          <th class="text-center" scope="col">العنوان</th>
-          <th class="text-center" scope="col">الكاتب</th>
-          {% if cond %}
-          <th class="text-center" scope="col">الخيارات</th>
-          {% endif %}
-        </tr>
-        </thead>
-        <tbody>
-        {% for news in news_list %}
-        <tr>
-          <th class="text-center" scope="row">{{forloop.counter}}</th>
-          <td class="text-center"><a href="{% url 'news_details' news.id%}">{{news.title}}</a></td>
-          <th class="text-center" scope="col">{{news.user.email}}</th>
-          {% if cond %}
-          <td class="text-center">
-            <a class="btn btn-sm btn-primary" href="{% url 'approve-news' news.pk %}"> اضافه  <i class="fas fa-check"></i></a>
-            <a class="btn btn-sm btn-danger" href="{% url 'delete-news' news.pk %}">حذف <i class="fas fa-trash"></i></a>
-            <a class="btn btn-sm btn-success" href="{% url 'edit-news' news.pk %}"> تعديل  <i class="fas fa-edit"></i></a>
-          </td>
-          {% endif %}
-        </tr>
+        <div class="col-sm-10 col-md-4 col-lg-8">
+            <a class="btn btn-primary" href="{% url 'add-news'%}">اضف منشور</a>
+            <hr>
+            {% if news_list%}
+            <table class="table table-borderless">
+                <thead class="thead-dark">
+                <tr>
+                    <th class="text-center" scope="col">#</th>
+                    <th class="text-center" scope="col">العنوان</th>
+                    <th class="text-center" scope="col">الكاتب</th>
+                    {% if cond %}
+                    <th class="text-center" scope="col">الخيارات</th>
+                    {% endif %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for news in news_list %}
+                <tr>
+                    <th class="text-center" scope="row">{{forloop.counter}}</th>
+                    <td class="text-center"><a href="{% url 'news_details' news.id%}">{{news.title}}</a></td>
+                    <th class="text-center" scope="col">{{news.user.email}}</th>
+                    {% if cond %}
+                    <td class="text-center">
+                        <a class="btn btn-sm btn-primary" href="{% url 'approve-news' news.pk %}"> اضافه <i
+                                class="fas fa-check"></i></a>
+                        <a class="btn btn-sm btn-danger" href="{% url 'delete-news' news.pk %}">حذف <i
+                                class="fas fa-trash"></i></a>
+                        <a class="btn btn-sm btn-success" href="{% url 'edit-news' news.pk %}"> تعديل <i
+                                class="fas fa-edit"></i></a>
+                    </td>
+                    {% endif %}
+                </tr>
 
-        {% endfor %}
-        </tbody>
-      </table>
-      {% endif %}
-    </div>
-    <div class="col-sm-1 col-md-4 col-lg-2">
-
-  </div>
-    <div class="col-sm-1 col-md-4 col-lg-2">
+                {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+        <div class="col-sm-1 col-md-4 col-lg-2">
 
         </div>
-    <div class="col-sm-10 col-md-4 col-lg-8">
+        <div class="col-sm-1 col-md-4 col-lg-2">
+
+        </div>
+        <div class="col-sm-10 col-md-4 col-lg-8">
             <nav aria-label="Page navigation example">
                 {% if news_list.has_other_pages %}
                 <ul class="pagination">
@@ -81,11 +84,11 @@
                 {% endif %}
             </nav>
         </div>
-    <div class="col-sm-1 col-md-4 col-lg-2">
+        <div class="col-sm-1 col-md-4 col-lg-2">
 
         </div>
 
-  </div>
+    </div>
 
 </div>
 {% endblock contain%}

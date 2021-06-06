@@ -30,6 +30,9 @@ from .views import (
     show_all_advertising,
     delete_photo,
     delete_advertising,
+    delete_subscriber,
+    show_subscribers,
+    postSubscriber,
 
 )
 
@@ -94,5 +97,11 @@ urlpatterns = [
     path('edit-photo/<int:pk>', edit_photo, name='edit-photo'),
     # delete photo
     path('delete-photo/<int:pk>', delete_photo, name='delete-photo'),
+    # show subscribers
+    path('show-subscribers/<int:page>/', show_subscribers, name='show-subscribers'),
+    # delete subscriber
+    path('delete-subscriber/<int:pk>', delete_subscriber, name='delete-subscriber'),
+    # Add Comment by using AJAX
+    path('post/ajax/Subscriber/', postSubscriber, name='post-subscriber'),
 
 ]

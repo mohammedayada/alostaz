@@ -2,688 +2,746 @@
 {% load static %}
 {% block title%}الوسيط الدولي{% endblock title%}
 {% block contain %}
-  <div id='HLvD'>
+<div id='HLvD'>
     <div id='Marqs' class="marqueed WAITcss">
-      {% for note in notes%}
-      <a {%if note.link %} href='{{note.link}}' {% endif %}  title="{{note.title}}" >{{note.title}}</a>
-      {% endfor %}
+        {% for note in notes%}
+        <a {%if note.link %} href='{{note.link}}' {% endif %} title="{{note.title}}">{{note.title}}</a>
+        {% endfor %}
     </div>
-  </div>
+</div>
 
 
-  <div class="main">
+<div class="main">
     <div class="container-fluid">
-      <div class="manager">
-        <div class="row">
-          <div class="col-sm-12 col-md-6 col-lg-6">
-            <a href="" class="spaces">
-              <img src="{{photo4.img.url}}" alt="">
-            </a>
-          </div>
-          <div class="col-sm-12 col-md-6 col-lg-6">
-            <a href="" class="spaces">
-              <img src="{{photo5.img.url}}" alt="">
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-12 col-md-8 col-lg-10">
-          <div class="content">
-            <div class="slider-news">
-              <div class="section-header">احدث الأخبار</div>
-              <div id="my-courcle" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                  {% for news in latest_news%}
-                  {% if forloop.counter0 == 0%}
-                  <li data-target="#my-courcle" data-slide-to="{{forloop.counter0}}" class="active"></li>
-                  {%else%}
-                  <li data-target="#my-courcle" data-slide-to="{{forloop.counter0}}"></li>
-                  {% endif %}
-                  {% endfor %}
-                </ol>
-                <div class="carousel-inner">
-                  {% for news in latest_news%}
-                  {% if forloop.counter0 == 0%}
-                  <div class="carousel-item active" style="background-image: url({{news.img.url}});">
-                    <div class="carousel-caption d-none d-md-block">
-                      <p>{{news.title}}</p>
-                    </div>
-                  </div>
-                  {%else%}
-                  <div class="carousel-item" style="background-image: url({{news.img.url}});">
-                    <div class="carousel-caption d-none d-md-block">
-                      <p>{{news.title}}</p>
-                    </div>
-                  </div>
-                  {% endif %}
-                  {% endfor %}
-                  <a class="carousel-control-prev" href="#my-courcle" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="carousel-control-next" href="#my-courcle" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="spaces">
-              <a href="">
-                <img src="{% static 'assets/images/7101668883051653025.png' %}" alt="">
-              </a>
-            </div>
-            {%if breaking_news0%}
-            <div class="urgently mt-3">
-              <h5 class="section-header">
-                اخبار عاجلة
-              </h5>
-              <div class="urgently-slider" dir="ltr">
-                <div class="slider-item">
-                  <div class="row">
-                    {%for news in breaking_news0%}
-                    <div class="col-sm-12 col-md-6 col-lg-3">
-                      <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
-                        <div class="card-img"><img src="{% static 'assets/images/galley-1.jpg' %}" alt=""></div>
-                        <h5 class="card-title">{{news.title}}</h5>
-                        <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                      </a>
-                    </div>
-                    {% endfor %}
-                  </div>
-                </div>
-                {% if breaking_news1%}
-                <div class="slider-item">
-                  <div class="row">
-                    {%for news in breaking_news1%}
-                    <div class="col-sm-12 col-md-6 col-lg-3">
-                      <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
-                        <div class="card-img"><img src="{% static 'assets/images/galley-1.jpg' %}" alt=""></div>
-                        <h5 class="card-title">{{news.title}}</h5>
-                        <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                      </a>
-                    </div>
-                    {% endfor %}
-                  </div>
-                </div>
-                {% endif %}
-              </div>
-            </div>
-            {% endif %}
+        <div class="manager">
             <div class="row">
-              <div class="col-sm-12 col-md-12 col-lg-8">
-                <div class="main-section-all">
-                  {% if local_news %}
-                  <div class="main-section-news localy">
-                    <h5 class="section-header">محليات
-                      <a href="{% url 'news_category' local_news.first.category.pk 1 %}" class="more">المزيد</a>
-                    </h5>
-                    <div class="row">
-                      {% for local in local_news%}
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="{% url 'news_details' local.pk%}" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="{{local.img.url}}" alt=""></div>
-                          <h5 class="card-title">{{local.title}}</h5>
-                          <p class="card-text">{{local.details|safe}}
-                          </p>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <a href="" class="spaces">
+                        <img src="{{photo4.img.url}}" alt="">
+                    </a>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <a href="" class="spaces">
+                        <img src="{{photo5.img.url}}" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-8 col-lg-10">
+                <div class="content">
+                    <div class="slider-news">
+                        <div class="section-header">احدث الأخبار</div>
+                        <div id="my-courcle" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                {% for news in latest_news%}
+                                {% if forloop.counter0 == 0%}
+                                <li data-target="#my-courcle" data-slide-to="{{forloop.counter0}}" class="active"></li>
+                                {%else%}
+                                <li data-target="#my-courcle" data-slide-to="{{forloop.counter0}}"></li>
+                                {% endif %}
+                                {% endfor %}
+                            </ol>
+                            <div class="carousel-inner">
+                                {% for news in latest_news%}
+                                {% if forloop.counter0 == 0%}
+                                <div class="carousel-item active" style="background-image: url({{news.img.url}});">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <p>{{news.title}}</p>
+                                    </div>
+                                </div>
+                                {%else%}
+                                <div class="carousel-item" style="background-image: url({{news.img.url}});">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <p>{{news.title}}</p>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                                <a class="carousel-control-prev" href="#my-courcle" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#my-courcle" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="spaces">
+                        <a href="">
+                            <img src="{% static 'assets/images/7101668883051653025.png' %}" alt="">
                         </a>
-                      </div>
-                      {% endfor %}
+                    </div>
+                    {%if breaking_news0%}
+                    <div class="urgently mt-3">
+                        <h5 class="section-header">
+                            اخبار عاجلة
+                        </h5>
+                        <div class="urgently-slider" dir="ltr">
+                            <div class="slider-item">
+                                <div class="row">
+                                    {%for news in breaking_news0%}
+                                    <div class="col-sm-12 col-md-6 col-lg-3">
+                                        <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
+                                            <div class="card-img"><img src="{% static 'assets/images/galley-1.jpg' %}"
+                                                                       alt=""></div>
+                                            <h5 class="card-title">{{news.title}}</h5>
+                                            <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
+                                        </a>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% if breaking_news1%}
+                            <div class="slider-item">
+                                <div class="row">
+                                    {%for news in breaking_news1%}
+                                    <div class="col-sm-12 col-md-6 col-lg-3">
+                                        <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
+                                            <div class="card-img"><img src="{% static 'assets/images/galley-1.jpg' %}"
+                                                                       alt=""></div>
+                                            <h5 class="card-title">{{news.title}}</h5>
+                                            <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
+                                        </a>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-8">
+                            <div class="main-section-all">
+                                {% if local_news %}
+                                <div class="main-section-news localy">
+                                    <h5 class="section-header">محليات
+                                        <a href="{% url 'news_category' local_news.first.category.pk 1 %}" class="more">المزيد</a>
+                                    </h5>
+                                    <div class="row">
+                                        {% for local in local_news%}
+                                        <div class="col-sm-12 col-md-6 col-lg-4">
+                                            <a href="{% url 'news_details' local.pk%}"
+                                               class="card new-card-of-main-section">
+                                                <div class="card-img"><img src="{{local.img.url}}" alt=""></div>
+                                                <h5 class="card-title">{{local.title}}</h5>
+                                                <p class="card-text">{{local.details|safe}}
+                                                </p>
+                                            </a>
+                                        </div>
+                                        {% endfor %}
 
-                    </div>
-                  </div>
-                  {% endif %}
-                  {% if arab_and_world%}
-                  <div class="main-section-news arab-and-world">
-                    <h5 class="section-header">عرب وعالم
-                      <a href="{% url 'news_category' 2 1 %}" class="more">المزيد</a>
-                    </h5>
-                    <div class="row">
-                      {% for news in arab_and_world%}
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                          <h5 class="card-title">{{news.title}}</h5>
-                          <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                        </a>
-                      </div>
-                      {% endfor %}
-                    </div>
-                  </div>
-                  {% endif %}
-                  {% if cites %}
-                  <div class="main-section-news goverment">
-                    <h5 class="section-header"> محافظات
-                      <a href="{% url 'news_category' 78 1 %}" class="more">المزيد</a>
-                    </h5>
-                    <div class="row">
-                      {% for news in cites%}
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                          <h5 class="card-title">{{news.title}}</h5>
-                          <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                        </a>
-                      </div>
-                      {% endfor %}
-                    </div>
-                  </div>
-                  {% endif %}
-                  {% if accidents_and_investigations%}
-                  <div class="main-section-news accident">
-                    <h5 class="section-header"> حوادث وتحقيقات
-                      <a href="{% url 'news_category' 7 1 %}" class="more">المزيد</a>
-                    </h5>
-                    <div class="row">
-                      {% for news in accidents_and_investigations%}
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                          <h5 class="card-title">{{news.title}}</h5>
-                          <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                        </a>
-                      </div>
-                      {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% if arab_and_world%}
+                                <div class="main-section-news arab-and-world">
+                                    <h5 class="section-header">عرب وعالم
+                                        <a href="{% url 'news_category' 2 1 %}" class="more">المزيد</a>
+                                    </h5>
+                                    <div class="row">
+                                        {% for news in arab_and_world%}
+                                        <div class="col-sm-12 col-md-6 col-lg-4">
+                                            <a href="{% url 'news_details' news.pk%}"
+                                               class="card new-card-of-main-section">
+                                                <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
+                                                <h5 class="card-title">{{news.title}}</h5>
+                                                <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
+                                            </a>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% if cites %}
+                                <div class="main-section-news goverment">
+                                    <h5 class="section-header"> محافظات
+                                        <a href="{% url 'news_category' 78 1 %}" class="more">المزيد</a>
+                                    </h5>
+                                    <div class="row">
+                                        {% for news in cites%}
+                                        <div class="col-sm-12 col-md-6 col-lg-4">
+                                            <a href="{% url 'news_details' news.pk%}"
+                                               class="card new-card-of-main-section">
+                                                <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
+                                                <h5 class="card-title">{{news.title}}</h5>
+                                                <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
+                                            </a>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% if accidents_and_investigations%}
+                                <div class="main-section-news accident">
+                                    <h5 class="section-header"> حوادث وتحقيقات
+                                        <a href="{% url 'news_category' 7 1 %}" class="more">المزيد</a>
+                                    </h5>
+                                    <div class="row">
+                                        {% for news in accidents_and_investigations%}
+                                        <div class="col-sm-12 col-md-6 col-lg-4">
+                                            <a href="{% url 'news_details' news.pk%}"
+                                               class="card new-card-of-main-section">
+                                                <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
+                                                <h5 class="card-title">{{news.title}}</h5>
+                                                <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
+                                            </a>
+                                        </div>
+                                        {% endfor %}
 
-                    </div>
-                  </div>
-                  {% endif %}
-                  {% if politics_and_economy%}
-                  <div class="main-section-news economics">
-                    <h5 class="section-header"> سياسة واقتصاد
-                      <a href="{% url 'news_category' 13 1 %}" class="more">المزيد</a>
-                    </h5>
-                    <div class="row">
-                      {% for news in politics_and_economy%}
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                          <h5 class="card-title">{{news.title}}</h5>
-                          <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                        </a>
-                      </div>
-                      {%endfor%}
-                    </div>
-                  </div>
-                  {% endif %}
-                  {%if sports%}
-                  <div class="main-section-news sports">
-                    <h5 class="section-header"> رياضة
-                      <a href="{% url 'news_category' 18 1 %}" class="more">المزيد</a>
-                    </h5>
-                    <div class="row">
-                      {% for news in sports%}
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                          <h5 class="card-title">{{news.title}}</h5>
-                          <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                        </a>
-                      </div>
-                      {% endfor %}
-                    </div>
-                  </div>
-                  {% endif %}
-                  {% if culture_and_arts%}
-                  <div class="main-section-news arts">
-                    <h5 class="section-header"> ثقافة وفنون
-                      <a href="{% url 'news_category' 22 1 %}" class="more">المزيد</a>
-                    </h5>
-                    <div class="row">
-                      {% for news in culture_and_arts%}
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                          <h5 class="card-title">{{news.title}}</h5>
-                          <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                        </a>
-                      </div>
-                      {% endfor %}
-                    </div>
-                  </div>
-                  {% endif %}
-                  {% if mixs%}
-                  <div class="main-section-news mix">
-                    <h5 class="section-header"> منوعات
-                      <a href="{% url 'news_category' 62 1 %}" class="more">المزيد</a>
-                    </h5>
-                    <div class="row">
-                      {% for news in mixs%}
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                          <h5 class="card-title">{{news.title}}</h5>
-                          <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                        </a>
-                      </div>
-                      {% endfor %}
-                    </div>
-                  </div>
-                  {%endif%}
-                  {%if real_estate_and_cars%}
-                  <div class="main-section-news car-building">
-                    <h5 class="section-header"> عقارات وسيارات
-                      <a href="{% url 'news_category' 40 1 %}" class="more">المزيد</a>
-                    </h5>
-                    <div class="row">
-                      {% for news in real_estate_and_cars%}
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                          <h5 class="card-title">{{news.title}}</h5>
-                          <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                        </a>
-                      </div>
-                      {% endfor %}
-                    </div>
-                  </div>
-                  {% endif %}
-                  {% if talents_and_identities%}
-                  <div class="main-section-news car-building">
-                    <h5 class="section-header"> مواهب وهوايات
-                      <a href="{% url 'news_category' 33 1 %}" class="more">المزيد</a>
-                    </h5>
-                    <div class="row">
-                      {% for news in talents_and_identities%}
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                          <h5 class="card-title">{{news.title}}</h5>
-                          <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                        </a>
-                      </div>
-                      {% endfor %}
-                    </div>
-                  </div>
-                  {% endif %}
-                  {% if video_and_audio%}
-                  <div class="main-section-news soud-pic">
-                    <h5 class="section-header"> صوت وصورة
-                      <a href="{% url 'news_category' 41 1 %}" class="more">المزيد</a>
-                    </h5>
-                    <div class="row">
-                      {%for news in video_and_audio%}
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                          <h5 class="card-title">{{news.title}}</h5>
-                          <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                        </a>
-                      </div>
-                      {% endfor %}
-                    </div>
-                  </div>
-                  {% endif %}
-                  {% if people_and_society%}
-                  <div class="main-section-news soud-pic">
-                    <h5 class="section-header"> ناس ومجتمع
-                      <a href="{% url 'news_category' 46 1 %}" class="more">المزيد</a>
-                    </h5>
-                    <div class="row">
-                      {% for news in people_and_society%}
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="{% url 'news_details' news.pk%}" class="card new-card-of-main-section">
-                          <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                          <h5 class="card-title">{{news.title}}</h5>
-                          <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                        </a>
-                      </div>
-                      {% endfor %}
-                    </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% if politics_and_economy%}
+                                <div class="main-section-news economics">
+                                    <h5 class="section-header"> سياسة واقتصاد
+                                        <a href="{% url 'news_category' 13 1 %}" class="more">المزيد</a>
+                                    </h5>
+                                    <div class="row">
+                                        {% for news in politics_and_economy%}
+                                        <div class="col-sm-12 col-md-6 col-lg-4">
+                                            <a href="{% url 'news_details' news.pk%}"
+                                               class="card new-card-of-main-section">
+                                                <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
+                                                <h5 class="card-title">{{news.title}}</h5>
+                                                <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
+                                            </a>
+                                        </div>
+                                        {%endfor%}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {%if sports%}
+                                <div class="main-section-news sports">
+                                    <h5 class="section-header"> رياضة
+                                        <a href="{% url 'news_category' 18 1 %}" class="more">المزيد</a>
+                                    </h5>
+                                    <div class="row">
+                                        {% for news in sports%}
+                                        <div class="col-sm-12 col-md-6 col-lg-4">
+                                            <a href="{% url 'news_details' news.pk%}"
+                                               class="card new-card-of-main-section">
+                                                <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
+                                                <h5 class="card-title">{{news.title}}</h5>
+                                                <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
+                                            </a>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% if culture_and_arts%}
+                                <div class="main-section-news arts">
+                                    <h5 class="section-header"> ثقافة وفنون
+                                        <a href="{% url 'news_category' 22 1 %}" class="more">المزيد</a>
+                                    </h5>
+                                    <div class="row">
+                                        {% for news in culture_and_arts%}
+                                        <div class="col-sm-12 col-md-6 col-lg-4">
+                                            <a href="{% url 'news_details' news.pk%}"
+                                               class="card new-card-of-main-section">
+                                                <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
+                                                <h5 class="card-title">{{news.title}}</h5>
+                                                <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
+                                            </a>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% if mixs%}
+                                <div class="main-section-news mix">
+                                    <h5 class="section-header"> منوعات
+                                        <a href="{% url 'news_category' 62 1 %}" class="more">المزيد</a>
+                                    </h5>
+                                    <div class="row">
+                                        {% for news in mixs%}
+                                        <div class="col-sm-12 col-md-6 col-lg-4">
+                                            <a href="{% url 'news_details' news.pk%}"
+                                               class="card new-card-of-main-section">
+                                                <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
+                                                <h5 class="card-title">{{news.title}}</h5>
+                                                <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
+                                            </a>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {%endif%}
+                                {%if real_estate_and_cars%}
+                                <div class="main-section-news car-building">
+                                    <h5 class="section-header"> عقارات وسيارات
+                                        <a href="{% url 'news_category' 40 1 %}" class="more">المزيد</a>
+                                    </h5>
+                                    <div class="row">
+                                        {% for news in real_estate_and_cars%}
+                                        <div class="col-sm-12 col-md-6 col-lg-4">
+                                            <a href="{% url 'news_details' news.pk%}"
+                                               class="card new-card-of-main-section">
+                                                <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
+                                                <h5 class="card-title">{{news.title}}</h5>
+                                                <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
+                                            </a>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% if talents_and_identities%}
+                                <div class="main-section-news car-building">
+                                    <h5 class="section-header"> مواهب وهوايات
+                                        <a href="{% url 'news_category' 33 1 %}" class="more">المزيد</a>
+                                    </h5>
+                                    <div class="row">
+                                        {% for news in talents_and_identities%}
+                                        <div class="col-sm-12 col-md-6 col-lg-4">
+                                            <a href="{% url 'news_details' news.pk%}"
+                                               class="card new-card-of-main-section">
+                                                <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
+                                                <h5 class="card-title">{{news.title}}</h5>
+                                                <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
+                                            </a>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% if video_and_audio%}
+                                <div class="main-section-news soud-pic">
+                                    <h5 class="section-header"> صوت وصورة
+                                        <a href="{% url 'news_category' 41 1 %}" class="more">المزيد</a>
+                                    </h5>
+                                    <div class="row">
+                                        {%for news in video_and_audio%}
+                                        <div class="col-sm-12 col-md-6 col-lg-4">
+                                            <a href="{% url 'news_details' news.pk%}"
+                                               class="card new-card-of-main-section">
+                                                <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
+                                                <h5 class="card-title">{{news.title}}</h5>
+                                                <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
+                                            </a>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% if people_and_society%}
+                                <div class="main-section-news soud-pic">
+                                    <h5 class="section-header"> ناس ومجتمع
+                                        <a href="{% url 'news_category' 46 1 %}" class="more">المزيد</a>
+                                    </h5>
+                                    <div class="row">
+                                        {% for news in people_and_society%}
+                                        <div class="col-sm-12 col-md-6 col-lg-4">
+                                            <a href="{% url 'news_details' news.pk%}"
+                                               class="card new-card-of-main-section">
+                                                <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
+                                                <h5 class="card-title">{{news.title}}</h5>
+                                                <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
+                                            </a>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
 
-                  </div>
-                  {% endif %}
-                </div>
-              </div>
-              <div class="col-sm-12 col-md-12 col-lg-4">
-                <div class="books-article">
-                  <div class="section-header">كتب ومقالات
-                    <a href="" class="more">المزيد</a>
-                  </div>
-                  <div class="books-slider" dir="ltr">
-                    <div class="slider-item">
-                      <div class="card-books">
-                        <div class="card-img" style="background-image: url('./assets/images/books.jpg');"></div>
-                        <div class="card-body">
-                          <a href="" class="card-title">كتاب الاستاذ عصام</a>
-                          <p class="card-text">برنامج الاستاذ ورمضان</p>
+                                </div>
+                                {% endif %}
+                            </div>
                         </div>
-                      </div>
-                      <div class="card-books">
-                        <div class="card-img" style="background-image: url('./assets/images/books.jpg');"></div>
-                        <div class="card-body">
-                          <a href="" class="card-title">كتاب الاستاذ عصام</a>
-                          <p class="card-text">برنامج الاستاذ ورمضان</p>
-                        </div>
-                      </div>
-                      <div class="card-books">
-                        <div class="card-img" style="background-image: url('./assets/images/books.jpg');"></div>
-                        <div class="card-body">
-                          <a href="" class="card-title">كتاب الاستاذ عصام</a>
-                          <p class="card-text">برنامج الاستاذ ورمضان</p>
-                        </div>
-                      </div>
-                      <div class="card-books">
-                        <div class="card-img" style="background-image: url('./assets/images/books.jpg');"></div>
-                        <div class="card-body">
-                          <a href="" class="card-title">كتاب الاستاذ عصام</a>
-                          <p class="card-text">برنامج الاستاذ ورمضان</p>
-                        </div>
-                      </div>
-                      <div class="card-books">
-                        <div class="card-img" style="background-image: url('./assets/images/books.jpg');"></div>
-                        <div class="card-body">
-                          <a href="" class="card-title">كتاب الاستاذ عصام</a>
-                          <p class="card-text">برنامج الاستاذ ورمضان</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="slider-item">
-                      <div class="card-books">
-                        <div class="card-img" style="background-image: url('./assets/images/books.jpg');"></div>
-                        <div class="card-body">
-                          <a href="" class="card-title">كتاب الاستاذ عصام</a>
-                          <p class="card-text">برنامج الاستاذ ورمضان</p>
-                        </div>
-                      </div>
-                      <div class="card-books">
-                        <div class="card-img" style="background-image: url('./assets/images/books.jpg');"></div>
-                        <div class="card-body">
-                          <a href="" class="card-title">كتاب الاستاذ عصام</a>
-                          <p class="card-text">برنامج الاستاذ ورمضان</p>
-                        </div>
-                      </div>
-                      <div class="card-books">
-                        <div class="card-img" style="background-image: url('./assets/images/books.jpg');"></div>
-                        <div class="card-body">
-                          <a href="" class="card-title">كتاب الاستاذ عصام</a>
-                          <p class="card-text">برنامج الاستاذ ورمضان</p>
-                        </div>
-                      </div>
-                      <div class="card-books">
-                        <div class="card-img" style="background-image: url('./assets/images/books.jpg');"></div>
-                        <div class="card-body">
-                          <a href="" class="card-title">كتاب الاستاذ عصام</a>
-                          <p class="card-text">برنامج الاستاذ ورمضان</p>
-                        </div>
-                      </div>
-                      <div class="card-books">
-                        <div class="card-img" style="background-image: url('./assets/images/books.jpg');"></div>
-                        <div class="card-body">
-                          <a href="" class="card-title">كتاب الاستاذ عصام</a>
-                          <p class="card-text">برنامج الاستاذ ورمضان</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="gallery video">
-                  <div class="section-header">الفيديو
-                    <a href="" class="more">المزيد</a>
-                  </div>
-                  <div class="row mt-3">
-                    <div class="col-6 col-md-6 col-lg-12">
-                      <iframe width="100%" height="215" src="https://www.youtube.com/embed/pO5dgZrM9Mk"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-                    </div>
-                  </div>
-                </div>
-                <div class="gallery">
-                  <div class="section-header"> رسوم وكاريكاتير
-                    <a href="{% url 'news_category' 65 1 %}" class="more">المزيد</a>
-                  </div>
-                  <div class="row">
-                    {%for carton in cartons%}
-                    <div class="col-6 col-md-6 col-lg-6">
-                      <a href="{% url 'news_details' carton.pk %}">
-                        <img src="{{carton.img.url}}" alt="">
-                      </a>
-                    </div>
-                    {%endfor%}
-                  </div>
-                </div>
-                <div class="alostaz-tv mt-4">
-                  <div class="section-header">تلفزيون الاستاذ
-                    <!-- <a href="" class="more">المزيد</a> -->
-                  </div>
-                  <div class="row mt-3">
-                    <div class="col-6 col-md-6 col-lg-12">
-                      <iframe width="100%" height="215" src="https://www.youtube.com/embed/pO5dgZrM9Mk"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-                    </div>
-                  </div>
-                </div>
-                <div class="alostaz-radio mt-4">
-                  <div class="section-header">راديو الاستاذ
-<!--                    <a href="https://www.youtube.com/" class="more">المزيد</a>-->
-                  </div>
-                   <div class="row mt-3">
-                    <div class="col-6 col-md-6 col-lg-12">
-                      <iframe width="100%" height="215" src="https://www.youtube.com/embed/pO5dgZrM9Mk"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-                    </div>
-                  </div>
-                </div>
-                {% if images %}
-                <div class="gallery alostaz-tv mt-4">
-                  <div class="section-header">صور الاستاذ
-                    <a href="" class="more">المزيد</a>
-                  </div>
-                  <div class="row">
-                    {% for img in images%}
-                    <div class="col-6 col-md-6 col-lg-6">
-                      <a href="">
-                        <img src="{{img.img.url}}" alt="">
-                      </a>
-                    </div>
-                    {%endfor%}
-                  </div>
-                </div>
-                {% endif %}
-                <div class="most-read last-news mt-3">
-                  <h5 class="section-header">
-                    اخر الاخبار
-                    <a href="{% url 'last-news' 1%}" class="more">المزيد</a>
-                  </h5>
-                  <div class="card-news-img-right">
-                    {% for news in breaking_news0%}
-                    <div class="card">
-                      <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                      <h5 class="card-title">{{news.title}}</h5>
-                      <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                    </div>
-                    {% endfor %}
-                  </div>
-                </div>
-                {% if most_read%}
-                <div class="most-read mt-3">
-                  <h5 class="section-header">
-                    الاكثر قراءة
-                    <a href="{% url 'most-read' 1%}" class="more">المزيد</a>
-                  </h5>
-                  <div class="card-news-img-right">
-                    {% for news in most_read%}
-                    <div class="card">
-                      <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                      <h5 class="card-title">{{news.title}}</h5>
-                      <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                    </div>
-                    {% endfor %}
-                  </div>
-                </div>
-                {%endif%}
-                {% if most_read%}
-                <div class="most-watch mt-3">
-                  <h5 class="section-header">
-                    الاكثر مشاهدة
-                    <a href="{% url 'most-read' 1%}" class="more">المزيد</a>
-                  </h5>
-                  <div class="card-news-img-right">
-                    {% for news in most_read%}
-                    <div class="card">
-                      <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                      <h5 class="card-title">{{news.title}}</h5>
-                      <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                    </div>
-                    {% endfor %}
-                  </div>
-                </div>
-                {%endif%}
-                <div class="most-comment mt-3">
-                  <h5 class="section-header">
-                    الاكثر تعليقا
-                    <a href="{% url 'most-comment' 1%}" class="more">المزيد</a>
-                  </h5>
-                  <div class="card-news-img-right">
-                    {% for news in more_comments%}
-                    <div class="card">
-                      <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                      <h5 class="card-title">{{news.title}}</h5>
-                      <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                    </div>
-                    {%endfor%}
-                  </div>
-                </div>
-                <div class="alostaz-serv mt-3">
-                  <h5 class="section-header">
-                    خدمات الاستاذ
-                    <a href="" class="more">المزيد</a>
-                  </h5>
-                </div>
-                <div class="temprature mt-3">
-                  <iframe
-                    src="https://www.meteoblue.com/ar/weather/widget/daily?geoloc=detect&days=4&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&precipunit=MILLIMETER&coloured=monochrome&pictoicon=0&pictoicon=1&maxtemperature=0&maxtemperature=1&mintemperature=0&mintemperature=1&windspeed=0&windgust=0&winddirection=0&uv=0&humidity=0&precipitation=0&precipitationprobability=0&spot=0&pressure=0&layout=light"
-                    frameborder="0" scrolling="NO" allowtransparency="true"
-                    sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox"
-                    style="width: 216px; height: 219px"></iframe>
-                  <div>
-                    <a href="https://www.meteoblue.com/ar/weather/week/index?utm_source=weather_widget&utm_medium=linkus&utm_content=daily&utm_campaign=Weather%2BWidget"
-                      target="_blank">meteoblue</a>
-                  </div>
-                </div>
-                <div class="praer-time">
-                  <div id="boxframeprayer">
-                    <table>
-                      <tr>
-                        <td>
-                          <div class="currentpray">الفجْر</div>
-                          <div class="city">اسيوط</div>
-                          <div class="country"></div>
-                        </td>
-                        <td>
-                          <div class="thetimes"><span>يتبقى <span id="countdown"
-                                style="font-size:12px;background:none;padding:0;margin:0;">--:--:--</span></span><br><span>موعد
+                        <div class="col-sm-12 col-md-12 col-lg-4">
+                            <div class="books-article">
+                                <div class="section-header">كتب ومقالات
+                                    <a href="" class="more">المزيد</a>
+                                </div>
+                                <div class="books-slider" dir="ltr">
+                                    <div class="slider-item">
+                                        <div class="card-books">
+                                            <div class="card-img"
+                                                 style="background-image: url('./assets/images/books.jpg');"></div>
+                                            <div class="card-body">
+                                                <a href="" class="card-title">كتاب الاستاذ عصام</a>
+                                                <p class="card-text">برنامج الاستاذ ورمضان</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-books">
+                                            <div class="card-img"
+                                                 style="background-image: url('./assets/images/books.jpg');"></div>
+                                            <div class="card-body">
+                                                <a href="" class="card-title">كتاب الاستاذ عصام</a>
+                                                <p class="card-text">برنامج الاستاذ ورمضان</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-books">
+                                            <div class="card-img"
+                                                 style="background-image: url('./assets/images/books.jpg');"></div>
+                                            <div class="card-body">
+                                                <a href="" class="card-title">كتاب الاستاذ عصام</a>
+                                                <p class="card-text">برنامج الاستاذ ورمضان</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-books">
+                                            <div class="card-img"
+                                                 style="background-image: url('./assets/images/books.jpg');"></div>
+                                            <div class="card-body">
+                                                <a href="" class="card-title">كتاب الاستاذ عصام</a>
+                                                <p class="card-text">برنامج الاستاذ ورمضان</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-books">
+                                            <div class="card-img"
+                                                 style="background-image: url('./assets/images/books.jpg');"></div>
+                                            <div class="card-body">
+                                                <a href="" class="card-title">كتاب الاستاذ عصام</a>
+                                                <p class="card-text">برنامج الاستاذ ورمضان</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slider-item">
+                                        <div class="card-books">
+                                            <div class="card-img"
+                                                 style="background-image: url('./assets/images/books.jpg');"></div>
+                                            <div class="card-body">
+                                                <a href="" class="card-title">كتاب الاستاذ عصام</a>
+                                                <p class="card-text">برنامج الاستاذ ورمضان</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-books">
+                                            <div class="card-img"
+                                                 style="background-image: url('./assets/images/books.jpg');"></div>
+                                            <div class="card-body">
+                                                <a href="" class="card-title">كتاب الاستاذ عصام</a>
+                                                <p class="card-text">برنامج الاستاذ ورمضان</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-books">
+                                            <div class="card-img"
+                                                 style="background-image: url('./assets/images/books.jpg');"></div>
+                                            <div class="card-body">
+                                                <a href="" class="card-title">كتاب الاستاذ عصام</a>
+                                                <p class="card-text">برنامج الاستاذ ورمضان</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-books">
+                                            <div class="card-img"
+                                                 style="background-image: url('./assets/images/books.jpg');"></div>
+                                            <div class="card-body">
+                                                <a href="" class="card-title">كتاب الاستاذ عصام</a>
+                                                <p class="card-text">برنامج الاستاذ ورمضان</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-books">
+                                            <div class="card-img"
+                                                 style="background-image: url('./assets/images/books.jpg');"></div>
+                                            <div class="card-body">
+                                                <a href="" class="card-title">كتاب الاستاذ عصام</a>
+                                                <p class="card-text">برنامج الاستاذ ورمضان</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gallery video">
+                                <div class="section-header">الفيديو
+                                    <a href="" class="more">المزيد</a>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-6 col-md-6 col-lg-12">
+                                        <iframe width="100%" height="215"
+                                                src="https://www.youtube.com/embed/pO5dgZrM9Mk"
+                                                title="YouTube video player" frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gallery">
+                                <div class="section-header"> رسوم وكاريكاتير
+                                    <a href="{% url 'news_category' 65 1 %}" class="more">المزيد</a>
+                                </div>
+                                <div class="row">
+                                    {%for carton in cartons%}
+                                    <div class="col-6 col-md-6 col-lg-6">
+                                        <a href="{% url 'news_details' carton.pk %}">
+                                            <img src="{{carton.img.url}}" alt="">
+                                        </a>
+                                    </div>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="alostaz-tv mt-4">
+                                <div class="section-header">تلفزيون الاستاذ
+                                    <!-- <a href="" class="more">المزيد</a> -->
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-6 col-md-6 col-lg-12">
+                                        <iframe width="100%" height="215"
+                                                src="https://www.youtube.com/embed/pO5dgZrM9Mk"
+                                                title="YouTube video player" frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="alostaz-radio mt-4">
+                                <div class="section-header">راديو الاستاذ
+                                    <!--                    <a href="https://www.youtube.com/" class="more">المزيد</a>-->
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-6 col-md-6 col-lg-12">
+                                        <iframe width="100%" height="215"
+                                                src="https://www.youtube.com/embed/pO5dgZrM9Mk"
+                                                title="YouTube video player" frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                            {% if images %}
+                            <div class="gallery alostaz-tv mt-4">
+                                <div class="section-header">صور الاستاذ
+                                    <a href="" class="more">المزيد</a>
+                                </div>
+                                <div class="row">
+                                    {% for img in images%}
+                                    <div class="col-6 col-md-6 col-lg-6">
+                                        <a href="">
+                                            <img src="{{img.img.url}}" alt="">
+                                        </a>
+                                    </div>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            {% endif %}
+                            <div class="most-read last-news mt-3">
+                                <h5 class="section-header">
+                                    اخر الاخبار
+                                    <a href="{% url 'last-news' 1%}" class="more">المزيد</a>
+                                </h5>
+                                <div class="card-news-img-right">
+                                    {% for news in breaking_news0%}
+                                    <div class="card">
+                                        <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
+                                        <h5 class="card-title">{{news.title}}</h5>
+                                        <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% if most_read%}
+                            <div class="most-read mt-3">
+                                <h5 class="section-header">
+                                    الاكثر قراءة
+                                    <a href="{% url 'most-read' 1%}" class="more">المزيد</a>
+                                </h5>
+                                <div class="card-news-img-right">
+                                    {% for news in most_read%}
+                                    <div class="card">
+                                        <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
+                                        <h5 class="card-title">{{news.title}}</h5>
+                                        <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {%endif%}
+                            {% if most_read%}
+                            <div class="most-watch mt-3">
+                                <h5 class="section-header">
+                                    الاكثر مشاهدة
+                                    <a href="{% url 'most-read' 1%}" class="more">المزيد</a>
+                                </h5>
+                                <div class="card-news-img-right">
+                                    {% for news in most_read%}
+                                    <div class="card">
+                                        <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
+                                        <h5 class="card-title">{{news.title}}</h5>
+                                        <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {%endif%}
+                            <div class="most-comment mt-3">
+                                <h5 class="section-header">
+                                    الاكثر تعليقا
+                                    <a href="{% url 'most-comment' 1%}" class="more">المزيد</a>
+                                </h5>
+                                <div class="card-news-img-right">
+                                    {% for news in more_comments%}
+                                    <div class="card">
+                                        <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
+                                        <h5 class="card-title">{{news.title}}</h5>
+                                        <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
+                                    </div>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="alostaz-serv mt-3">
+                                <h5 class="section-header">
+                                    خدمات الاستاذ
+                                    <a href="" class="more">المزيد</a>
+                                </h5>
+                            </div>
+                            <div class="temprature mt-3">
+                                <iframe
+                                        src="https://www.meteoblue.com/ar/weather/widget/daily?geoloc=detect&days=4&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&precipunit=MILLIMETER&coloured=monochrome&pictoicon=0&pictoicon=1&maxtemperature=0&maxtemperature=1&mintemperature=0&mintemperature=1&windspeed=0&windgust=0&winddirection=0&uv=0&humidity=0&precipitation=0&precipitationprobability=0&spot=0&pressure=0&layout=light"
+                                        frameborder="0" scrolling="NO" allowtransparency="true"
+                                        sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox"
+                                        style="width: 216px; height: 219px"></iframe>
+                                <div>
+                                    <a href="https://www.meteoblue.com/ar/weather/week/index?utm_source=weather_widget&utm_medium=linkus&utm_content=daily&utm_campaign=Weather%2BWidget"
+                                       target="_blank">meteoblue</a>
+                                </div>
+                            </div>
+                            <div class="praer-time">
+                                <div id="boxframeprayer">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <div class="currentpray">الفجْر</div>
+                                                <div class="city">اسيوط</div>
+                                                <div class="country"></div>
+                                            </td>
+                                            <td>
+                                                <div class="thetimes"><span>يتبقى <span id="countdown"
+                                                                                        style="font-size:12px;background:none;padding:0;margin:0;">--:--:--</span></span><br><span>موعد
                               الأذان
                               3:47 am</span></div>
-                          <div class="datetime playsound">الأن <span id="timenowinthecity">11:02:34 PM</span><br>الجمعة
-                          </div>
-                        </td>
-                      </tr>
-                    </table>
-                    <table class="tbllistprayer">
-                      <tr class="headtdprayer">
-                        <td colspan="3">الصلاة</td>
-                        <td colspan="3">الوقت</td>
-                      </tr>
-                      <tr>
-                        <td colspan="3" class="heightlithcolor">الفجْر</td>
-                        <td colspan="3" class="heightlithcolor">3:47 am</td>
-                      </tr>
-                      <tr>
-                        <td colspan="3">الشروق</td>
-                        <td colspan="3">5:19 am</td>
-                      </tr>
-                      <tr>
-                        <td colspan="3">الظُّهْر</td>
-                        <td colspan="3">11:54 am</td>
-                      </tr>
-                      <tr>
-                        <td colspan="3">العَصر</td>
-                        <td colspan="3">3:26 pm</td>
-                      </tr>
-                      <tr>
-                        <td colspan="3">المَغرب</td>
-                        <td colspan="3">6:30 pm</td>
-                      </tr>
-                      <tr>
-                        <td colspan="3">العِشاء</td>
-                        <td colspan="3">7:51 pm</td>
-                      </tr>
-                    </table>
-                  </div>
-                </div>
-                <div class="gold-price mt-3">
-                  <iframe width='100%' height='466' id='freshgoldprice'
-                    src='http://egypt.freshgoldprice.com/embed/vgoldprice.aspx?size=f' frameborder='0'
-                    scrolling='no'></iframe>
-                </div>
-                <div class="cuurency mt-3">
-                  <iframe src="https://currencyz.today/embed/?type=table&from=EGP" scrolling="on"
-                    style="height: 500px; width: 100%; border: 0;"></iframe>
-                </div>
-                <div class="boll-subscripe">
-                  <div class="row">
-                    <div class="col-sm-12 col-md-6 col-lg-12">
-                      <div class="boll">
-                        <h5 class="section-header">استطلاع الرأي</h5>
-                        <form action="">
-                          <h5>هل تتوقع موجة ثانيه لفايروس كورونا</h5>
-                          <div class="form-group">
-                            <input type="radio" name="corona" id="option-yes">
-                            <label for="option-yes">نعم</label>
-                          </div>
-                          <div class="form-group">
-                            <input type="radio" name="corona" id="option-no">
-                            <label for="option-no">لا</label>
-                          </div>
-                          <button type="submit" class="btn btn-submit">تصويت</button>
-                        </form>
-                      </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-12">
-                      <div class="subscripe mt-3">
-                        <div class="section-header">اشترك</div>
-                        <h5>اشترك في خدمة الاخبار العاجلة</h5>
-                        <form action="">
-                          <input type="email" name="" id="" class="form-control" placeholder="اكتب ايميلك هنا">
-                          <button type="submit" class="btn btn-submit">الاشتراك</button>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="cards-advert mt-3">
-                  <h5 class="section-header">دعاية واعلان</h5>
-                  {% for advertising in advertisings%}
-                  <div class="card card-adv">
-                    <img src="{{advertising.img.url}}" alt="" height="200">
-                  </div>
-                  {% endfor %}
+                                                <div class="datetime playsound">الأن <span id="timenowinthecity">11:02:34 PM</span><br>الجمعة
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table class="tbllistprayer">
+                                        <tr class="headtdprayer">
+                                            <td colspan="3">الصلاة</td>
+                                            <td colspan="3">الوقت</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="heightlithcolor">الفجْر</td>
+                                            <td colspan="3" class="heightlithcolor">3:47 am</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">الشروق</td>
+                                            <td colspan="3">5:19 am</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">الظُّهْر</td>
+                                            <td colspan="3">11:54 am</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">العَصر</td>
+                                            <td colspan="3">3:26 pm</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">المَغرب</td>
+                                            <td colspan="3">6:30 pm</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">العِشاء</td>
+                                            <td colspan="3">7:51 pm</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="gold-price mt-3">
+                                <iframe width='100%' height='466' id='freshgoldprice'
+                                        src='http://egypt.freshgoldprice.com/embed/vgoldprice.aspx?size=f'
+                                        frameborder='0'
+                                        scrolling='no'></iframe>
+                            </div>
+                            <div class="cuurency mt-3">
+                                <iframe src="https://currencyz.today/embed/?type=table&from=EGP" scrolling="on"
+                                        style="height: 500px; width: 100%; border: 0;"></iframe>
+                            </div>
+                            <div class="boll-subscripe">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6 col-lg-12">
+                                        <div class="boll">
+                                            <h5 class="section-header">استطلاع الرأي</h5>
+                                            <form action="">
+                                                <h5>هل تتوقع موجة ثانيه لفايروس كورونا</h5>
+                                                <div class="form-group">
+                                                    <input type="radio" name="corona" id="option-yes">
+                                                    <label for="option-yes">نعم</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="radio" name="corona" id="option-no">
+                                                    <label for="option-no">لا</label>
+                                                </div>
+                                                <button type="submit" class="btn btn-submit">تصويت</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-12">
+                                        <div class="subscripe mt-3">
+                                            <div class="section-header">اشترك</div>
+                                            <h5>اشترك في خدمة الاخبار العاجلة</h5>
+                                            <form action="" id="subscriber-form">
+                                                {% csrf_token %}
+                                                <input type="email" name="email" id="email" class="form-control"
+                                                       placeholder="اكتب ايميلك هنا">
+                                                <button type="submit" class="btn btn-submit">الاشتراك</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cards-advert mt-3">
+                                <h5 class="section-header">دعاية واعلان</h5>
+                                {% for advertising in advertisings%}
+                                <div class="card card-adv">
+                                    <img src="{{advertising.img.url}}" alt="" height="200">
+                                </div>
+                                {% endfor %}
 
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
+
             </div>
-          </div>
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                {% for photo in photos%}
+                <div class="cards-advert mt-3 spaces">
+                    <img src="{{photo.img.url}}" alt="">
 
+                </div>
+                {% endfor %}
+            </div>
         </div>
-        <div class="col-sm-12 col-md-2 col-lg-2">
-          {% for photo in photos%}
-          <div class="cards-advert mt-3 spaces">
-            <img src="{{photo.img.url}}" alt="">
-
-          </div>
-          {% endfor %}
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 {% endblock contain%}
 
 
+{% block javascript %}
+<script>
+    $("#subscriber-form").submit(function (e) {
+        // preventing from page reload and default actions
+        e.preventDefault();
+        // serialize the data for sending the form data.
+        var serializedData = $(this).serialize();
+        // make POST ajax call
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'post-subscriber' %}",
+            data: serializedData,
+            success: function (response) {
+                // on successfull creating object
+                // 1. clear the form.
+                $("#comment-form").trigger('reset');
+               alert("تمت اضافه المشترك بنجاح");
+
+            },
+            error: function (response) {
+                // alert the error if any error occured
+                alert(response["responseJSON"]["error"]);
+            }
+        })
+    })
+
+</script>
+{% endblock javascript %}

@@ -1,107 +1,111 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block contain %}
-  <div class="newline">
+<div class="newline">
     <div class="container">
-      {% if notes%}
-      <div class="my-news-slider" dir="ltr">
-        {% for note in notes%}
-        <div class="slider-item">
-          <a {%if note.link %} href='{{note.link}}' {% endif %}>
-            {{note.title}}
-          </a>
-        </div>
-        {% endfor %}
-      </div>
-      {% endif %}
-    </div>
-  </div>
-
-
-  <div class="main">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-12 col-md-2 col-lg-2">
-          <div class="spaces">
-            {% for photo in photos%}
-            <a href="">
-              <img src="{{photo.img.url}}" alt="">
-            </a>
-            {% endfor %}
-          </div>
-        </div>
-        <div class="col-sm-12 col-md-8 col-lg-8">
-          <div class="accidents-investigations">
-            <div class="row">
-              <div class="col-sm-12 col-md-12 col-lg-8">
-                <div class="section-header">الأكثر قراءة</div>
-                <div class="arab-news card-news-img-right">
-                  {% for news in news_list%}
-                  <div class="card">
-                    <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                    <a href="{% url 'news_details' news.pk%}" class="card-title">{{news.title}}</a>
-                    <span class="card-date">{{news.Publish_date.date}}</span>
-                    <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                  </div>
-                  {% endfor %}
-                </div>
-                <nav aria-label="Page navigation example">
-                  {% if news_list.has_other_pages %}
-                  <ul class="pagination">
-                    {% if news_list.has_previous %}
-                    <li class="page-item">
-                      <a class="page-link" href="{% url 'most-read' news_list.previous_page_number%}" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                        <span class="sr-only">Previous</span>
-                      </a>
-                    </li>
-                    {% endif %}
-                    {% for i in news_list.paginator.page_range %}
-                    {% if news_list.number == i %}
-                    <li class="page-item"><a class="page-link" style="background-color:#dee2e6" href="#">{{ i }}</a></li>
-                    {% else %}
-                    <li class="page-item"><a class="page-link" href="{% url 'most-read' i %}">{{ i }}</a></li>
-                    {% endif %}
-                    {% endfor %}
-                    {% if news_list.has_next %}
-                    <li class="page-item">
-                      <a class="page-link" href="{% url 'most-read' news_list.next_page_number%}" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                        <span class="sr-only">Next</span>
-                      </a>
-                    </li>
-                    {% endif %}
-                  </ul>
-                  {% endif %}
-                </nav>
-              </div>
-              <div class="col-sm-12 col-md-12 col-lg-4">
-                {% if last_news%}
-                <div class="">
-                  <div class="section-header">أخر الأخبار</div>
-                  {% for news in last_news%}
-                  <div class="card card-most-read">
-                    <a href="{% url 'news_details' news.pk%}" class="card-text">{{news.title}}</a>
-                  </div>
-                  {% endfor %}
-                </div>
-                {% endif %}
-              </div>
+        {% if notes%}
+        <div class="my-news-slider" dir="ltr">
+            {% for note in notes%}
+            <div class="slider-item">
+                <a {%if note.link %} href='{{note.link}}' {% endif %}>
+                    {{note.title}}
+                </a>
             </div>
-          </div>
-        </div>
-        <div class="col-sm-12 col-md-2 col-lg-2">
-          <div class="spaces">
-            {% for advertising in advertisings%}
-            <a href="">
-              <img src="{{advertising.img.url}}" alt="">
-            </a>
             {% endfor %}
-          </div>
         </div>
-      </div>
+        {% endif %}
     </div>
-  </div>
+</div>
+
+
+<div class="main">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <div class="spaces">
+                    {% for photo in photos%}
+                    <a href="">
+                        <img src="{{photo.img.url}}" alt="">
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-8 col-lg-8">
+                <div class="accidents-investigations">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-8">
+                            <div class="section-header">الأكثر قراءة</div>
+                            <div class="arab-news card-news-img-right">
+                                {% for news in news_list%}
+                                <div class="card">
+                                    <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
+                                    <a href="{% url 'news_details' news.pk%}" class="card-title">{{news.title}}</a>
+                                    <span class="card-date">{{news.Publish_date.date}}</span>
+                                    <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <nav aria-label="Page navigation example">
+                                {% if news_list.has_other_pages %}
+                                <ul class="pagination">
+                                    {% if news_list.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="{% url 'most-read' news_list.previous_page_number%}"
+                                           aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                    {% for i in news_list.paginator.page_range %}
+                                    {% if news_list.number == i %}
+                                    <li class="page-item"><a class="page-link" style="background-color:#dee2e6"
+                                                             href="#">{{ i }}</a></li>
+                                    {% else %}
+                                    <li class="page-item"><a class="page-link" href="{% url 'most-read' i %}">{{ i
+                                        }}</a></li>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% if news_list.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="{% url 'most-read' news_list.next_page_number%}"
+                                           aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                                {% endif %}
+                            </nav>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-4">
+                            {% if last_news%}
+                            <div class="">
+                                <div class="section-header">أخر الأخبار</div>
+                                {% for news in last_news%}
+                                <div class="card card-most-read">
+                                    <a href="{% url 'news_details' news.pk%}" class="card-text">{{news.title}}</a>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <div class="spaces">
+                    {% for advertising in advertisings%}
+                    <a href="">
+                        <img src="{{advertising.img.url}}" alt="">
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 {% endblock contain%}

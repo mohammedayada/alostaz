@@ -154,7 +154,7 @@ def News_details(request, pk):
     photo2 = Photo.objects.filter(pk=2).last()
     photo3 = Photo.objects.filter(pk=3).last()
     photos = Photo.objects.all()[5:10]
-    advertisings = Advertising.objects.all()[5:10]
+    advertisings = Photo.objects.all()[10:15]
 
     context = {
         'news': news,
@@ -255,7 +255,7 @@ def News_page(request, pk, page):
     photo2 = Photo.objects.filter(pk=2).last()
     photo3 = Photo.objects.filter(pk=3).last()
     photos = Photo.objects.all()[5:10]
-    advertisings = Advertising.objects.all()[5:10]
+    advertisings = Photo.objects.all()[10:15]
     context = {'news_list': news,
                'category': category,
                'most_read': most_read,
@@ -289,7 +289,7 @@ def News_tag(request, pk, page):
     photo2 = Photo.objects.filter(pk=2).last()
     photo3 = Photo.objects.filter(pk=3).last()
     photos = Photo.objects.all()[5:10]
-    advertisings = Advertising.objects.all()[5:10]
+    advertisings = Photo.objects.all()[10:15]
     context = {
         'news_tags': news_tags,
         'tag': tag,
@@ -325,6 +325,8 @@ def Search_news(request, page):
         photo1 = Photo.objects.filter(pk=1).last()
         photo2 = Photo.objects.filter(pk=2).last()
         photo3 = Photo.objects.filter(pk=3).last()
+        photos = Photo.objects.all()[5:10]
+        advertisings = Photo.objects.all()[10:15]
         context = {
             'news_list': news,
             'most_read': most_read,
@@ -332,6 +334,8 @@ def Search_news(request, page):
             'photo1': photo1,
             'photo2': photo2,
             'photo3': photo3,
+            'photos': photos,
+            'advertisings': advertisings,
 
         }
         return render(request, 'news-page.html', context)
@@ -358,7 +362,7 @@ def Last_news(request, page):
     photo2 = Photo.objects.filter(pk=2).last()
     photo3 = Photo.objects.filter(pk=3).last()
     photos = Photo.objects.all()[5:10]
-    advertisings = Advertising.objects.all()[5:10]
+    advertisings = Photo.objects.all()[10:15]
 
     context = {'news_list': news,
                'most_read': most_read,
@@ -370,6 +374,7 @@ def Last_news(request, page):
                'advertisings': advertisings,
                }
     return render(request, 'last-news.html', context)
+
 
 # Most read
 def most_read(request, page):
@@ -389,7 +394,7 @@ def most_read(request, page):
     photo3 = Photo.objects.filter(pk=3).last()
     last_news = News.objects.filter(approval=True).order_by('-id')[:6]
     photos = Photo.objects.all()[5:10]
-    advertisings = Advertising.objects.all()[5:10]
+    advertisings = Photo.objects.all()[10:15]
     context = {'news_list': news,
                'last_news': last_news,
                'notes': notes,
@@ -420,7 +425,7 @@ def most_comment(request, page):
     photo3 = Photo.objects.filter(pk=3).last()
     last_news = News.objects.filter(approval=True).order_by('-id')[:6]
     photos = Photo.objects.all()[5:10]
-    advertisings = Advertising.objects.all()[5:10]
+    advertisings = Photo.objects.all()[10:15]
 
     context = {'news_list': news,
                'last_news': last_news,
