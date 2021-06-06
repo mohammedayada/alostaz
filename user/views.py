@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import user, Photo, Advertising, Subscriber
-from news.models import Note, Tag, News, Category, Comment
+from news.models import Note, Tag, News, Category, Comment, Tag_news
 from .forms import NewsForm, PhotoForm, AdvertisingForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
@@ -694,3 +694,48 @@ def postSubscriber(request):
 
     # some error occured
     return JsonResponse({"error": "من فضلك ادخل بريد الكترونى صحيح "}, status=400)
+
+
+# Add tag to news
+def add_tag_to_news(request, tag_id, news_id):
+    my_user = user.objects.get(id=request.user.id)
+    news = News.objects.filter(pk=news_id).last()
+    cond = News.objects.filter(pk=news_id, user=request.user).count()
+    tag = Tag.objects.filter(pk=tag_id).last()
+    if my_user.type == 'chairman' or my_user.type == 'editor_in_chief' or cond > 0:
+        if news and tag:
+            Tag_news.objects.create(tag=tag, news=news)
+    return redirect('news_details', pk=news_id)
+
+
+# delete tag from news
+def delete_tag_from_news(request, tag_id, news_id):
+    my_user = user.objects.get(id=request.user.id)
+    news = News.objects.filter(pk=news_id).last()
+    cond = News.objects.filter(pk=news_id, user=request.user).count()
+    tag = Tag.objects.filter(pk=tag_id).last()
+    if my_user.type == 'chairman' or my_user.type == 'editor_in_chief' or cond > 0:
+        if news and tag:
+            Tag_news.objects.filter(tag=tag, news=news).last().delete()
+    return redirect('news_details', pk=news_id)
+
+
+def tags_page(request, page, pk):
+    my_user = user.objects.get(id=request.user.id)
+    cond = News.objects.filter(pk=pk, user=request.user).count()
+    if my_user.type == 'chairman' or my_user.type == 'editor_in_chief' or cond > 0:
+        tags = Tag.objects.all()
+        paginator = Paginator(tags, 10)
+        try:
+            tags = paginator.page(page)
+        except PageNotAnInteger:
+            tags = paginator.page(1)
+        except EmptyPage:
+            tags = paginator.page(paginator.num_pages)
+        news = News.objects.filter(pk=pk).last()
+        context = {
+            'tags': tags,
+            'news': news,
+        }
+        return render(request, 'tags_page.html', context)
+    return redirect('news_details', pk=pk)

@@ -78,6 +78,13 @@ def Home(request):
     cites = News.objects.filter(
         Q(approval=True) & (Q(category__parent__name='محافظات') | Q(category__name='محافظات'))).order_by(
         '-Publish_date')[:9]
+    # محافظات cites
+    books1 = News.objects.filter(
+        Q(approval=True) & Q(category__name='كتب')).order_by(
+        '-Publish_date')[:5]
+    books2 = News.objects.filter(
+        Q(approval=True) & Q(category__name='كتب')).order_by(
+        '-Publish_date')[5:10]
     # Most read الأكثر قراءه
     most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
     # Notes العناوين
@@ -106,6 +113,8 @@ def Home(request):
         'people_and_society': people_and_society,
         'mixs': mixs,
         'cites': cites,
+        'books1': books1,
+        'books2': books2,
         'breaking_news0': breaking_news0,
         'breaking_news1': breaking_news1,
         'most_read': most_read,

@@ -33,6 +33,9 @@ from .views import (
     delete_subscriber,
     show_subscribers,
     postSubscriber,
+    add_tag_to_news,
+    tags_page,
+    delete_tag_from_news,
 
 )
 
@@ -103,5 +106,12 @@ urlpatterns = [
     path('delete-subscriber/<int:pk>', delete_subscriber, name='delete-subscriber'),
     # Add Comment by using AJAX
     path('post/ajax/Subscriber/', postSubscriber, name='post-subscriber'),
+    # Add tag to news
+    path('add-tag-to-news/<int:news_id>/<int:tag_id>/', add_tag_to_news, name='add-tag-to-news'),
+    # delete tag from news
+    path('delete-tag-from-news/<int:news_id>/<int:tag_id>/', delete_tag_from_news, name='delete-tag-from-news'),
+    # tag page
+    path('tags-page/<int:page>/<int:pk>/', tags_page, name='tags-page'),
+
 
 ]

@@ -43,6 +43,7 @@
                                 {% if user.is_authenticated%}
                                 <a class="btn btn-sm btn-danger m-2" href="{% url 'edit-news' news.pk%}">تعديل
                                     المنشور</a>
+                                <a class="btn btn-sm btn-primary m-2" href="{% url 'tags-page' 1 news.pk%}">تعديل الكلمات دلاليه</a>
                                 {% endif %}
                                 <div class="blog-details-content-par">
                                     <p>{{news.details|safe}}</p>
@@ -50,7 +51,7 @@
                                 {% if tag_news%}
                                 <div class="key-words">
                                     {% for tag in tag_news%}
-                                    <a href="{% url 'news_tag' tag.pk 1%}">{{tag.tag.text}}</a>
+                                    <a href="{% url 'news_tag' tag.tag.pk 1 %}">{{tag.tag.text}}</a>
                                     {% endfor %}
                                 </div>
                                 {% endif %}

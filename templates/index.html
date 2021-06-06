@@ -353,92 +353,32 @@
                         <div class="col-sm-12 col-md-12 col-lg-4">
                             <div class="books-article">
                                 <div class="section-header">كتب ومقالات
-                                    <a href="" class="more">المزيد</a>
+                                    <a href="{% url 'news_category' 27 1%}" class="more">المزيد</a>
                                 </div>
                                 <div class="books-slider" dir="ltr">
                                     <div class="slider-item">
+                                        {% for news in books1%}
                                         <div class="card-books">
                                             <div class="card-img"
-                                                 style="background-image: url('./assets/images/books.jpg');"></div>
+                                                 style="background-image: url('{{news.img.url}}');"></div>
                                             <div class="card-body">
-                                                <a href="" class="card-title">كتاب الاستاذ عصام</a>
-                                                <p class="card-text">برنامج الاستاذ ورمضان</p>
+                                                <a href="{% url 'news_details' news.pk %}" class="card-title">{{news.title}}</a>
+                                                <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
                                             </div>
                                         </div>
-                                        <div class="card-books">
-                                            <div class="card-img"
-                                                 style="background-image: url('./assets/images/books.jpg');"></div>
-                                            <div class="card-body">
-                                                <a href="" class="card-title">كتاب الاستاذ عصام</a>
-                                                <p class="card-text">برنامج الاستاذ ورمضان</p>
-                                            </div>
-                                        </div>
-                                        <div class="card-books">
-                                            <div class="card-img"
-                                                 style="background-image: url('./assets/images/books.jpg');"></div>
-                                            <div class="card-body">
-                                                <a href="" class="card-title">كتاب الاستاذ عصام</a>
-                                                <p class="card-text">برنامج الاستاذ ورمضان</p>
-                                            </div>
-                                        </div>
-                                        <div class="card-books">
-                                            <div class="card-img"
-                                                 style="background-image: url('./assets/images/books.jpg');"></div>
-                                            <div class="card-body">
-                                                <a href="" class="card-title">كتاب الاستاذ عصام</a>
-                                                <p class="card-text">برنامج الاستاذ ورمضان</p>
-                                            </div>
-                                        </div>
-                                        <div class="card-books">
-                                            <div class="card-img"
-                                                 style="background-image: url('./assets/images/books.jpg');"></div>
-                                            <div class="card-body">
-                                                <a href="" class="card-title">كتاب الاستاذ عصام</a>
-                                                <p class="card-text">برنامج الاستاذ ورمضان</p>
-                                            </div>
-                                        </div>
+                                        {% endfor %}
                                     </div>
                                     <div class="slider-item">
+                                        {% for news in books2%}
                                         <div class="card-books">
                                             <div class="card-img"
-                                                 style="background-image: url('./assets/images/books.jpg');"></div>
+                                                 style="background-image: url('{{news.img.url}}');"></div>
                                             <div class="card-body">
-                                                <a href="" class="card-title">كتاب الاستاذ عصام</a>
-                                                <p class="card-text">برنامج الاستاذ ورمضان</p>
+                                                <a href="{% url 'news_details' news.pk %}" class="card-title">{{news.title}}</a>
+                                                <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
                                             </div>
                                         </div>
-                                        <div class="card-books">
-                                            <div class="card-img"
-                                                 style="background-image: url('./assets/images/books.jpg');"></div>
-                                            <div class="card-body">
-                                                <a href="" class="card-title">كتاب الاستاذ عصام</a>
-                                                <p class="card-text">برنامج الاستاذ ورمضان</p>
-                                            </div>
-                                        </div>
-                                        <div class="card-books">
-                                            <div class="card-img"
-                                                 style="background-image: url('./assets/images/books.jpg');"></div>
-                                            <div class="card-body">
-                                                <a href="" class="card-title">كتاب الاستاذ عصام</a>
-                                                <p class="card-text">برنامج الاستاذ ورمضان</p>
-                                            </div>
-                                        </div>
-                                        <div class="card-books">
-                                            <div class="card-img"
-                                                 style="background-image: url('./assets/images/books.jpg');"></div>
-                                            <div class="card-body">
-                                                <a href="" class="card-title">كتاب الاستاذ عصام</a>
-                                                <p class="card-text">برنامج الاستاذ ورمضان</p>
-                                            </div>
-                                        </div>
-                                        <div class="card-books">
-                                            <div class="card-img"
-                                                 style="background-image: url('./assets/images/books.jpg');"></div>
-                                            <div class="card-body">
-                                                <a href="" class="card-title">كتاب الاستاذ عصام</a>
-                                                <p class="card-text">برنامج الاستاذ ورمضان</p>
-                                            </div>
-                                        </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
@@ -742,6 +682,7 @@
             }
         })
     })
+
 
 </script>
 {% endblock javascript %}

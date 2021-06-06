@@ -7,7 +7,7 @@ class NewsForm(forms.ModelForm):
     # specify the name of model to use
     class Meta:
         model = News
-        exclude = ['user', 'approval', 'viewCount']
+        exclude = ['user', 'approval', 'viewCount', 'commentCount']
 
     widgets = {
         'title': forms.TextInput(attrs={'class': 'form-control', 'name': 'العنوان'}),
@@ -19,7 +19,7 @@ class NewsForm(forms.ModelForm):
 class PhotoForm(forms.ModelForm):
     class Meta:
         model = Photo
-        fields= '__all__'
+        fields = '__all__'
 
 
 class AdvertisingForm(forms.ModelForm):
