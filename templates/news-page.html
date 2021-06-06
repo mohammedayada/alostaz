@@ -23,15 +23,11 @@
       <div class="row">
         <div class="col-sm-12 col-md-2 col-lg-2">
           <div class="spaces">
+            {% for photo in photos%}
             <a href="">
-              <img src="./assets/images/ramadan2021.webp" alt="">
+              <img src="{{photo.img.url}}" alt="">
             </a>
-            <a href="">
-              <img src="./assets/images/10198959625171873868.jfif" alt="">
-            </a>
-            <a href="">
-              <img src="./assets/images/abtal2.jpeg" alt="">
-            </a>
+            {% endfor %}
           </div>
         </div>
         <div class="col-sm-12 col-md-8 col-lg-8">
@@ -45,7 +41,7 @@
                     <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
                     <a href="{% url 'news_details' news.pk%}" class="card-title">{{news.title}}</a>
                     <span class="card-date">{{news.Publish_date.date}}</span>
-                    <p class="card-text">{{news.details|safe}}</p>
+                    <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
                   </div>
                   {% endfor %}
                 </div>
@@ -96,15 +92,11 @@
         </div>
         <div class="col-sm-12 col-md-2 col-lg-2">
           <div class="spaces">
+            {% for advertising in advertisings%}
             <a href="">
-              <img src="./assets/images/ramadan2021.webp" alt="">
+              <img src="{{advertising.img.url}}" alt="">
             </a>
-            <a href="">
-              <img src="./assets/images/10198959625171873868.jfif" alt="">
-            </a>
-            <a href="">
-              <img src="./assets/images/abtal2.jpeg" alt="">
-            </a>
+            {% endfor %}
           </div>
         </div>
       </div>

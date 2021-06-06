@@ -334,6 +334,8 @@ def approve_comment(request, pk):
     comment = Comment.objects.filter(pk=pk).last()
     if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
         comment.approval = True
+        comment.news.commentCount += 1
+        comment.news.save()
         comment.save()
         return redirect('show-comments', page=1)
     else:

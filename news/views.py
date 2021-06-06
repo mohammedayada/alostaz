@@ -90,6 +90,8 @@ def Home(request):
     photo5 = Photo.objects.filter(pk=5).last()
     photos = Photo.objects.all()[5:]
     advertisings = Advertising.objects.all()
+    cartons = News.objects.filter(pk=65)[:4]
+    more_comments = News.objects.all().order_by('commentCount')[:6]
     context = {
         'latest_news': latest_news,
         'local_news': local_news,
@@ -115,6 +117,8 @@ def Home(request):
         'photo5': photo5,
         'photos': photos,
         'advertisings': advertisings,
+        'cartons': cartons,
+        'more_comments': more_comments,
 
     }
     return render(request, 'index.html', context)
@@ -149,6 +153,8 @@ def News_details(request, pk):
     photo1 = Photo.objects.filter(pk=1).last()
     photo2 = Photo.objects.filter(pk=2).last()
     photo3 = Photo.objects.filter(pk=3).last()
+    photos = Photo.objects.all()[5:10]
+    advertisings = Advertising.objects.all()[5:10]
 
     context = {
         'news': news,
@@ -160,7 +166,8 @@ def News_details(request, pk):
         'photo1': photo1,
         'photo2': photo2,
         'photo3': photo3,
-
+        'photos': photos,
+        'advertisings': advertisings,
     }
     return render(request, 'news-details.html', context)
 
@@ -247,7 +254,8 @@ def News_page(request, pk, page):
     photo1 = Photo.objects.filter(pk=1).last()
     photo2 = Photo.objects.filter(pk=2).last()
     photo3 = Photo.objects.filter(pk=3).last()
-
+    photos = Photo.objects.all()[5:10]
+    advertisings = Advertising.objects.all()[5:10]
     context = {'news_list': news,
                'category': category,
                'most_read': most_read,
@@ -255,6 +263,8 @@ def News_page(request, pk, page):
                'photo1': photo1,
                'photo2': photo2,
                'photo3': photo3,
+               'photos': photos,
+               'advertisings': advertisings,
                }
     return render(request, 'news-page.html', context)
 
@@ -278,7 +288,8 @@ def News_tag(request, pk, page):
     photo1 = Photo.objects.filter(pk=1).last()
     photo2 = Photo.objects.filter(pk=2).last()
     photo3 = Photo.objects.filter(pk=3).last()
-
+    photos = Photo.objects.all()[5:10]
+    advertisings = Advertising.objects.all()[5:10]
     context = {
         'news_tags': news_tags,
         'tag': tag,
@@ -287,6 +298,8 @@ def News_tag(request, pk, page):
         'photo1': photo1,
         'photo2': photo2,
         'photo3': photo3,
+        'photos': photos,
+        'advertisings': advertisings,
     }
     return render(request, 'news-tag.html', context)
 
@@ -324,3 +337,98 @@ def Search_news(request, page):
         return render(request, 'news-page.html', context)
 
     return redirect('home')
+
+
+# Last news
+def Last_news(request, page):
+    news_list = News.objects.filter(approval=True).order_by('-id')
+    paginator = Paginator(news_list, 10)
+    try:
+        news = paginator.page(page)
+    except PageNotAnInteger:
+        news = paginator.page(1)
+    except EmptyPage:
+        news = paginator.page(paginator.num_pages)
+
+    # Most read
+    most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
+    # Notes العناوين
+    notes = Note.objects.all().order_by('-id')[:3]
+    photo1 = Photo.objects.filter(pk=1).last()
+    photo2 = Photo.objects.filter(pk=2).last()
+    photo3 = Photo.objects.filter(pk=3).last()
+    photos = Photo.objects.all()[5:10]
+    advertisings = Advertising.objects.all()[5:10]
+
+    context = {'news_list': news,
+               'most_read': most_read,
+               'notes': notes,
+               'photo1': photo1,
+               'photo2': photo2,
+               'photo3': photo3,
+               'photos': photos,
+               'advertisings': advertisings,
+               }
+    return render(request, 'last-news.html', context)
+
+# Most read
+def most_read(request, page):
+    news_list = News.objects.filter(approval=True).order_by('-viewCount')
+    paginator = Paginator(news_list, 10)
+    try:
+        news = paginator.page(page)
+    except PageNotAnInteger:
+        news = paginator.page(1)
+    except EmptyPage:
+        news = paginator.page(paginator.num_pages)
+
+    # Notes العناوين
+    notes = Note.objects.all().order_by('-id')[:3]
+    photo1 = Photo.objects.filter(pk=1).last()
+    photo2 = Photo.objects.filter(pk=2).last()
+    photo3 = Photo.objects.filter(pk=3).last()
+    last_news = News.objects.filter(approval=True).order_by('-id')[:6]
+    photos = Photo.objects.all()[5:10]
+    advertisings = Advertising.objects.all()[5:10]
+    context = {'news_list': news,
+               'last_news': last_news,
+               'notes': notes,
+               'photo1': photo1,
+               'photo2': photo2,
+               'photo3': photo3,
+               'photos': photos,
+               'advertisings': advertisings,
+               }
+    return render(request, 'most-read.html', context)
+
+
+# Most comment
+def most_comment(request, page):
+    news_list = News.objects.filter(approval=True).order_by('-commentCount')
+    paginator = Paginator(news_list, 10)
+    try:
+        news = paginator.page(page)
+    except PageNotAnInteger:
+        news = paginator.page(1)
+    except EmptyPage:
+        news = paginator.page(paginator.num_pages)
+
+    # Notes العناوين
+    notes = Note.objects.all().order_by('-id')[:3]
+    photo1 = Photo.objects.filter(pk=1).last()
+    photo2 = Photo.objects.filter(pk=2).last()
+    photo3 = Photo.objects.filter(pk=3).last()
+    last_news = News.objects.filter(approval=True).order_by('-id')[:6]
+    photos = Photo.objects.all()[5:10]
+    advertisings = Advertising.objects.all()[5:10]
+
+    context = {'news_list': news,
+               'last_news': last_news,
+               'notes': notes,
+               'photo1': photo1,
+               'photo2': photo2,
+               'photo3': photo3,
+               'photos': photos,
+               'advertisings': advertisings,
+               }
+    return render(request, 'most-comment.html', context)

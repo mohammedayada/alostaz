@@ -433,29 +433,16 @@
                 </div>
                 <div class="gallery">
                   <div class="section-header"> رسوم وكاريكاتير
-                    <a href="" class="more">المزيد</a>
+                    <a href="{% url 'news_category' 65 1 %}" class="more">المزيد</a>
                   </div>
                   <div class="row">
+                    {%for carton in cartons%}
                     <div class="col-6 col-md-6 col-lg-6">
-                      <a href="">
-                        <img src="./assets/images/galley-1.jpg" alt="">
+                      <a href="{% url 'news_details' carton.pk %}">
+                        <img src="{{carton.img.url}}" alt="">
                       </a>
                     </div>
-                    <div class="col-6 col-md-6 col-lg-6">
-                      <a href="">
-                        <img src="./assets/images/galley-2.jpg" alt="">
-                      </a>
-                    </div>
-                    <div class="col-6 col-md-6 col-lg-6">
-                      <a href="">
-                        <img src="./assets/images/galley-3.jpg" alt="">
-                      </a>
-                    </div>
-                    <div class="col-6 col-md-6 col-lg-6">
-                      <a href="">
-                        <img src="./assets/images/galley-1.jpg" alt="">
-                      </a>
-                    </div>
+                    {%endfor%}
                   </div>
                 </div>
                 <div class="alostaz-tv mt-4">
@@ -473,16 +460,16 @@
                 </div>
                 <div class="alostaz-radio mt-4">
                   <div class="section-header">راديو الاستاذ
-                    <!-- <a href="" class="more">المزيد</a> -->
+<!--                    <a href="https://www.youtube.com/" class="more">المزيد</a>-->
                   </div>
-                  <!-- <div class="row mt-3">
+                   <div class="row mt-3">
                     <div class="col-6 col-md-6 col-lg-12">
                       <iframe width="100%" height="215" src="https://www.youtube.com/embed/pO5dgZrM9Mk"
                         title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
                     </div>
-                  </div> -->
+                  </div>
                 </div>
                 {% if images %}
                 <div class="gallery alostaz-tv mt-4">
@@ -503,7 +490,7 @@
                 <div class="most-read last-news mt-3">
                   <h5 class="section-header">
                     اخر الاخبار
-                    <a href="" class="more">المزيد</a>
+                    <a href="{% url 'last-news' 1%}" class="more">المزيد</a>
                   </h5>
                   <div class="card-news-img-right">
                     {% for news in breaking_news0%}
@@ -519,7 +506,7 @@
                 <div class="most-read mt-3">
                   <h5 class="section-header">
                     الاكثر قراءة
-                    <a href="" class="more">المزيد</a>
+                    <a href="{% url 'most-read' 1%}" class="more">المزيد</a>
                   </h5>
                   <div class="card-news-img-right">
                     {% for news in most_read%}
@@ -536,7 +523,7 @@
                 <div class="most-watch mt-3">
                   <h5 class="section-header">
                     الاكثر مشاهدة
-                    <a href="" class="more">المزيد</a>
+                    <a href="{% url 'most-read' 1%}" class="more">المزيد</a>
                   </h5>
                   <div class="card-news-img-right">
                     {% for news in most_read%}
@@ -552,45 +539,16 @@
                 <div class="most-comment mt-3">
                   <h5 class="section-header">
                     الاكثر تعليقا
-                    <a href="" class="more">المزيد</a>
+                    <a href="{% url 'most-comment' 1%}" class="more">المزيد</a>
                   </h5>
                   <div class="card-news-img-right">
+                    {% for news in more_comments%}
                     <div class="card">
-                      <div class="card-img"><img src="./assets/images/slider-1.jpg" alt=""></div>
-                      <h5 class="card-title">عنوان الخبر</h5>
-                      <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من الأمن
-                        للمواطن ثم إجراء الانتخابات</p>
+                      <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
+                      <h5 class="card-title">{{news.title}}</h5>
+                      <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
                     </div>
-                    <div class="card">
-                      <div class="card-img"><img src="./assets/images/slider-1.jpg" alt=""></div>
-                      <h5 class="card-title">عنوان الخبر</h5>
-                      <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من الأمن
-                        للمواطن ثم إجراء الانتخابات</p>
-                    </div>
-                    <div class="card">
-                      <div class="card-img"><img src="./assets/images/slider-1.jpg" alt=""></div>
-                      <h5 class="card-title">عنوان الخبر</h5>
-                      <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من الأمن
-                        للمواطن ثم إجراء الانتخابات</p>
-                    </div>
-                    <div class="card">
-                      <div class="card-img"><img src="./assets/images/slider-1.jpg" alt=""></div>
-                      <h5 class="card-title">عنوان الخبر</h5>
-                      <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من الأمن
-                        للمواطن ثم إجراء الانتخابات</p>
-                    </div>
-                    <div class="card">
-                      <div class="card-img"><img src="./assets/images/slider-1.jpg" alt=""></div>
-                      <h5 class="card-title">عنوان الخبر</h5>
-                      <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من الأمن
-                        للمواطن ثم إجراء الانتخابات</p>
-                    </div>
-                    <div class="card">
-                      <div class="card-img"><img src="./assets/images/slider-1.jpg" alt=""></div>
-                      <h5 class="card-title">عنوان الخبر</h5>
-                      <p class="card-text">«الدبيبة»: توحيد المؤسسات الليبية بنسبة 80%؜.. ونعمل على خلق حالة من الأمن
-                        للمواطن ثم إجراء الانتخابات</p>
-                    </div>
+                    {%endfor%}
                   </div>
                 </div>
                 <div class="alostaz-serv mt-3">

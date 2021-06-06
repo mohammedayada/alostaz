@@ -28,7 +28,7 @@ class News(models.Model):
     img = models.ImageField(verbose_name='الصوره')
     approval = models.BooleanField(default=False, verbose_name='الموافقه')
     viewCount = models.IntegerField(default=0, verbose_name='عدد المشاهديين')
-
+    commentCount = models.IntegerField(default=0, verbose_name='عدد التعليقات')
     class Meta:
         ordering = ['-Publish_date']
 
