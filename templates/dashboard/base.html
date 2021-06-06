@@ -3,55 +3,69 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{% static 'assets/css/bootstrap-ar.min.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/all.min.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/slick-theme.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
-  <title>{% block title %} {% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap-ar.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/slick-theme.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <title>{% block title %} {% endblock %}</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
+
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg navbar-light">
     <div class="">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'home' %}">الرئيسية</a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="{% url 'show-news' 1 %}">الأخبار</a>
-          </li>
-          {% if is_chairman or is_chef%}
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'show-comments' 1 %}">التعليقات</a>
-          </li>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home' %}">الرئيسية</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{% url 'show-news' 1 %}"> الأخبار قيد الانتظار</a>
+                </li>
+                {% if is_chairman or is_chef%}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'show-all-news' 1 %}">جميع الأخبار</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'show-comments' 1 %}">التعليقات</a>
+                </li>
 
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'show-notes' 1 %}">عناويين الأخبار</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'show-tags' 1 %}">الكلمات الدلاليه</a>
-          </li>
-          {%endif%}
-          {% if is_chairman%}
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'show-users' 1 %}">المستخدمين</a>
-          </li>
-          {% endif%}
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-user"></i> تسجيل خروج</a>
-          </li>
-        </ul>
-      </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'show-notes' 1 %}">عناويين الأخبار</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'show-tags' 1 %}">الكلمات الدلاليه</a>
+                </li>
+                {%endif%}
+                {% if is_chairman%}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'show-photos' 1 %}">الصور</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'show-all-advertising' 1 %}">الاعلانات</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'show-users' 1 %}">المستخدمين</a>
+                </li>
+                {% endif%}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-user"></i> تسجيل خروج</a>
+                </li>
+
+            </ul>
+        </div>
     </div>
-    </nav>
-    {% block contain %} {% endblock %}
+</nav>
+
+
+{% block contain %} {% endblock %}
 </body>
 </html>

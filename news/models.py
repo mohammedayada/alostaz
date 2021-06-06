@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from ckeditor.fields import RichTextField
 
+
 # Create your models here.
 class Category(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -39,8 +40,6 @@ class News(models.Model):
         self.save()
 
 
-
-
 class Comment(models.Model):
     news = models.ForeignKey(News, on_delete=models.CASCADE)
     email = models.EmailField()
@@ -53,30 +52,15 @@ class Comment(models.Model):
         return f'email: {self.email} news: {self.news.title} comment: {self.text} date: {self.Publish_date} approval: {self.approval}'
 
 
-class Advertising(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
-    img = models.ImageField()
-
-    def __str__(self):
-        return f'Title: {self.title} user: {self.user.name}'
-
-class Photo(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
-    img = models.ImageField(upload_to='images/')
-    def __str__(self):
-        return f'Title: {self.title} user: {self.user}'
-
 class Note(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     link = models.URLField(blank=True)
+
     def __str__(self):
         return f'Title: {self.title} user: {self.user}'
+
 
 class Tag(models.Model):
     text = models.CharField(max_length=20)
@@ -84,11 +68,13 @@ class Tag(models.Model):
     def __str__(self):
         return f'Text: {self.text}'
 
+
 class Tag_news(models.Model):
     news = models.ForeignKey(News, on_delete=models.CASCADE)
     tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
 
     class Meta:
         unique_together = ('news', 'tag',)
+
     def __str__(self):
         return f'Tag: {self.tag} news: {self.news}'

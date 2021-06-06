@@ -24,11 +24,16 @@
                 <div class="input-group mb-3">
                     <label>النوع</label><br>
                     <select class="custom-select" name="type">
-                        <option value="contributor" {% if user.type == "contributor" %} selected {%endif%} >مساهم</option>
-                        <option value="writer" {%if user.type == "writer" %} selected {%endif%} >كاتب</option>
-                        <option value="editor" {%if user.type == "editor" %} selected {%endif%}>محرر</option>
-                        <option value="editor_in_chief" {%if user.type == "editor_in_chief" %} selected {%endif%}>رئيس تحرير</option>
-                        <option value="chairman" {%if user.type == "chairman" %} selected {%endif%}>رئيس مجلس اداره</option>
+                        <option value="contributor" {% if user.type==
+                        "contributor" %} selected {%endif%}> مساهم</option>
+                        <option value="writer" {%if user.type==
+                        "writer" %} selected {%endif%}> كاتب</option>
+                        <option value="editor" {%if user.type==
+                        "editor" %} selected {%endif%}>محرر</option>
+                        <option value="editor_in_chief" {%if user.type==
+                        "editor_in_chief" %} selected {%endif%}>رئيس تحرير</option>
+                        <option value="chairman" {%if user.type==
+                        "chairman" %} selected {%endif%}>رئيس مجلس اداره</option>
                     </select>
                 </div>
 

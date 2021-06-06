@@ -10,6 +10,7 @@ from .views import (
     show_tags,
     add_news,
     show_news,
+    show_all_news,
     approve_news,
     delete_news,
     edit_news,
@@ -21,6 +22,14 @@ from .views import (
     delete_user,
     edit_user,
     change_user_pass,
+    add_photo,
+    add_advertising,
+    edit_photo,
+    edit_advertising,
+    show_photos,
+    show_all_advertising,
+    delete_photo,
+    delete_advertising,
 
 )
 
@@ -47,14 +56,16 @@ urlpatterns = [
     path('show-notes/<int:page>/', show_notes, name='show-notes'),
     # add tag
     path('add-tag/', add_tag, name='add-tag'),
-    # delete note
+    # delete tag
     path('delete-tag/<int:pk>', delete_tag, name='delete-tag'),
     # show tags
     path('show-tags/<int:page>/', show_tags, name='show-tags'),
-    # add tag
+    # add news
     path('add-news/', add_news, name='add-news'),
     # show news
     path('show-news/<int:page>/', show_news, name='show-news'),
+    # show all news
+    path('show-all-news/<int:page>/', show_all_news, name='show-all-news'),
     # Approve news
     path('approve-news/<int:pk>', approve_news, name='approve-news'),
     # delete news
@@ -67,5 +78,21 @@ urlpatterns = [
     path('approve-comment/<int:pk>', approve_comment, name='approve-comment'),
     # delete comment
     path('delete-comment/<int:pk>', delete_comment, name='delete-comment'),
+    # add advertising
+    path('add-advertising/', add_advertising, name='add-advertising'),
+    # show all advertising
+    path('show-all-advertising/<int:page>/', show_all_advertising, name='show-all-advertising'),
+    # edit advertising
+    path('edit-advertising/<int:pk>', edit_advertising, name='edit-advertising'),
+    # delete advertising
+    path('delete-advertising/<int:pk>', delete_advertising, name='delete-advertising'),
+    # show photos
+    path('show-photos/<int:page>/', show_photos, name='show-photos'),
+    # add photo
+    path('add-photo/', add_photo, name='add-photo'),
+    # edit photo
+    path('edit-photo/<int:pk>', edit_photo, name='edit-photo'),
+    # delete photo
+    path('delete-photo/<int:pk>', delete_photo, name='delete-photo'),
 
 ]

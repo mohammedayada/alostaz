@@ -17,12 +17,12 @@
         <div class="row">
           <div class="col-sm-12 col-md-6 col-lg-6">
             <a href="" class="spaces">
-              <img src="{% static 'assets/images/7101668883051653025.png' %}" alt="">
+              <img src="{{photo4.img.url}}" alt="">
             </a>
           </div>
           <div class="col-sm-12 col-md-6 col-lg-6">
             <a href="" class="spaces">
-              <img src="{% static 'assets/images/7101668883051653025.png' %}" alt="">
+              <img src="{{photo5.img.url}}" alt="">
             </a>
           </div>
         </div>
@@ -703,22 +703,12 @@
                 </div>
                 <div class="cards-advert mt-3">
                   <h5 class="section-header">دعاية واعلان</h5>
-                  <div class="card card-adv"></div>
-                  <div class="card card-adv"></div>
-                  <div class="card card-adv"></div>
-                  <div class="card card-adv"></div>
-                  <div class="card card-adv"></div>
-                  <div class="card card-adv"></div>
-                  <div class="card card-adv"></div>
-                  <div class="card card-adv"></div>
-                  <div class="card card-adv"></div>
-                  <div class="card card-adv"></div>
-                  <div class="card card-adv"></div>
-                  <div class="card card-adv"></div>
-                  <div class="card card-adv"></div>
-                  <div class="card card-adv"></div>
-                  <div class="card card-adv"></div>
-                  <div class="card card-adv"></div>
+                  {% for advertising in advertisings%}
+                  <div class="card card-adv">
+                    <img src="{{advertising.img.url}}" alt="" height="200">
+                  </div>
+                  {% endfor %}
+
                 </div>
               </div>
             </div>
@@ -726,62 +716,12 @@
 
         </div>
         <div class="col-sm-12 col-md-2 col-lg-2">
-          <div class="spaces">
-            <a href="">
-              <img src="{% static 'assets/images/10198959625171873868.jfif' %}" alt="">
-            </a>
-            <a href="">
-              <img src="./assets/images/17133376819504545784.jfif" alt="">
-            </a>
-            <a href="">
-              <img src="./assets/images/1.jpg" alt="">
-            </a>
+          {% for photo in photos%}
+          <div class="cards-advert mt-3 spaces">
+            <img src="{{photo.img.url}}" alt="">
+
           </div>
-          <div class="cards-advert mt-3">
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-            <div class="card card-adv"></div>
-          </div>
+          {% endfor %}
         </div>
       </div>
     </div>

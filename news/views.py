@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
-from .models import News, Category, Photo, Note, Comment, Tag_news, Tag
+from .models import News, Category, Note, Comment, Tag_news, Tag
 from django.db.models import Q
 from django.core import serializers
 from django.http import JsonResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import re
-from user.models import user
+from user.models import user, Photo, Advertising
 
 # Create your views here.
 # Make a regular expression
@@ -80,10 +80,16 @@ def Home(request):
         '-Publish_date')[:9]
     # Most read الأكثر قراءه
     most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
-    # Images الصور
-    images = Photo.objects.all().order_by('-id')[:4]
     # Notes العناوين
     notes = Note.objects.all().order_by('-id')
+    # Notes العناوين
+    photo1 = Photo.objects.filter(pk=1).last()
+    photo2 = Photo.objects.filter(pk=2).last()
+    photo3 = Photo.objects.filter(pk=3).last()
+    photo4 = Photo.objects.filter(pk=4).last()
+    photo5 = Photo.objects.filter(pk=5).last()
+    photos = Photo.objects.all()[5:]
+    advertisings = Advertising.objects.all()
     context = {
         'latest_news': latest_news,
         'local_news': local_news,
@@ -101,8 +107,15 @@ def Home(request):
         'breaking_news0': breaking_news0,
         'breaking_news1': breaking_news1,
         'most_read': most_read,
-        'images': images,
         'notes': notes,
+        'photo1': photo1,
+        'photo2': photo2,
+        'photo3': photo3,
+        'photo4': photo4,
+        'photo5': photo5,
+        'photos': photos,
+        'advertisings': advertisings,
+
     }
     return render(request, 'index.html', context)
 
@@ -133,6 +146,9 @@ def News_details(request, pk):
     # Related News الموضوعات المتعلقه
     related_news = News.objects.filter(Q(approval=True) & Q(category=news.category) & ~Q(pk=news.pk)).order_by(
         '-Publish_date')[:3]
+    photo1 = Photo.objects.filter(pk=1).last()
+    photo2 = Photo.objects.filter(pk=2).last()
+    photo3 = Photo.objects.filter(pk=3).last()
 
     context = {
         'news': news,
@@ -140,7 +156,11 @@ def News_details(request, pk):
         'most_read': most_read,
         'comments': comments,
         'tag_news': tag_news,
-        'related_news': related_news
+        'related_news': related_news,
+        'photo1': photo1,
+        'photo2': photo2,
+        'photo3': photo3,
+
     }
     return render(request, 'news-details.html', context)
 
@@ -224,11 +244,17 @@ def News_page(request, pk, page):
     most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
     # Notes العناوين
     notes = Note.objects.all().order_by('-id')[:3]
+    photo1 = Photo.objects.filter(pk=1).last()
+    photo2 = Photo.objects.filter(pk=2).last()
+    photo3 = Photo.objects.filter(pk=3).last()
 
     context = {'news_list': news,
                'category': category,
                'most_read': most_read,
                'notes': notes,
+               'photo1': photo1,
+               'photo2': photo2,
+               'photo3': photo3,
                }
     return render(request, 'news-page.html', context)
 
@@ -249,11 +275,18 @@ def News_tag(request, pk, page):
 
     # Notes العناوين
     notes = Note.objects.all().order_by('-id')[:3]
+    photo1 = Photo.objects.filter(pk=1).last()
+    photo2 = Photo.objects.filter(pk=2).last()
+    photo3 = Photo.objects.filter(pk=3).last()
+
     context = {
         'news_tags': news_tags,
         'tag': tag,
         'most_read': most_read,
         'notes': notes,
+        'photo1': photo1,
+        'photo2': photo2,
+        'photo3': photo3,
     }
     return render(request, 'news-tag.html', context)
 
@@ -276,10 +309,16 @@ def Search_news(request, page):
         most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
         # Notes العناوين
         notes = Note.objects.all().order_by('-id')[:3]
+        photo1 = Photo.objects.filter(pk=1).last()
+        photo2 = Photo.objects.filter(pk=2).last()
+        photo3 = Photo.objects.filter(pk=3).last()
         context = {
             'news_list': news,
             'most_read': most_read,
             'notes': notes,
+            'photo1': photo1,
+            'photo2': photo2,
+            'photo3': photo3,
 
         }
         return render(request, 'news-page.html', context)

@@ -1,0 +1,26 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block title %}
+أضف اعلان
+{% endblock title%}
+{% block contain %}
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-sm-1 col-md-4 col-lg-2">
+        </div>
+        <div class="col-sm-10 col-md-4 col-lg-8">
+            <h1>اضف اعلان</h1>
+            <hr>
+            <form method="post" action="{% url 'add-advertising' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit" class="btn btn-primary">اضف</button>
+            </form>
+
+        </div>
+    </div>
+    <div class="col-sm-1 col-md-4 col-lg-2">
+
+    </div>
+</div>
+{% endblock contain%}
