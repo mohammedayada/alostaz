@@ -4,11 +4,13 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'assets/css/bootstrap-ar.min.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/all.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/slick-theme.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/all.min.css' %}">
+    <link href="https://prayertimes.date/css/widget.api.v1.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
     <title>{% block title %} {% endblock %}</title>
 </head>
@@ -72,3 +74,10 @@
 {% block contain %} {% endblock %}
 </body>
 </html>
+<script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/slick.min.js' %}"></script>
+<script src="https://prayertimes.date/js/widget.api.v1.min.js"></script>
+<script src="{% static 'assets/js/simplemarquee.js' %}"></script>
+<script src="{% static 'assets/js/main.js' %}"></script>

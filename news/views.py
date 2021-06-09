@@ -318,38 +318,39 @@ def Who_us(request):
 
 
 def Search_news(request, page):
+    news = News.objects.all()
+    search = 'الكل'
     if request.GET.get('search'):
+        search = request.GET.get('search')
         news = News.objects.filter(title__icontains=request.GET.get('search'))
-        paginator = Paginator(news, 10)
-        try:
-            news = paginator.page(page)
-        except PageNotAnInteger:
-            news = paginator.page(1)
-        except EmptyPage:
-            news = paginator.page(paginator.num_pages)
-        # Most read
-        most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
-        # Notes العناوين
-        notes = Note.objects.all().order_by('-id')[:3]
-        photo1 = Photo.objects.filter(pk=1).last()
-        photo2 = Photo.objects.filter(pk=2).last()
-        photo3 = Photo.objects.filter(pk=3).last()
-        photos = Photo.objects.all()[5:10]
-        advertisings = Photo.objects.all()[10:15]
-        context = {
-            'news_list': news,
-            'most_read': most_read,
-            'notes': notes,
-            'photo1': photo1,
-            'photo2': photo2,
-            'photo3': photo3,
-            'photos': photos,
-            'advertisings': advertisings,
-
-        }
-        return render(request, 'news-page.html', context)
-
-    return redirect('home')
+    paginator = Paginator(news, 10)
+    try:
+        news = paginator.page(page)
+    except PageNotAnInteger:
+        news = paginator.page(1)
+    except EmptyPage:
+        news = paginator.page(paginator.num_pages)
+    # Most read
+    most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
+    # Notes العناوين
+    notes = Note.objects.all().order_by('-id')[:3]
+    photo1 = Photo.objects.filter(pk=1).last()
+    photo2 = Photo.objects.filter(pk=2).last()
+    photo3 = Photo.objects.filter(pk=3).last()
+    photos = Photo.objects.all()[5:10]
+    advertisings = Photo.objects.all()[10:15]
+    context = {
+        'search': search,
+        'news_list': news,
+        'most_read': most_read,
+        'notes': notes,
+        'photo1': photo1,
+        'photo2': photo2,
+        'photo3': photo3,
+        'photos': photos,
+        'advertisings': advertisings,
+    }
+    return render(request, 'search-news.html', context)
 
 
 # Last news

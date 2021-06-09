@@ -9,6 +9,19 @@
         <div class="col-sm-1 col-md-4 col-lg-2">
         </div>
         <div class="col-sm-10 col-md-4 col-lg-8">
+            <form method="GET" action="{% url 'show-tags' 1 %}">
+                <div class="input-group mb-3">
+                    <input type="search" class="form-control" name="search" placeholder="ابحث هنا"
+                           aria-label="Recipient's username"
+                           aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </form>
             <a class="btn btn-primary" href="{% url 'add-tag'%}">اضف كلمه دلاليه</a>
             <hr>
             <table class="table table-borderless">
@@ -75,7 +88,8 @@
                 <ul class="pagination">
                     {% if tags.has_previous %}
                     <li class="page-item">
-                        <a class="page-link" href="{% url 'show-tags'  tags.previous_page_number%}"
+                        <a class="page-link"
+                           href="{{tags.previous_page_number}}{% if request.GET.search %}?search={{ request.GET.search }}{% endif %}"
                            aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                             <span class="sr-only">Previous</span>
@@ -86,12 +100,15 @@
                     {% if tags.number == i %}
                     <li class="page-item"><a class="page-link" style="background-color:gray" href="#">{{ i }}</a></li>
                     {% else %}
-                    <li class="page-item"><a class="page-link" href="{% url 'show-tags'  i %}">{{ i }}</a></li>
+                    <li class="page-item"><a class="page-link"
+                                             href="{{i}}{% if request.GET.search %}?search={{ request.GET.search }}{% endif %}">{{ i }}</a></li>
                     {% endif %}
                     {% endfor %}
                     {% if tags.has_next %}
                     <li class="page-item">
-                        <a class="page-link" href="{% url 'show-tags' tags.next_page_number%}" aria-label="Next">
+                        <a class="page-link"
+                           href="{{tags.next_page_number}}{% if request.GET.search %}?search={{ request.GET.search }}{% endif %}"
+                           aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                             <span class="sr-only">Next</span>
                         </a>

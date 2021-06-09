@@ -26,7 +26,7 @@ urlpatterns = [
     # Who us
     path('who-us/', Who_us, name='who-us'),
     # Search page
-    path('search-news/<int:page>/', Search_news, name='search-news'),
+    path('search-news/<int:page>', Search_news, name='search-news'),
     # Last News
     path('last-news/<int:page>/', Last_news, name='last-news'),
     # Most read

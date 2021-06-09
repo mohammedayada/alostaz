@@ -91,6 +91,8 @@ def show_users(request, page):
     is_chef = (my_user.type == 'editor_in_chief')
     if my_user.type == 'chairman':
         users = user.objects.all()
+        if request.GET.get('search'):
+            users = user.objects.filter(name__icontains=request.GET.get('search'))
         paginator = Paginator(users, 10)
         try:
             users = paginator.page(page)
@@ -189,6 +191,8 @@ def show_tags(request, page):
     is_chef = (my_user.type == 'editor_in_chief')
     if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
         tags = Tag.objects.all()
+        if request.GET.get('search'):
+            tags = Tag.objects.filter(text__icontains=request.GET.get('search'))
         paginator = Paginator(tags, 10)
         try:
             tags = paginator.page(page)
@@ -454,11 +458,13 @@ def change_user_pass(request, pk):
 # ِshow all news
 @login_required
 def show_all_news(request, page):
+    news_list = News.objects.all()
+    if request.GET.get('search'):
+        news_list = News.objects.filter(title__icontains=request.GET.get('search'))
     my_user = user.objects.get(id=request.user.id)
     is_chairman = (my_user.type == 'chairman')
     is_chef = (my_user.type == 'editor_in_chief')
     if is_chef or is_chairman:
-        news_list = News.objects.all()
         paginator = Paginator(news_list, 10)
         try:
             news_list = paginator.page(page)
@@ -472,8 +478,8 @@ def show_all_news(request, page):
             'is_chef': is_chef,
         }
         return render(request, 'dashboard/show_all_news.html', context)
-    else:
-        return redirect('home')
+
+    return redirect('show-all-news', page=1)
 
 
 # Add photo
@@ -661,6 +667,8 @@ def show_subscribers(request, page):
     is_chef = (my_user.type == 'editor_in_chief')
     if my_user.type == 'chairman':
         subscribers = Subscriber.objects.all()
+        if request.GET.get('search'):
+            subscribers = Subscriber.objects.filter(email__icontains=request.GET.get('search'))
         paginator = Paginator(subscribers, 10)
         try:
             subscribers = paginator.page(page)
@@ -722,9 +730,13 @@ def delete_tag_from_news(request, tag_id, news_id):
 
 def tags_page(request, page, pk):
     my_user = user.objects.get(id=request.user.id)
+    is_chairman = (my_user.type == 'chairman')
+    is_chef = (my_user.type == 'editor_in_chief')
     cond = News.objects.filter(pk=pk, user=request.user).count()
     if my_user.type == 'chairman' or my_user.type == 'editor_in_chief' or cond > 0:
         tags = Tag.objects.all()
+        if request.GET.get('search'):
+            tags = Tag.objects.filter(text__icontains=request.GET.get('search'))
         paginator = Paginator(tags, 10)
         try:
             tags = paginator.page(page)
@@ -734,6 +746,8 @@ def tags_page(request, page, pk):
             tags = paginator.page(paginator.num_pages)
         news = News.objects.filter(pk=pk).last()
         context = {
+            'is_chairman': is_chairman,
+            'is_chef': is_chef,
             'tags': tags,
             'news': news,
         }

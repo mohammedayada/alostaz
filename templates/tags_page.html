@@ -1,7 +1,7 @@
 {% extends 'dashboard/base.html' %}
 {% load static %}
 {% block title %}
-الأخبار
+الكلمات الدلاليه
 {% endblock title%}
 {% block contain %}
 <div class="container-fluid mt-3">
@@ -9,6 +9,19 @@
         <div class="col-sm-1 col-md-4 col-lg-2">
         </div>
         <div class="col-sm-10 col-md-4 col-lg-8">
+            <form method="GET" action="{% url 'tags-page' 1 news.pk %}">
+                <div class="input-group mb-3">
+                    <input type="search" class="form-control" name="search" placeholder="ابحث هنا"
+                           aria-label="Recipient's username"
+                           aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </form>
             <table class="table table-borderless">
                 <thead class="thead-dark">
                 <tr>
