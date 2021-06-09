@@ -19,7 +19,7 @@ class Category(models.Model):
 
 class News(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE)
+                             on_delete=models.SET_NULL, null=True, blank=True)
     category = models.ForeignKey(Category,
                                  on_delete=models.CASCADE, verbose_name='القسم')
     title = models.CharField(max_length=200, verbose_name='العنوان')

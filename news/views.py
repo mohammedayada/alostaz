@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import News, Category, Note, Comment, Tag_news, Tag
 from django.db.models import Q
 from django.core import serializers
@@ -135,14 +135,14 @@ def Home(request):
 
 # News details page
 def News_details(request, pk):
-    news = News.objects.filter(pk=pk).last()
+    news = get_object_or_404(News,pk=pk)
     username = 'غير معروف'
-    name = user.objects.filter(id=news.user.id).last()
-    if name:
+    if news.user:
+        name = get_object_or_404(user, id=news.user.id)
         username = name.name
     if news.approval == False:
         if request.user.is_authenticated:
-            my_user = user.objects.get(id=request.user.id)
+            my_user = get_object_or_404(user, id=request.user.id)
             if my_user.type == 'chairman' or my_user.type == 'editor_in_chief' or news.user == my_user:
                 pass
         else:
@@ -201,7 +201,7 @@ def postComment(request, pk):
 
 # News page
 def News_page(request, pk, page):
-    category = Category.objects.filter(pk=pk).last()
+    category = get_object_or_404(Category, pk=pk)
     if category.name == 'عرب وعالم':
         news_list = News.objects.filter(
             Q(approval=True) & (Q(category__parent__name='عرب وعالم') | Q(category__name='عرب وعالم'))).order_by(

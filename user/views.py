@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -264,7 +264,7 @@ def show_news(request, page):
 @login_required
 def approve_news(request, pk):
     my_user = user.objects.get(id=request.user.id)
-    news = News.objects.filter(pk=pk).last()
+    news = get_object_or_404(News, pk=pk)
     if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
         news.approval = True
         news.save()
@@ -282,7 +282,7 @@ def approve_news(request, pk):
 @login_required
 def delete_news(request, pk):
     my_user = user.objects.get(id=request.user.id)
-    news = News.objects.filter(pk=pk).last()
+    news = get_object_or_404(News, pk=pk)
     if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
         news.delete()
         return redirect('show-news', page=1)
@@ -303,7 +303,7 @@ def edit_news(request, pk):
     is_chef = (my_user.type == 'editor_in_chief')
     context['is_chairman'] = is_chairman
     context['is_chef'] = is_chef
-    news = News.objects.get(pk=pk)
+    news = get_object_or_404(News, pk=pk)
     cond = News.objects.filter(pk=pk, user=request.user).count()
     if my_user.type == 'chairman' or my_user.type == 'editor_in_chief' or cond > 0:
         context['news'] = news
@@ -353,7 +353,7 @@ def show_comments(request, page):
 @login_required
 def approve_comment(request, pk):
     my_user = user.objects.get(id=request.user.id)
-    comment = Comment.objects.filter(pk=pk).last()
+    comment = get_object_or_404(Comment, pk=pk)
     if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
         comment.approval = True
         comment.news.commentCount += 1
@@ -368,7 +368,7 @@ def approve_comment(request, pk):
 @login_required
 def delete_comment(request, pk):
     my_user = user.objects.get(id=request.user.id)
-    comment = Comment.objects.filter(pk=pk).last()
+    comment = get_object_or_404(Comment, pk=pk)
     if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
         comment.delete()
         return redirect('show-comments', page=1)
@@ -380,7 +380,7 @@ def delete_comment(request, pk):
 @login_required
 def delete_note(request, pk):
     my_user = user.objects.get(id=request.user.id)
-    note = Note.objects.filter(pk=pk).last()
+    note = get_object_or_404(Note, pk=pk)
     if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
         note.delete()
         return redirect('show-notes', page=1)
@@ -392,7 +392,7 @@ def delete_note(request, pk):
 @login_required
 def delete_tag(request, pk):
     my_user = user.objects.get(id=request.user.id)
-    tag = Tag.objects.filter(pk=pk).last()
+    tag = get_object_or_404(Tag, pk=pk)
     if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
         tag.delete()
         return redirect('show-tags', page=1)
@@ -404,7 +404,7 @@ def delete_tag(request, pk):
 @login_required
 def delete_user(request, pk):
     my_user = user.objects.get(id=request.user.id)
-    user1 = user.objects.filter(pk=pk).last()
+    user1 = get_object_or_404(user, pk=pk)
     if my_user.type == 'chairman':
         user1.delete()
         return redirect('show-users', page=1)
@@ -413,6 +413,7 @@ def delete_user(request, pk):
 
 
 # Edit user
+@login_required
 def edit_user(request, pk):
     context = {}
     my_user = user.objects.get(id=request.user.id)
@@ -420,7 +421,7 @@ def edit_user(request, pk):
     is_chef = (my_user.type == 'editor_in_chief')
     context['is_chairman'] = is_chairman
     context['is_chef'] = is_chef
-    user1 = user.objects.get(pk=pk)
+    user1 = get_object_or_404(user, pk=pk)
     if my_user.type == 'chairman':
         context['user'] = user1
         if request.POST:
@@ -436,6 +437,7 @@ def edit_user(request, pk):
 
 
 # Change user password
+@login_required
 def change_user_pass(request, pk):
     context = {}
     my_user = user.objects.get(id=request.user.id)
@@ -443,7 +445,7 @@ def change_user_pass(request, pk):
     is_chef = (my_user.type == 'editor_in_chief')
     context['is_chairman'] = is_chairman
     context['is_chef'] = is_chef
-    user1 = user.objects.get(pk=pk)
+    user1 = get_object_or_404(user, pk=pk)
     if my_user.type == 'chairman':
         context['user'] = user1
         if request.POST:
@@ -511,7 +513,7 @@ def edit_photo(request, pk):
     is_chef = (my_user.type == 'editor_in_chief')
     context['is_chairman'] = is_chairman
     context['is_chef'] = is_chef
-    photo = Photo.objects.get(pk=pk)
+    photo = get_object_or_404(Photo, pk=pk)
     if my_user.type == 'chairman':
         context['photo'] = photo
         if request.POST:
@@ -533,7 +535,7 @@ def delete_photo(request, pk):
     my_user = user.objects.get(id=request.user.id)
     if pk == 1 or pk == 2 or pk == 3 or pk == 4 or pk == 5:
         return redirect('home')
-    photo = Photo.objects.filter(pk=pk).last()
+    photo = get_object_or_404(Photo, pk=pk)
     if my_user.type == 'chairman':
         photo.delete()
         return redirect('show-photos', page=1)
@@ -567,6 +569,7 @@ def show_photos(request, page):
 
 
 # Add Advertising
+@login_required
 def add_advertising(request):
     context = {}
     my_user = user.objects.get(id=request.user.id)
@@ -594,7 +597,7 @@ def edit_advertising(request, pk):
     is_chef = (my_user.type == 'editor_in_chief')
     context['is_chairman'] = is_chairman
     context['is_chef'] = is_chef
-    advertising = Advertising.objects.get(pk=pk)
+    advertising = get_object_or_404(Advertising, pk=pk)
     if my_user.type == 'chairman':
         context['advertising'] = Advertising
         if request.POST:
@@ -614,7 +617,7 @@ def edit_advertising(request, pk):
 @login_required
 def delete_advertising(request, pk):
     my_user = user.objects.get(id=request.user.id)
-    advertising = Advertising.objects.filter(pk=pk).last()
+    advertising = get_object_or_404(Advertising, pk=pk)
     if my_user.type == 'chairman':
         advertising.delete()
         return redirect('show-all-advertising', page=1)
@@ -651,7 +654,7 @@ def show_all_advertising(request, page):
 @login_required
 def delete_subscriber(request, pk):
     my_user = user.objects.get(id=request.user.id)
-    subscriber = Subscriber.objects.filter(pk=pk).last()
+    subscriber = get_object_or_404(Subscriber, pk=pk)
     if my_user.type == 'chairman':
         subscriber.delete()
         return redirect('show-all-advertising', page=1)
@@ -705,9 +708,10 @@ def postSubscriber(request):
 
 
 # Add tag to news
+@login_required
 def add_tag_to_news(request, tag_id, news_id):
     my_user = user.objects.get(id=request.user.id)
-    news = News.objects.filter(pk=news_id).last()
+    news = get_object_or_404(News, pk=news_id)
     cond = News.objects.filter(pk=news_id, user=request.user).count()
     tag = Tag.objects.filter(pk=tag_id).last()
     if my_user.type == 'chairman' or my_user.type == 'editor_in_chief' or cond > 0:
@@ -717,9 +721,10 @@ def add_tag_to_news(request, tag_id, news_id):
 
 
 # delete tag from news
+@login_required
 def delete_tag_from_news(request, tag_id, news_id):
     my_user = user.objects.get(id=request.user.id)
-    news = News.objects.filter(pk=news_id).last()
+    news = get_object_or_404(News, pk=news_id)
     cond = News.objects.filter(pk=news_id, user=request.user).count()
     tag = Tag.objects.filter(pk=tag_id).last()
     if my_user.type == 'chairman' or my_user.type == 'editor_in_chief' or cond > 0:
@@ -728,6 +733,7 @@ def delete_tag_from_news(request, tag_id, news_id):
     return redirect('news_details', pk=news_id)
 
 
+@login_required
 def tags_page(request, page, pk):
     my_user = user.objects.get(id=request.user.id)
     is_chairman = (my_user.type == 'chairman')
