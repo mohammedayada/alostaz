@@ -10,6 +10,7 @@ from .views import (
     Last_news,
     most_read,
     most_comment,
+    create_category,
 )
 
 urlpatterns = [
@@ -33,5 +34,7 @@ urlpatterns = [
     path('most-read/<int:page>/', most_read, name='most-read'),
     # Most comment
     path('most-comment/<int:page>/', most_comment, name='most-comment'),
+    # create category default settings
+    path('default/', create_category, name='default'),
 
 ]

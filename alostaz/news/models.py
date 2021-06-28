@@ -5,8 +5,6 @@ from ckeditor.fields import RichTextField
 
 # Create your models here.
 class Category(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE)
     parent = models.ForeignKey('self', blank=True, null=True, related_name='child', on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
 
