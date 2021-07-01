@@ -111,72 +111,15 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-8">
                             <div class="main-section-all">
-                                {% if local_news %}
-                                <div class="main-section-news localy">
-                                    <h5 class="section-header">محليات
-                                        <a href="{% url 'news_category' local_news.first.category.pk 1 %}" class="more">المزيد</a>
+                                {% for category in categories %}
+                                {% if category.all_news%}
+                                <div class="main-section-news">
+                                    <h5 class="section-header"> {{category.name}}
+                                        <a href="{% url 'news_category' category.pk 1 %}" class="more">المزيد</a>
                                     </h5>
                                     <div class="row">
-                                        {% for local in local_news%}
-                                        <div class="col-sm-12 col-md-6 col-lg-4">
-                                            <a href="{% url 'news_details' local.pk%}"
-                                               class="card new-card-of-main-section">
-                                                <div class="card-img"><img src="{{local.img.url}}" alt=""></div>
-                                                <h5 class="card-title">{{local.title}}</h5>
-                                                <p class="card-text">{{local.details|safe}}
-                                                </p>
-                                            </a>
-                                        </div>
-                                        {% endfor %}
 
-                                    </div>
-                                </div>
-                                {% endif %}
-                                {% if arab_and_world%}
-                                <div class="main-section-news arab-and-world">
-                                    <h5 class="section-header">عرب وعالم
-                                        <a href="{% url 'news_category' 2 1 %}" class="more">المزيد</a>
-                                    </h5>
-                                    <div class="row">
-                                        {% for news in arab_and_world%}
-                                        <div class="col-sm-12 col-md-6 col-lg-4">
-                                            <a href="{% url 'news_details' news.pk%}"
-                                               class="card new-card-of-main-section">
-                                                <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                                                <h5 class="card-title">{{news.title}}</h5>
-                                                <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                                            </a>
-                                        </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                                {% endif %}
-                                {% if cites %}
-                                <div class="main-section-news goverment">
-                                    <h5 class="section-header"> محافظات
-                                        <a href="{% url 'news_category' 78 1 %}" class="more">المزيد</a>
-                                    </h5>
-                                    <div class="row">
-                                        {% for news in cites%}
-                                        <div class="col-sm-12 col-md-6 col-lg-4">
-                                            <a href="{% url 'news_details' news.pk%}"
-                                               class="card new-card-of-main-section">
-                                                <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                                                <h5 class="card-title">{{news.title}}</h5>
-                                                <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                                            </a>
-                                        </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                                {% endif %}
-                                {% if accidents_and_investigations%}
-                                <div class="main-section-news accident">
-                                    <h5 class="section-header"> حوادث وتحقيقات
-                                        <a href="{% url 'news_category' 7 1 %}" class="more">المزيد</a>
-                                    </h5>
-                                    <div class="row">
-                                        {% for news in accidents_and_investigations%}
+                                        {% for news in category.all_news%}
                                         <div class="col-sm-12 col-md-6 col-lg-4">
                                             <a href="{% url 'news_details' news.pk%}"
                                                class="card new-card-of-main-section">
@@ -190,159 +133,9 @@
                                     </div>
                                 </div>
                                 {% endif %}
-                                {% if politics_and_economy%}
-                                <div class="main-section-news economics">
-                                    <h5 class="section-header"> سياسة واقتصاد
-                                        <a href="{% url 'news_category' 13 1 %}" class="more">المزيد</a>
-                                    </h5>
-                                    <div class="row">
-                                        {% for news in politics_and_economy%}
-                                        <div class="col-sm-12 col-md-6 col-lg-4">
-                                            <a href="{% url 'news_details' news.pk%}"
-                                               class="card new-card-of-main-section">
-                                                <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                                                <h5 class="card-title">{{news.title}}</h5>
-                                                <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                                            </a>
-                                        </div>
-                                        {%endfor%}
-                                    </div>
-                                </div>
-                                {% endif %}
-                                {%if sports%}
-                                <div class="main-section-news sports">
-                                    <h5 class="section-header"> رياضة
-                                        <a href="{% url 'news_category' 18 1 %}" class="more">المزيد</a>
-                                    </h5>
-                                    <div class="row">
-                                        {% for news in sports%}
-                                        <div class="col-sm-12 col-md-6 col-lg-4">
-                                            <a href="{% url 'news_details' news.pk%}"
-                                               class="card new-card-of-main-section">
-                                                <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                                                <h5 class="card-title">{{news.title}}</h5>
-                                                <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                                            </a>
-                                        </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                                {% endif %}
-                                {% if culture_and_arts%}
-                                <div class="main-section-news arts">
-                                    <h5 class="section-header"> ثقافة وفنون
-                                        <a href="{% url 'news_category' 22 1 %}" class="more">المزيد</a>
-                                    </h5>
-                                    <div class="row">
-                                        {% for news in culture_and_arts%}
-                                        <div class="col-sm-12 col-md-6 col-lg-4">
-                                            <a href="{% url 'news_details' news.pk%}"
-                                               class="card new-card-of-main-section">
-                                                <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                                                <h5 class="card-title">{{news.title}}</h5>
-                                                <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                                            </a>
-                                        </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                                {% endif %}
-                                {% if mixs%}
-                                <div class="main-section-news mix">
-                                    <h5 class="section-header"> منوعات
-                                        <a href="{% url 'news_category' 62 1 %}" class="more">المزيد</a>
-                                    </h5>
-                                    <div class="row">
-                                        {% for news in mixs%}
-                                        <div class="col-sm-12 col-md-6 col-lg-4">
-                                            <a href="{% url 'news_details' news.pk%}"
-                                               class="card new-card-of-main-section">
-                                                <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                                                <h5 class="card-title">{{news.title}}</h5>
-                                                <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                                            </a>
-                                        </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                                {%endif%}
-                                {%if real_estate_and_cars%}
-                                <div class="main-section-news car-building">
-                                    <h5 class="section-header"> عقارات وسيارات
-                                        <a href="{% url 'news_category' 40 1 %}" class="more">المزيد</a>
-                                    </h5>
-                                    <div class="row">
-                                        {% for news in real_estate_and_cars%}
-                                        <div class="col-sm-12 col-md-6 col-lg-4">
-                                            <a href="{% url 'news_details' news.pk%}"
-                                               class="card new-card-of-main-section">
-                                                <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                                                <h5 class="card-title">{{news.title}}</h5>
-                                                <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                                            </a>
-                                        </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                                {% endif %}
-                                {% if talents_and_identities%}
-                                <div class="main-section-news car-building">
-                                    <h5 class="section-header"> مواهب وهوايات
-                                        <a href="{% url 'news_category' 33 1 %}" class="more">المزيد</a>
-                                    </h5>
-                                    <div class="row">
-                                        {% for news in talents_and_identities%}
-                                        <div class="col-sm-12 col-md-6 col-lg-4">
-                                            <a href="{% url 'news_details' news.pk%}"
-                                               class="card new-card-of-main-section">
-                                                <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                                                <h5 class="card-title">{{news.title}}</h5>
-                                                <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                                            </a>
-                                        </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                                {% endif %}
-                                {% if video_and_audio%}
-                                <div class="main-section-news soud-pic">
-                                    <h5 class="section-header"> صوت وصورة
-                                        <a href="{% url 'news_category' 41 1 %}" class="more">المزيد</a>
-                                    </h5>
-                                    <div class="row">
-                                        {%for news in video_and_audio%}
-                                        <div class="col-sm-12 col-md-6 col-lg-4">
-                                            <a href="{% url 'news_details' news.pk%}"
-                                               class="card new-card-of-main-section">
-                                                <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                                                <h5 class="card-title">{{news.title}}</h5>
-                                                <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                                            </a>
-                                        </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                                {% endif %}
-                                {% if people_and_society%}
-                                <div class="main-section-news soud-pic">
-                                    <h5 class="section-header"> ناس ومجتمع
-                                        <a href="{% url 'news_category' 46 1 %}" class="more">المزيد</a>
-                                    </h5>
-                                    <div class="row">
-                                        {% for news in people_and_society%}
-                                        <div class="col-sm-12 col-md-6 col-lg-4">
-                                            <a href="{% url 'news_details' news.pk%}"
-                                               class="card new-card-of-main-section">
-                                                <div class="card-img"><img src="{{news.img.url}}" alt=""></div>
-                                                <h5 class="card-title">{{news.title}}</h5>
-                                                <p class="card-text">{{news.details|safe|truncatechars:50}}</p>
-                                            </a>
-                                        </div>
-                                        {% endfor %}
-                                    </div>
+                                {% endfor %}
 
-                                </div>
-                                {% endif %}
+
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-4">
@@ -677,6 +470,9 @@
             }
         })
     })
+
+
+
 
 
 </script>

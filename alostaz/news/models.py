@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 from ckeditor.fields import RichTextField
-
+from django.db.models import Q
 
 # Create your models here.
 class Category(models.Model):
@@ -13,13 +13,15 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    def all_news(self):
+        return News.objects.filter(Q(Q(category=self) & Q(approval=True)) | (Q(category__parent=self) & Q(approval=True)) | (Q(category__parent__parent=self) & Q(approval=True)))[:9]
 
 
 class News(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.SET_NULL, null=True, blank=True)
     category = models.ForeignKey(Category,
-                                 on_delete=models.CASCADE, verbose_name='القسم')
+                                 on_delete=models.CASCADE, related_name='NEWS', verbose_name='القسم')
     title = models.CharField(max_length=200, verbose_name='العنوان')
     Publish_date = models.DateTimeField(auto_now_add=True)
     details = RichTextField(blank=True, null=True, verbose_name='البيانات')

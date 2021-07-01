@@ -26,65 +26,20 @@ def check(email):
 
 # Home functions
 def Home(request):
+    # الأقسام categories
+    categories = Category.objects.filter(parent=None)
     # Latest news أحدث الأخبار
     latest_news = News.objects.filter(approval=True).order_by('-Publish_date')[:5]
     # Breaking news أخبار عاجله
     breaking_news0 = News.objects.filter(approval=True).order_by('-Publish_date')[:8]
     breaking_news1 = News.objects.filter(approval=True).order_by('-Publish_date')[8:16]
-    # Local news المحليات
-    local = Category.objects.filter(name='محليات').last()
-    local_news = News.objects.filter(category=local, approval=True).order_by('-Publish_date')[:9]
-    # Arabs and the world عرب وعالم
-    arab_and_world = News.objects.filter(
-        Q(approval=True) & (Q(category__parent__name='عرب وعالم') | Q(category__name='عرب وعالم'))).order_by(
-        '-Publish_date')[:9]
-    # حوادث وتحقيقات Accidents and investigations
-    accidents_and_investigations = News.objects.filter(
-        Q(approval=True) & (Q(category__parent__name='حوادث وتحقيقات') | Q(category__name='حوادث وتحقيقات'))).order_by(
-        '-Publish_date')[:9]
-    # Politics and Economy سياسه واقتصاد
-    politics_and_economy = News.objects.filter(
-        Q(approval=True) & (Q(category__parent__name='سياسه وأقتصاد') | Q(category__name='سياسه وأقتصاد'))).order_by(
-        '-Publish_date')[:9]
-    # sport رياضة
-    sports = News.objects.filter(
-        Q(approval=True) & (Q(category__parent__name='رياضة') | Q(category__name='رياضة'))).order_by('-Publish_date')[
-             :9]
-    # Culture and arts ثقافه وفنون
-    culture_and_arts = News.objects.filter(
-        Q(approval=True) & (Q(category__parent__name='ثقافة وفنون') | Q(category__name='ثقافة وفنون'))).order_by(
-        '-Publish_date')[:9]
-    # Talents and identities مواهب وهوايات
-    talents_and_identities = News.objects.filter(
-        Q(approval=True) & (Q(category__parent__name='مواهب وهويات') | Q(category__name='مواهب وهويات'))).order_by(
-        '-Publish_date')[:9]
-    # Real Estate and Cars عقارات وسيارات
-    real_estate_and_cars = News.objects.filter(
-        Q(approval=True) & (Q(category__parent__name='عقارات وسيارات') | Q(category__name='عقارات وسيارات'))).order_by(
-        '-Publish_date')[:9]
-    # Video and audio صوت وصوره
-    video_and_audio = News.objects.filter(
-        Q(approval=True) & (Q(category__parent__name='صوت وصورة') | Q(category__name='صوت وصورة'))).order_by(
-        '-Publish_date')[:9]
-    # ناس ومجتمع
-    people_and_society = News.objects.filter(
-        Q(approval=True) & (Q(category__parent__name='ناس ومجتمع') | Q(category__name='ناس ومجتمع'))).order_by(
-        '-Publish_date')[:9]
-    # منوعات
-    mixs = News.objects.filter(
-        Q(approval=True) & (Q(category__parent__name='حوادث وتحقيقات') | Q(category__name='حوادث وتحقيقات'))).order_by(
-        '-Publish_date')[:9]
-    # محافظات cites
-    cites = News.objects.filter(
-        Q(approval=True) & (Q(category__parent__name='محافظات') | Q(category__name='محافظات'))).order_by(
-        '-Publish_date')[:9]
-    # محافظات cites
-    books1 = News.objects.filter(
-        Q(approval=True) & Q(category__name='كتب')).order_by(
-        '-Publish_date')[:5]
-    books2 = News.objects.filter(
-        Q(approval=True) & Q(category__name='كتب')).order_by(
-        '-Publish_date')[5:10]
+
+    # books1 = News.objects.filter(
+    #     Q(approval=True) & Q(category__name='كتب')).order_by(
+    #     '-Publish_date')[:5]
+    # books2 = News.objects.filter(
+    #     Q(approval=True) & Q(category__name='كتب')).order_by(
+    #     '-Publish_date')[5:10]
     # Most read الأكثر قراءه
     most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
     # Notes العناوين
@@ -100,21 +55,11 @@ def Home(request):
     cartons = News.objects.filter(pk=65)[:4]
     more_comments = News.objects.all().order_by('commentCount')[:6]
     context = {
+
         'latest_news': latest_news,
-        'local_news': local_news,
-        'arab_and_world': arab_and_world,
-        'accidents_and_investigations': accidents_and_investigations,
-        'politics_and_economy': politics_and_economy,
-        'sports': sports,
-        'culture_and_arts': culture_and_arts,
-        'talents_and_identities': talents_and_identities,
-        'real_estate_and_cars': real_estate_and_cars,
-        'video_and_audio': video_and_audio,
-        'people_and_society': people_and_society,
-        'mixs': mixs,
-        'cites': cites,
-        'books1': books1,
-        'books2': books2,
+        'categories': categories,
+        # 'books1': books1,
+        # 'books2': books2,
         'breaking_news0': breaking_news0,
         'breaking_news1': breaking_news1,
         'most_read': most_read,
@@ -135,6 +80,8 @@ def Home(request):
 
 # News details page
 def News_details(request, pk):
+    # الأقسام categories
+    categories = Category.objects.filter(parent=None)
     news = get_object_or_404(News, pk=pk)
     username = 'غير معروف'
     if news.user:
@@ -166,6 +113,7 @@ def News_details(request, pk):
     advertisings = Photo.objects.all()[10:15]
 
     context = {
+        'categories': categories,
         'news': news,
         'username': username,
         'most_read': most_read,
@@ -201,53 +149,10 @@ def postComment(request, pk):
 
 # News page
 def News_page(request, pk, page):
+    # الأقسام categories
+    categories = Category.objects.filter(parent=None)
     category = get_object_or_404(Category, pk=pk)
-    if category.name == 'عرب وعالم':
-        news_list = News.objects.filter(
-            Q(approval=True) & (Q(category__parent__name='عرب وعالم') | Q(category__name='عرب وعالم'))).order_by(
-            '-Publish_date')
-    elif category.name == 'محافظات':
-        news_list = News.objects.filter(
-            Q(approval=True) & (Q(category__parent__name='محافظات') | Q(category__name='محافظات'))).order_by(
-            '-Publish_date')
-    elif category.name == 'منوعات':
-        news_list = News.objects.filter(
-            Q(approval=True) & (Q(category__parent__name='منوعات') | Q(category__name='منوعات'))).order_by(
-            '-Publish_date')
-    elif category.name == 'ناس ومجتمع':
-        news_list = News.objects.filter(
-            Q(approval=True) & (Q(category__parent__name='ناس ومجتمع') | Q(category__name='ناس ومجتمع'))).order_by(
-            '-Publish_date')
-    elif category.name == 'صوت وصورة':
-        news_list = News.objects.filter(
-            Q(approval=True) & (Q(category__parent__name='صوت وصورة') | Q(category__name='صوت وصورة'))).order_by(
-            '-Publish_date')
-    elif category.name == 'عقارات وسيارات':
-        news_list = News.objects.filter(Q(approval=True) & (
-                Q(category__parent__name='عقارات وسيارات') | Q(category__name='عقارات وسيارات'))).order_by(
-            '-Publish_date')
-    elif category.name == 'مواهب وهويات':
-        news_list = News.objects.filter(
-            Q(approval=True) & (Q(category__parent__name='مواهب وهويات') | Q(category__name='مواهب وهويات'))).order_by(
-            '-Publish_date')
-    elif category.name == 'ثقافة وفنون':
-        news_list = News.objects.filter(
-            Q(approval=True) & (Q(category__parent__name='ثقافة وفنون') | Q(category__name='ثقافة وفنون'))).order_by(
-            '-Publish_date')
-    elif category.name == 'رياضة':
-        news_list = News.objects.filter(
-            Q(approval=True) & (Q(category__parent__name='رياضة') | Q(category__name='رياضة'))).order_by(
-            '-Publish_date')
-    elif category.name == 'سياسه وأقتصاد':
-        news_list = News.objects.filter(Q(approval=True) & (
-                Q(category__parent__name='سياسه وأقتصاد') | Q(category__name='سياسه وأقتصاد'))).order_by(
-            '-Publish_date')
-    elif category.name == 'حوادث وتحقيقات':
-        news_list = News.objects.filter(Q(approval=True) & (
-                Q(category__parent__name='حوادث وتحقيقات') | Q(category__name='حوادث وتحقيقات'))).order_by(
-            '-Publish_date')
-    else:
-        news_list = News.objects.filter(category=category, approval=True)
+    news_list = category.all_news()
     paginator = Paginator(news_list, 10)
     try:
         news = paginator.page(page)
@@ -265,7 +170,9 @@ def News_page(request, pk, page):
     photo3 = Photo.objects.filter(pk=3).last()
     photos = Photo.objects.all()[5:10]
     advertisings = Photo.objects.all()[10:15]
-    context = {'news_list': news,
+    context = {
+               'categories': categories,
+               'news_list': news,
                'category': category,
                'most_read': most_read,
                'notes': notes,
@@ -280,6 +187,8 @@ def News_page(request, pk, page):
 
 # News tag page
 def News_tag(request, pk, page):
+    # الأقسام categories
+    categories = Category.objects.filter(parent=None)
     tag = Tag.objects.filter(pk=pk).first()
     news_tag_list = Tag_news.objects.filter(tag=tag)
     paginator = Paginator(news_tag_list, 10)
@@ -300,6 +209,7 @@ def News_tag(request, pk, page):
     photos = Photo.objects.all()[5:10]
     advertisings = Photo.objects.all()[10:15]
     context = {
+        'categories': categories,
         'news_tags': news_tags,
         'tag': tag,
         'most_read': most_read,
@@ -314,10 +224,16 @@ def News_tag(request, pk, page):
 
 
 def Who_us(request):
-    return render(request, 'who-us.html')
+    # الأقسام categories
+    categories = Category.objects.filter(parent=None)
+    return render(request, 'who-us.html', {
+        'categories': categories,
+    })
 
 
 def Search_news(request, page):
+    # الأقسام categories
+    categories = Category.objects.filter(parent=None)
     news = News.objects.all()
     search = 'الكل'
     if request.GET.get('search'):
@@ -340,6 +256,7 @@ def Search_news(request, page):
     photos = Photo.objects.all()[5:10]
     advertisings = Photo.objects.all()[10:15]
     context = {
+        'categories': categories,
         'search': search,
         'news_list': news,
         'most_read': most_read,
@@ -355,6 +272,8 @@ def Search_news(request, page):
 
 # Last news
 def Last_news(request, page):
+    # الأقسام categories
+    categories = Category.objects.filter(parent=None)
     news_list = News.objects.filter(approval=True).order_by('-id')
     paginator = Paginator(news_list, 10)
     try:
@@ -374,7 +293,9 @@ def Last_news(request, page):
     photos = Photo.objects.all()[5:10]
     advertisings = Photo.objects.all()[10:15]
 
-    context = {'news_list': news,
+    context = {
+               'categories': categories,
+               'news_list': news,
                'most_read': most_read,
                'notes': notes,
                'photo1': photo1,
@@ -388,6 +309,8 @@ def Last_news(request, page):
 
 # Most read
 def most_read(request, page):
+    # الأقسام categories
+    categories = Category.objects.filter(parent=None)
     news_list = News.objects.filter(approval=True).order_by('-viewCount')
     paginator = Paginator(news_list, 10)
     try:
@@ -405,7 +328,9 @@ def most_read(request, page):
     last_news = News.objects.filter(approval=True).order_by('-id')[:6]
     photos = Photo.objects.all()[5:10]
     advertisings = Photo.objects.all()[10:15]
-    context = {'news_list': news,
+    context = {
+               'categories': categories,
+               'news_list': news,
                'last_news': last_news,
                'notes': notes,
                'photo1': photo1,
@@ -419,6 +344,8 @@ def most_read(request, page):
 
 # Most comment
 def most_comment(request, page):
+    # الأقسام categories
+    categories = Category.objects.filter(parent=None)
     news_list = News.objects.filter(approval=True).order_by('-commentCount')
     paginator = Paginator(news_list, 10)
     try:
@@ -437,7 +364,9 @@ def most_comment(request, page):
     photos = Photo.objects.all()[5:10]
     advertisings = Photo.objects.all()[10:15]
 
-    context = {'news_list': news,
+    context = {
+               'categories': categories,
+               'news_list': news,
                'last_news': last_news,
                'notes': notes,
                'photo1': photo1,

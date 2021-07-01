@@ -37,7 +37,19 @@
                 <div class="accidents-investigations">
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-8">
-                            <div class="section-header">{{category.name}}</div>
+                            <div class="section-header">
+                                <a href="{% url 'home' %}" style="color:white">الرئيسية</a>
+                                /
+                                {% if category.parent.parent %}
+                                <a href="{% url 'news_category' category.parent.parent.pk 1 %}" style="color:white">{{category.parent.parent.name}}</a>
+                                /
+                                {% endif %}
+                                {% if category.parent %}
+                                <a href="{% url 'news_category' category.parent.pk 1 %}" style="color:white">{{category.parent.name}}</a>
+                                /
+                                {% endif %}
+                                <a href="{% url 'news_category' category.pk 1 %}" style="color:white">{{category.name}}</a>
+                            </div>
                             <div class="arab-news card-news-img-right">
                                 {% for news in news_list%}
                                 <div class="card">

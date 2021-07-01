@@ -90,228 +90,44 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'home' %}">الرئيسية</a>
                 </li>
+                {% for category in categories %}
+                {% if not category.child.all %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'news_category' 1 1 %}">محليات</a>
+                    <a class="nav-link" href="{% url 'news_category' category.pk 1 %}">{{category.name}}</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="{% url 'news_category' 2 1 %}" id="navbarDropdown"
-                       role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        عرب وعالم
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{% url 'news_category' 3 1 %}">عرب</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 4 1 %}">عالم</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 5 1 %}">افريقا</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 6 1 %}">الصين</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="{% url 'news_category' 78 1 %}" id="navbarDropdown"
-                       role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        محافظات
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{% url 'news_category' 79 1 %}">الوادي الجديد</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 80 1 %}">المنيا</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 81 1 %}">المنوفية</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 82 1 %}">مرسى مطروح</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 83 1 %}">كفر الشيخ</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 84 1 %}">قنا</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 85 1 %}">القليوبية</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 86 1 %}">القاهرة</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 87 1 %}">الفيوم</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 88 1 %}">الغربية</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 89 1 %}">شمال سينا</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 90 1 %}">الشرقية</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 91 1 %}">السويس</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 92 1 %}">سوهاج</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 93 1 %}">دمياط</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 94 1 %}">الدقهليه</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 95 1 %}">الجيزة</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 96 1 %}">جنوب سينا</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 97 1 %}">بورسعيد</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 98 1 %}">بني سويف</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 99 1 %}">البحيرة</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 100 1 %}">البحر الاحمر</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 101 1 %}">الاقصر</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 102 1 %}">اسيوط</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 103 1 %}">اسوان</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 104 1 %}">الاسماعلية</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 105 1 %}">الاسكندرية</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="{% url 'news_category' 7 1 %}" id="navbarDropdown"
-                       role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        حوادث وتحقيقات
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{% url 'news_category' 8 1 %}">حوادث </a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 9 1 %}">تحقيقات </a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 10 1 %}">ملفات ساخنة </a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 11 1 %}">جرائم </a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 12 1 %}">محاكم </a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="{% url 'news_category' 13 1 %}" id="navbarDropdown"
-                       role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        سياسة واقتصاد
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{% url 'news_category' 14 1 %}">اسعار واسواق</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 15 1 %}">بورصة وشركات</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 16 1 %}">بنوك واستثمار</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 17 1 %}">نقل وملاحة</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="{% url 'news_category' 18 1 %}" id="navbarDropdown"
-                       role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        رياضة
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{% url 'news_category' 19 1 %}">رياضة محلية</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 20 1 %}">رياضة عربية</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 21 1 %}">رياضة عالمية</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="{% url 'news_category' 22 1 %}" id="navbarDropdown"
-                       role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        ثقافة وفنون
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{% url 'news_category' 32 1 %}">بورتريه </a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 23 1 %}">تراث</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 24 1 %}">اعلام</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 25 1 %}">اصدارات</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 26 1 %}">كاركاتير</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 27 1 %}">كتب</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 28 1 %}">ثقافات</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 29 1 %}">نصوص</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 30 1 %}">فنون</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 31 1 %}">اراء ومقالات</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="{% url 'news_category' 62 1 %}" id="navbarDropdown"
-                       role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        منوعات
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{% url 'news_category' 63 1 %}">سيدتى وطفلك </a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 64 1 %}">خدمات ومجتمع </a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 65 1 %}">كاريكاتير ورسوم </a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 66 1 %}">صحافة و تليفزيون </a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 67 1 %}">علوم وتكنولوجيا</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 68 1 %}">صحة وجمال </a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 69 1 %}">صور وفيديوهات</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 70 1 %}">تريندات وهاشتاجات عربية </a>
-                        </li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 71 1 %}">دعاية وإعلانات </a></li>
 
+                {% else %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="{% url 'news_category' category.pk 1 %}"
+                       id="navbarDropdown"
+                       role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        {{category.name}}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% for subcategory in category.child.all %}
+                        {% if not subcategory.child.all %}
+                        <li><a class="dropdown-item" href="{% url 'news_category' subcategory.pk 1 %}">{{subcategory.name}}</a>
+                        </li>
+                        {% else %}
                         <li class="dropdown-submenu">
-                            <a class="dropdown-item dropdown-toggle" href="{% url 'news_category' 71 1 %}">دعاية
-                                واعلان</a>
+                            <a class="dropdown-item dropdown-toggle" href="{% url 'news_category' subcategory.pk 1 %}">{{subcategory.name}}</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{% url 'news_category' 72 1 %}">أسواق ومعارض</a></li>
-                                <li><a class="dropdown-item" href="{% url 'news_category' 73 1 %}">عروض وخصومات </a>
-                                </li>
-                                <li><a class="dropdown-item" href="{% url 'news_category' 74 1 %}">شركات ومصانع</a></li>
-                                <li><a class="dropdown-item" href="{% url 'news_category' 75 1 %}">تدريب وتسويق </a>
-                                </li>
-                                <li><a class="dropdown-item" href="{% url 'news_category' 76 1 %}">تأمين واستثمار </a>
-                                </li>
-                                <li><a class="dropdown-item" href="{% url 'news_category' 77 1 %}">محلات تجارية
-                                    وافتتاحات</a></li>
+                                {% for sscat in subcategory.child.all %}
+                                <li><a class="dropdown-item"
+                                       href="{% url 'news_category' sscat.pk 1 %}">{{sscat.name}}</a></li>
+                                {%endfor%}
                             </ul>
                         </li>
+
+                        {% endif %}
+                        {% endfor %}
                     </ul>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="{% url 'news_category' 40 1 %}" id="navbarDropdown"
-                       role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        عقارات وسيارات
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'news_category' 38 1 %}">عقارات</a>
-                        <a class="dropdown-item" href="{% url 'news_category' 39 1 %}">سيارات</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="{% url 'news_category' 33 1 %}" id="navbarDropdown"
-                       role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        مواهب وهوايات
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{% url 'news_category' 34 1 %}">مواهب </a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 37 1 %}">هوايات </a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 35 1 %}">غرائب وطرائف</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 36 1 %}">مسابقات وتسالى</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="{% url 'news_category' 46 1 %}" id="navbarDropdown"
-                       role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        ناس ومجتمع
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{% url 'news_category' 47 1 %}">انفوجراف</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 48 1 %}">حياة كريمة</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 49 1 %}">خدمات وأدلة</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 50 1 %}">حياة الناس</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 51 1 %}">أهل الخير</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 52 1 %}">وفيات</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 53 1 %}">مفقودات</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 54 1 %}">تهانى ومناسبات</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 55 1 %}">الصلح خير</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 56 1 %}">خطابك وصل</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 57 1 %}">تسالى وابتسامات</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 58 1 %}">مخترعات وابتكارات </a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 59 1 %}">استغاثات ومتابعات </a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 60 1 %}">جمعيات ونقابات </a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 61 1 %}">حدوتة مصرية </a></li>
-                    </ul>
-                </li>
-                <!-- <li class="nav-item">
-                  <a class="nav-link" href="#">دعاية واعلان</a>
-                </li> -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="{% url 'news_category' 106 1 %}" id="navbarDropdown" role="button"
-                       data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        المزيد
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{% url 'news_category' 107 1 %}">عاجل</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 108 1 %}">دنيا ودين</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 109 1 %}">سياحة وطيران</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 110 1 %}">فيروس كورونا</a></li>
-                        <li><a class="dropdown-item" href="{% url 'news_category' 111 1 %}">قنصليات وسفارات</a></li>
-                        <li class="dropdown-submenu">
-                            <a class="dropdown-item dropdown-toggle" href="{% url 'news_category' 41 1 %}">صوت وصورة</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{% url 'news_category' 42 1 %}">فيديوهات </a></li>
-                                <li><a class="dropdown-item" href="{% url 'news_category' 43 1 %}">ألبومات صور </a></li>
-                                <li><a class="dropdown-item" href="{% url 'news_category' 44 1 %}">راديو الأستاذ</a>
-                                </li>
-                                <li><a class="dropdown-item" href="{% url 'news_category' 45 1 %}">تليفزيون الأستاذ</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
+                {% endif %}
+                {% endfor %}
+
+
             </ul>
         </div>
     </div>
@@ -512,10 +328,18 @@
     function httpAjax(url, mFunction) { var xhttp = new XMLHttpRequest(); xhttp.onreadystatechange = function () { if (this.readyState == 4 && this.status == 200) { mFunction(JSON.parse(this.responseText)) } }; xhttp.open("GET", url, true); xhttp.send() } function changeCountry() { var c_value = document.getElementById("cid").value; httpAjax('//timesprayer.com/ajax.php?do=loadCities&language=ar&cid=' + c_value, function (result) { if (result.status == 1) { document.getElementById("ciid").innerHTML = result.msg } }) } function changecity() { var ci_value = document.getElementById("ciid").value; var thisurl = window.location.href; var newUrl = thisurl.replace("name=assiut", "name=" + ci_value); window.location.href = newUrl } var city_offset = "2"; var reminingtime = 17066000; var soundfile = "fajer"; var douration_sound = "280"; var clean_url = 'timesprayer.com';
 
 
+
+
+
+
 </script>
 <script src="{% static 'assets/js/timerprayer.js' %}"></script>
 <script>
     (function (i, s, o, g, r, a, m) { i.GoogleAnalyticsObject = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o), m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m) })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga'); ga('create', 'UA-51636779-1', 'timesprayer.com'); ga('send', 'pageview');
+
+
+
+
 
 
 </script>

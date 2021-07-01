@@ -20,6 +20,18 @@
                         <div class="col-sm-12 col-md-12 col-lg-8">
                             <div class="blog-details-content">
                                 <h5 class="blog-details-content-header">
+                                <a href="{% url 'home' %}" style="color:#c31e1e">الرئيسية</a>
+                                /
+                                {% if news.category.parent.parent %}
+                                <a href="{% url 'news_category' news.category.parent.parent.pk 1 %}" style="color:#c31e1e">{{news.category.parent.parent.name}}</a>
+                                /
+                                {% endif %}
+                                {% if news.category.parent %}
+                                <a href="{% url 'news_category' news.category.parent.pk 1 %}" style="color:#c31e1e">{{news.category.parent.name}}</a>
+                                /
+                                {% endif %}
+                                <a href="{% url 'news_category' news.category.pk 1 %}" style="color:#c31e1e">{{news.category.name}}</a>
+                                    /
                                     {{news.title}}
                                 </h5>
                                 <div class="name">
