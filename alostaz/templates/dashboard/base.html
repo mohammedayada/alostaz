@@ -4,80 +4,103 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'assets/css/bootstrap-ar.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/all.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/slick-theme.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/all.min.css' %}">
-    <link href="https://prayertimes.date/css/widget.api.v1.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
     <title>{% block title %} {% endblock %}</title>
 </head>
-<body>
-
-<!-- navbar -->
-<nav class="navbar navbar-expand-lg navbar-light">
-    <div class="">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'home' %}">الرئيسية</a>
+<body style="background-color: #1F1E2E;">
+<!-- navabr -->
+<div class="container-fluid">
+    <nav class="navbar-dashboard navbar-expand-lg navbar-light ">
+        <a class="navbar-brand" href="#">لوحة التحكم</a>
+        <div class=" " id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" style="color: white">
+                        {{request.user.username}}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{% url 'logout' %}">تسجيل الخروج</a>
+                    </div>
                 </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="{% url 'show-news' 1 %}"> الأخبار قيد الانتظار</a>
-                </li>
-                {% if is_chairman or is_chef%}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'show-all-news' 1 %}">جميع الأخبار</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'show-comments' 1 %}">التعليقات</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'show-notes' 1 %}">عناويين الأخبار</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'show-tags' 1 %}">الكلمات الدلاليه</a>
-                </li>
-                {%endif%}
-                {% if is_chairman%}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'show-photos' 1 %}">الصور</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'show-all-advertising' 1 %}">الاعلانات</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'show-subscribers' 1 %}">المشتركيين</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'show-users' 1 %}">المستخدمين</a>
-                </li>
-                {% endif%}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-user"></i> تسجيل خروج</a>
-                </li>
-
             </ul>
         </div>
+    </nav>
+</div>
+<div class="main-dasboard">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-lg-3">
+                <div class="side-bar">
+                    <div class="sidebar-logo">
+                        <a href="{% url 'home' %}" style="color: white">الوسيط الدولي</a>
+                    </div>
+                    <div class="side-bar-links">
+                        <ul class="list-unstyled">
+                            <li>
+                                <i class="fas fa-clipboard"></i>
+                                <a href="{% url 'show-news' 1 %}">الاخبار قيد الانتظار</a>
+                            </li>
+                            {% if is_chairman or is_chef%}
+                            <li>
+                                <i class="fas fa-comments"></i>
+                                <a href="{% url 'show-comments' 1 %}">التعليقات</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-ad"></i>
+                                <a href="{% url 'show-notes' 1 %}">عناوين الاخبار</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-clipboard-check"></i>
+                                <a href="{% url 'show-tags' 1 %}">الكلمات الدلاليه</a>
+                            </li>
+                            {% endif %}
+                            {% if is_chairman%}
+                            <li class="">
+                                <i class="fas fa-users"></i>
+                                <a href="{% url 'show-users' 1 %}">المستخدمين</a>
+                            </li>
+                            <li class="">
+                                <i class="fas fa-users"></i>
+                                <a href="{% url 'show-subscribers' 1 %}">المشتركين</a>
+                            </li>
+                            <li class="">
+                                <i class="fas fa-box"></i>
+                                <a href="{% url 'show-all-advertising' 1 %}">الاعلانات</a>
+                            </li>
+                            <li class="">
+                                <i class="fas fa-users"></i>
+                                <a href="{% url 'show-photos' 1 %}">الصور</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-8 col-lg-9">
+                <div class="dasboard-content">
+                    <div class="dashboard-order-table">
+                        <div class="container-fluid">
+                            {% block contain %} {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</nav>
-
-
-{% block contain %} {% endblock %}
-</body>
-</html>
+</div>
 <script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
 <script src="{% static 'assets/js/popper.min.js' %}"></script>
 <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'assets/js/slick.min.js' %}"></script>
-<script src="https://prayertimes.date/js/widget.api.v1.min.js"></script>
-<script src="{% static 'assets/js/simplemarquee.js' %}"></script>
+<script src="{% static 'assets/js/jquery.nicescroll.min.js' %}"></script>
 <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+
+</html>

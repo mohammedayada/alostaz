@@ -4,86 +4,85 @@
 {% endblock title%}
 التعليقات
 {% block contain %}
-<div class="container-fluid mt-3">
-    <div class="row">
-        <div class="col-sm-1 col-md-4 col-lg-2">
-        </div>
-        <div class="col-sm-10 col-md-4 col-lg-8">
-            <table class="table table-borderless">
-                <thead class="thead-dark">
-                <tr>
-                    <th class="text-center" scope="col">#</th>
-                    <th class="text-center" scope="col">اسم المستخدم</th>
-                    <th class="text-center" scope="col">البريد الالكترونى</th>
-                    <th class="text-center" scope="col">الخبر</th>
-                    <th class="text-center" scope="col">التعليق</th>
-                    <th class="text-center" scope="col">الخيارات</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for comment in comments %}
-                <tr>
-                    <th scope="row">{{forloop.counter}}</th>
-                    <td class="text-center">{{comment.auther}}</td>
-                    <td class="text-center">{{comment.email}}</td>
-                    <td class="text-center"><a
-                            href="{% url 'news_details' comment.news.pk %}">{{comment.news.title}}</a></td>
-                    <td class="text-center">{{comment.text}}</td>
-                    <td class="text-center">
-                        <a class="btn btn-sm btn-primary" href="{% url 'approve-comment' comment.pk%}"> <i
-                                class="fas fa-check"></i> اضافه </a>
-                        <a class="btn btn-sm btn-danger" href="{% url 'delete-comment' comment.pk%}"> حذف <i
-                                class="fas fa-trash"></i></a></td>
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        <div class="col-sm-1 col-md-4 col-lg-2">
-        </div>
-        <div class="col-sm-1 col-md-4 col-lg-2">
-
-        </div>
-        <div class="col-sm-10 col-md-4 col-lg-8">
-            <nav aria-label="Page navigation example">
-                {% if comments.has_other_pages %}
-                <ul class="pagination">
-                    {% if comments.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link" href="{% url 'show-comments'  comments.previous_page_number%}"
-                           aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                    </li>
-                    {% endif %}
-                    {% for i in comments.paginator.page_range %}
-                    {% if comments.number == i %}
-                    <li class="page-item"><a class="page-link" style="background-color:gray" href="#">{{ i }}</a></li>
-                    {% else %}
-                    <li class="page-item"><a class="page-link" href="{% url 'show-comments'  i %}">{{ i }}</a></li>
-                    {% endif %}
-                    {% endfor %}
-                    {% if notes.has_next %}
-                    <li class="page-item">
-                        <a class="page-link" href="{% url 'show-comments' comments.next_page_number%}"
-                           aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </li>
-                    {% endif %}
-                </ul>
-                {% endif %}
-            </nav>
-        </div>
-        <div class="col-sm-1 col-md-4 col-lg-2">
-
-        </div>
-
-    </div>
-
+<h5>التعليقات</h5>
+<div class="table-responsive">
+    <table class="table table-borderless">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">اسم المستخدم</th>
+            <th scope="col">البريد الالكترونى</th>
+            <th scope="col">الخبر</th>
+            <th scope="col">التعليق</th>
+            <th scope="col">الخيارات</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+        <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{comment.auther}}</td>
+            <td>{{comment.email}}</td>
+            <td><a href="{% url 'news_details' comment.news.pk %}"
+                   style="color:white">
+                {{comment.news.title}}</a></td>
+            <td>{{comment.text}}</td>
+            <td>
+                <a class="btn btn-sm btn-primary" href="{% url 'approve-comment' comment.pk%}"> <i
+                        class="fas fa-check"></i></a>
+                <a class="btn btn-sm btn-danger" href="{% url 'delete-comment' comment.pk%}"><i
+                        class="fas fa-trash"></i></a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
+<nav aria-label="Page navigation example">
+    {% if comments.has_other_pages %}
+    <ul class="pagination">
+        {% if comments.has_previous %}
+        <li class="page-item">
+            <a class="page-link"
+               href="{% url 'show-comments'  comments.previous_page_number%}"
+               style="background-color:#262b40"
+               aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+        </li>
+        {% endif %}
+        {% for i in comments.paginator.page_range %}
+        {% if comments.number == i %}
+        <li class="page-item">
+            <a class="page-link"
+               style="background-color:black" href="#">
+                {{ i }}
+            </a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link"
+               style="background-color:#262b40"
+               href="{% url 'show-comments'  i %}">
+                {{ i }}
+            </a>
+        </li>
+        {% endif %}
+        {% endfor %}
+        {% if notes.has_next %}
+        <li class="page-item">
+            <a class="page-link" style="background-color:#262b40"
+               href="{% url 'show-comments' comments.next_page_number%}"
+               aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+    {% endif %}
+</nav>
+
 {% endblock contain%}
 
 
