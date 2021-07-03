@@ -3,8 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import user, Photo, Advertising, Subscriber, Survey
-from news.models import Note, Tag, News, Category, Comment, Tag_news
-from .forms import NewsForm, PhotoForm, AdvertisingForm, SurveyForm, CategoryForm
+from news.models import Note, Tag, News, Category, Comment, Tag_news, Book
+from .forms import NewsForm, PhotoForm, AdvertisingForm, SurveyForm, CategoryForm, BookForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
 import re
@@ -939,3 +939,87 @@ def edit_category(request, pk):
             context['form'] = form
         return render(request, 'dashboard/edit_category.html', context)
     return redirect('home')
+
+
+# Add book
+@login_required
+def add_book(request):
+    context = {}
+    my_user = user.objects.get(id=request.user.id)
+    is_chairman = (my_user.type == 'chairman')
+    is_chef = (my_user.type == 'editor_in_chief')
+    context['is_chairman'] = is_chairman
+    context['is_chef'] = is_chef
+    if is_chairman:
+        form = BookForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            book = Book.objects.create(img=request.FILES['img'], title=request.POST['title'],
+                                user=request.user, details=request.POST['details'])
+            return redirect('book_details', pk=book.pk)
+        context['form'] = form
+        return render(request, 'dashboard/add_book.html', context)
+    else:
+        return redirect('home')
+
+
+# ِshow books
+@login_required
+def show_books(request, page):
+    my_user = user.objects.get(id=request.user.id)
+    is_chairman = (my_user.type == 'chairman')
+    is_chef = (my_user.type == 'editor_in_chief')
+    if my_user.type == 'chairman':
+        books = Book.objects.all()
+    else:
+        return redirect('home')
+    paginator = Paginator(books, 10)
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+
+    context = {
+        'books': books,
+        'is_chairman': is_chairman,
+        'is_chef': is_chef,
+    }
+    return render(request, 'dashboard/show_books.html', context)
+
+# delete book
+@login_required
+def delete_book(request, pk):
+    my_user = user.objects.get(id=request.user.id)
+    book = get_object_or_404(Book, pk=pk)
+    if my_user.type == 'chairman':
+        book.delete()
+        return redirect('show-books', page=1)
+    else:
+        return redirect('home')
+
+
+# Edit book
+@login_required
+def edit_book(request, pk):
+    context = {}
+    my_user = user.objects.get(id=request.user.id)
+    is_chairman = (my_user.type == 'chairman')
+    is_chef = (my_user.type == 'editor_in_chief')
+    context['is_chairman'] = is_chairman
+    context['is_chef'] = is_chef
+    book = get_object_or_404(Book, pk=pk)
+    if my_user.type == 'chairman':
+        context['book'] = book
+        if request.POST:
+            if 'img' in request.FILES:
+                book.img = request.FILES['img']
+            book.title = request.POST['title']
+            book.details = request.POST['details']
+            book.save()
+            return redirect('book_details', pk=pk)
+        else:
+            form = BookForm(instance=book)
+            context['form'] = form
+        return render(request, 'dashboard/edit_book.html', context)
+    return redirect('book_details', pk=pk)

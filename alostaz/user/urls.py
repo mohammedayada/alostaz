@@ -44,6 +44,10 @@ from .views import (
     add_category,
     delete_category,
     edit_category,
+    add_book,
+    show_books,
+    edit_book,
+    delete_book,
 
 
 
@@ -148,5 +152,14 @@ urlpatterns = [
     path('delete-category/<int:pk>', delete_category, name='delete-category'),
     # edit category
     path('edit-category/<int:pk>', edit_category, name='edit-category'),
+    # الكتب books ------------------------------------------------------
+    # add book
+    path('add-book/', add_book, name='add-book'),
+    # show books
+    path('show-books/<int:page>', show_books, name='show-books'),
+    # edit book
+    path('edit-book/<int:pk>', edit_book, name='edit-book'),
+    # delete book
+    path('delete-book/<int:pk>', delete_book, name='delete-book'),
 
 ]

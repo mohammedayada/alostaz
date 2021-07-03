@@ -1,5 +1,5 @@
 from django import forms
-from news.models import News, Category
+from news.models import News, Category, Book
 from .models import Photo, Advertising, Survey
 
 
@@ -14,6 +14,12 @@ class NewsForm(forms.ModelForm):
         'category': forms.TextInput(attrs={'class': 'form-control', 'name': 'القسم'}),
 
     }
+
+
+class BookForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        exclude = ['user', 'viewCount']
 
 
 class PhotoForm(forms.ModelForm):

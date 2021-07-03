@@ -1,0 +1,14 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block title %}
+أضف خبر
+{% endblock title%}
+{% block contain %}
+<h5>اضف كتاب</h5>
+<form method="post" action="{% url 'add-book' %}" enctype="multipart/form-data" style="color:white">
+    {% csrf_token %}
+    {{form.media}}
+    {{form.as_p}}
+    <button type="submit" class="btn btn-success">اضف</button>
+</form>
+{% endblock contain%}

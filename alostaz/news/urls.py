@@ -13,6 +13,8 @@ from .views import (
     create_category,
     make_survey,
     post_your_photo,
+    book_details,
+    books_page,
 )
 
 urlpatterns = [
@@ -42,5 +44,9 @@ urlpatterns = [
     path('default/', create_category, name='default'),
     # make survey
     path('make-survey/<int:pk>/', make_survey, name='make-survey'),
+    # book details page
+    path('book/<int:pk>', book_details, name='book_details'),
+    # books
+    path('books/<int:page>/', books_page, name='books'),
 
 ]

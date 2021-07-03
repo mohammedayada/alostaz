@@ -139,9 +139,10 @@
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-4">
+                            {% if books1%}
                             <div class="books-article">
                                 <div class="section-header">كتب ومقالات
-                                    <a href="{% url 'news_category' 27 1%}" class="more">المزيد</a>
+                                    <a href="{% url 'books' 1%}" class="more">المزيد</a>
                                 </div>
                                 <div class="books-slider" dir="ltr">
                                     <div class="slider-item">
@@ -170,6 +171,7 @@
                                     </div>
                                 </div>
                             </div>
+                            {% endif %}
                             <div class="gallery video">
                                 <div class="section-header">الفيديو
                                     <a href="" class="more">المزيد</a>

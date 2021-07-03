@@ -3,25 +3,30 @@ from django.conf import settings
 from ckeditor.fields import RichTextField
 from django.db.models import Q
 
+
 # Create your models here.
 class Category(models.Model):
-    parent = models.ForeignKey('self', blank=True, null=True, related_name='child', on_delete=models.CASCADE)
-    name = models.CharField(max_length=200)
+    parent = models.ForeignKey('self', blank=True, null=True, related_name='child',
+                               on_delete=models.SET_NULL, verbose_name='القسم الأب')
+    name = models.CharField(max_length=200, verbose_name='اسم القسم')
 
     class Meta:
         verbose_name_plural = "Categories"
 
     def __str__(self):
         return self.name
+
     def all_news(self):
-        return News.objects.filter(Q(Q(category=self) & Q(approval=True)) | (Q(category__parent=self) & Q(approval=True)) | (Q(category__parent__parent=self) & Q(approval=True)))[:9]
+        return News.objects.filter(
+            Q(Q(category=self) & Q(approval=True)) | (Q(category__parent=self) & Q(approval=True)) | (
+                    Q(category__parent__parent=self) & Q(approval=True)))[:9]
 
 
 class News(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.SET_NULL, null=True, blank=True)
-    category = models.ForeignKey(Category,
-                                 on_delete=models.CASCADE, related_name='NEWS', verbose_name='القسم')
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True,
+                                 related_name='NEWS', verbose_name='القسم')
     title = models.CharField(max_length=200, verbose_name='العنوان')
     Publish_date = models.DateTimeField(auto_now_add=True)
     details = RichTextField(blank=True, null=True, verbose_name='البيانات')
@@ -29,6 +34,7 @@ class News(models.Model):
     approval = models.BooleanField(default=False, verbose_name='الموافقه')
     viewCount = models.IntegerField(default=0, verbose_name='عدد المشاهديين')
     commentCount = models.IntegerField(default=0, verbose_name='عدد التعليقات')
+
     class Meta:
         ordering = ['-Publish_date']
 
@@ -78,3 +84,23 @@ class Tag_news(models.Model):
 
     def __str__(self):
         return f'Tag: {self.tag} news: {self.news}'
+
+
+class Book(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.SET_NULL, null=True, blank=True)
+    title = models.CharField(max_length=200, verbose_name='العنوان')
+    Publish_date = models.DateTimeField(auto_now_add=True)
+    details = RichTextField(blank=True, null=True, verbose_name='البيانات')
+    img = models.ImageField(upload_to='books/', verbose_name='الصوره')
+    viewCount = models.IntegerField(default=0, verbose_name='عدد المشاهديين')
+
+    class Meta:
+        ordering = ['-Publish_date']
+
+    def __str__(self):
+        return f'Title: {self.title} user: {self.user}'
+
+    def incrementViewCount(self):
+        self.viewCount += 1
+        self.save()

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title%}{{book.title}}{% endblock title%}
+{% block contain %}
+<div class="main">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <div class="spaces">
+                    {% for photo in photos%}
+                    <a href="">
+                        <img src="{{photo.img.url}}" alt="">
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-8 col-lg-8">
+                <div class="blog-details">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-8">
+                            <div class="blog-details-content">
+                                <div class="date">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>{{book.Publish_date.date}}</span>
+                                </div>
+                                <h5 class="blog-details-content-header">
+                                {{book.title}}
+                                </h5>
+
+                                <div class="blog-details-content-img">
+                                    <img src="{{book.img.url}}" alt="">
+                                </div>
+                                <div class="share">
+                                    <h6>مشاركة الخبر عبر</h6>
+                                    <a href="" class="fab fa-facebook"></a>
+                                    <a href="" class="fab fa-twitter"></a>
+                                    <a href="" class="fab fa-facebook-messenger"></a>
+                                    <a href="" class="fab fa-whatsapp-square"></a>
+                                </div>
+                                {% if user.is_authenticated%}
+                                <a class="btn btn-sm btn-danger m-2" href="{% url 'edit-book' book.pk%}">تعديل
+                                    المنشور</a>
+                                {% endif %}
+                                <div class="blog-details-content-par">
+                                    <p>{{book.details|safe}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-4">
+                            <div class="">
+                                {% if most_read%}
+                                <div class="section-header">الاكثر قراءة</div>
+                                {% for news in most_read%}
+                                <div class="card card-most-read">
+                                    <a href="{% url 'news_details' news.pk %}" class="card-text">{{news.title}}</a>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <div class="spaces">
+                    {% for advertising in advertisings%}
+                    <a href="">
+                        <img src="{{advertising.img.url}}" alt="">
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock contain%}

@@ -1,0 +1,14 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block title %}
+تعديل كتاب
+{% endblock title%}
+{% block contain %}
+<h5>تعديل كتاب</h5>
+<form method="post" action="{% url 'edit-book' book.pk %}" enctype="multipart/form-data" style="color:white">
+    {% csrf_token %}
+    {{form.media}}
+    {{form.as_p}}
+    <button type="submit" class="btn btn-success">عدل</button>
+</form>
+{% endblock contain%}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import News, Category, Note, Comment, Tag_news, Tag
+from .models import News, Category, Note, Comment, Tag_news, Tag, Book
 from django.db.models import Q
 from django.core import serializers
 from django.http import JsonResponse
@@ -34,12 +34,8 @@ def Home(request):
     breaking_news0 = News.objects.filter(approval=True).order_by('-Publish_date')[:8]
     breaking_news1 = News.objects.filter(approval=True).order_by('-Publish_date')[8:16]
 
-    # books1 = News.objects.filter(
-    #     Q(approval=True) & Q(category__name='كتب')).order_by(
-    #     '-Publish_date')[:5]
-    # books2 = News.objects.filter(
-    #     Q(approval=True) & Q(category__name='كتب')).order_by(
-    #     '-Publish_date')[5:10]
+    books1 = Book.objects.all().order_by('-Publish_date')[:5]
+    books2 = Book.objects.all().order_by('-Publish_date')[5:10]
     # Most read الأكثر قراءه
     most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
     # Notes العناوين
@@ -60,8 +56,8 @@ def Home(request):
 
         'latest_news': latest_news,
         'categories': categories,
-        # 'books1': books1,
-        # 'books2': books2,
+        'books1': books1,
+        'books2': books2,
         'breaking_news0': breaking_news0,
         'breaking_news1': breaking_news1,
         'most_read': most_read,
@@ -560,3 +556,68 @@ def make_survey(request, pk):
 
     }
     return render(request, 'make_survey.html', context)
+
+
+
+# book details page
+def book_details(request, pk):
+    # الأقسام categories
+    categories = Category.objects.filter(parent=None)
+    book = get_object_or_404(Book, pk=pk)
+    # To increament book count
+    book.incrementViewCount()
+    most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
+    photo1 = Photo.objects.filter(pk=1).last()
+    photo2 = Photo.objects.filter(pk=2).last()
+    photo3 = Photo.objects.filter(pk=3).last()
+    photos = Photo.objects.all()[5:10]
+    advertisings = Photo.objects.all()[10:15]
+
+    context = {
+        'book': book,
+        'categories': categories,
+        'most_read': most_read,
+        'photo1': photo1,
+        'photo2': photo2,
+        'photo3': photo3,
+        'photos': photos,
+        'advertisings': advertisings,
+    }
+    return render(request, 'book-details.html', context)
+
+
+
+# News page
+def books_page(request, page):
+    # الأقسام categories
+    categories = Category.objects.filter(parent=None)
+    news_list = Book.objects.all()
+    paginator = Paginator(news_list, 10)
+    try:
+        news = paginator.page(page)
+    except PageNotAnInteger:
+        news = paginator.page(1)
+    except EmptyPage:
+        news = paginator.page(paginator.num_pages)
+
+    # Most read
+    most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
+    # Notes العناوين
+    notes = Note.objects.all().order_by('-id')[:3]
+    photo1 = Photo.objects.filter(pk=1).last()
+    photo2 = Photo.objects.filter(pk=2).last()
+    photo3 = Photo.objects.filter(pk=3).last()
+    photos = Photo.objects.all()[5:10]
+    advertisings = Photo.objects.all()[10:15]
+    context = {
+        'categories': categories,
+        'news_list': news,
+        'most_read': most_read,
+        'notes': notes,
+        'photo1': photo1,
+        'photo2': photo2,
+        'photo3': photo3,
+        'photos': photos,
+        'advertisings': advertisings,
+    }
+    return render(request, 'books-page.html', context)
