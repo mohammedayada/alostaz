@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .models import user, Photo, Advertising, Subscriber
+from .models import user, Photo, Advertising, Subscriber, Survey
 from news.models import Note, Tag, News, Category, Comment, Tag_news
-from .forms import NewsForm, PhotoForm, AdvertisingForm
+from .forms import NewsForm, PhotoForm, AdvertisingForm, SurveyForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
 import re
@@ -599,7 +599,7 @@ def edit_advertising(request, pk):
     context['is_chef'] = is_chef
     advertising = get_object_or_404(Advertising, pk=pk)
     if my_user.type == 'chairman':
-        context['advertising'] = Advertising
+        context['advertising'] = advertising
         if request.POST:
             if 'img' in request.FILES:
                 advertising.img = request.FILES['img']
@@ -607,7 +607,7 @@ def edit_advertising(request, pk):
             advertising.save()
             return redirect('show-all-advertising', page=1)
         else:
-            form = PhotoForm(instance=advertising)
+            form = AdvertisingForm(instance=advertising)
             context['form'] = form
         return render(request, 'dashboard/edit_advertising.html', context)
     return redirect('home')
@@ -759,3 +759,92 @@ def tags_page(request, page, pk):
         }
         return render(request, 'tags_page.html', context)
     return redirect('news_details', pk=pk)
+
+
+# Add survey
+@login_required
+def add_survey(request):
+    # when request POST
+    my_user = user.objects.get(id=request.user.id)
+    is_chairman = (my_user.type == 'chairman')
+    is_chef = (my_user.type == 'editor_in_chief')
+    if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
+        msg = 'من فضلك ادخل بيانات صحيحه'
+        if request.POST:
+            if request.POST['question'] != "":
+                Survey.objects.create(
+                    question=request.POST['question'],
+                )
+                return redirect('show-surveys', page=1)
+            msg = 'هذه الكلمه الدلاليه موجوده بالفعل'
+        context = {'msg': msg,
+                   'is_chairman': is_chairman,
+                   'is_chef': is_chef,
+                   }
+        return render(request, 'dashboard/add_survey.html', context)
+    else:
+        return redirect('home')
+
+
+@login_required
+def show_surveys(request, page):
+    my_user = user.objects.get(id=request.user.id)
+    is_chairman = (my_user.type == 'chairman')
+    is_chef = (my_user.type == 'editor_in_chief')
+    if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
+        surveys = Survey.objects.all()
+        if request.GET.get('search'):
+            surveys = Survey.objects.filter(question__icontains=request.GET.get('search'))
+        paginator = Paginator(surveys, 10)
+        try:
+            surveys = paginator.page(page)
+        except PageNotAnInteger:
+            surveys = paginator.page(1)
+        except EmptyPage:
+            surveys = paginator.page(paginator.num_pages)
+        context = {'surveys': surveys,
+                   'is_chairman': is_chairman,
+                   'is_chef': is_chef,
+                   }
+        return render(request, 'dashboard/show_surveys.html', context)
+    else:
+        return redirect('home')
+
+
+# Edit survey
+@login_required
+def edit_survey(request, pk):
+    context = {}
+    my_user = user.objects.get(id=request.user.id)
+    is_chairman = (my_user.type == 'chairman')
+    is_chef = (my_user.type == 'editor_in_chief')
+    context['is_chairman'] = is_chairman
+    context['is_chef'] = is_chef
+    survey = get_object_or_404(Survey, pk=pk)
+    if my_user.type == 'chairman':
+        context['survey'] = survey
+        if request.POST:
+            survey.question = request.POST['question']
+            if 'approval' in request.POST:
+                survey.approval = True
+            else:
+                survey.approval = False
+            survey.save()
+            return redirect('show-surveys', page=1)
+        else:
+            form = SurveyForm(instance=survey)
+            context['form'] = form
+        return render(request, 'dashboard/edit_survey.html', context)
+    return redirect('home')
+
+
+# Delete survey
+@login_required
+def delete_survey(request, pk):
+    my_user = user.objects.get(id=request.user.id)
+    survey = get_object_or_404(Survey, pk=pk)
+    if my_user.type == 'chairman':
+        survey.delete()
+        return redirect('show-surveys', page=1)
+    else:
+        return redirect('home')

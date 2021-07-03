@@ -180,21 +180,10 @@
                 <div class="important-links an-links">
                     <!-- <h5>أقسام الموقع</h5> -->
                     <ul class="list-unstyled">
-                        <li><a href="#">الرئيسية</a></li>
-                        <li><a href="#">محليات</a></li>
-                        <li><a href="#">عرب وعالم</a></li>
-                        <li><a href="#">محافظات</a></li>
-                        <li><a href="#">حوادث وتحقسقات</a></li>
-                        <li><a href="">سياسة واقتصاد</a></li>
-                        <li><a href="">رياضة</a></li>
-                        <li><a href="">ثقافة وفنون</a></li>
-                        <li><a href="">منوعات</a></li>
-                        <li><a href="">عقارات وسيارات</a></li>
-                        <li><a href="">مواهب وهوايات</a></li>
-                        <li><a href="">صوت وصورة</a></li>
-                        <li><a href="">ناس ومجتمع</a></li>
-                        <li><a href="">دعاية واعلان</a></li>
-                        <!-- <li><a href="">المزيد</a></li> -->
+                        <li><a href="{% url 'home' %}">الرئيسية</a></li>
+                        {% for category in categories%}
+                        <li><a href="{% url 'news_category' category.pk 1 %}">{{category.name}}</a></li>
+                        {% endfor%}
                     </ul>
                 </div>
             </div>
@@ -238,12 +227,12 @@
                         <li><a href="#">شروط الاستخدام</a></li>
                         <li><a href="#">سياية الخصوصية</a></li>
                         <li><a href="">ارسل خبرا</a></li>
-                        <li><a href="">انشر صورك</a></li>
+                        <li><a href="{% url 'post-your-photo'%}">انشر صورك</a></li>
                         <li><a href="">تابع أخرالأخبار عبر الاشتراك بالجريدة الإلكترونية </a></li>
                         <li><a href="">اشترك في خدمة الواتساب</a></li>
                         <li><a href="">اشترك فى النشرة الإخبارية </a></li>
                         <li><a href="">امسح الكود وحمل التطبيق </a></li>
-                        <li><a href="#">عن الموقع</a></li>
+                        <li><a href="{% url 'who-us'%}">عن الموقع</a></li>
                         <li><a href="#">خدمة الرسائل</a></li>
                     </ul>
                 </div>

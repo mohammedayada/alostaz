@@ -19,15 +19,15 @@
         </tr>
         </thead>
         <tbody>
-        {% for advertising in advertisings %}
+        {% for ad in advertisings %}
         <tr>
             <th scope="row">{{forloop.counter}}</th>
-            <td>{{advertising.title}}</td>
-            <td scope="col"><img src="{{advertising.img.url}}"></td>
+            <td>{{ad.title}}</td>
+            <td scope="col"><img src="{{ad.img.url}}"></td>
             <td>
-                <a class="btn btn-sm btn-danger" href="{% url 'delete-advertising' advertising.pk %}">
+                <a class="btn btn-sm btn-danger" href="{% url 'delete-advertising' ad.pk %}">
                     <i class="fas fa-trash"></i></a>
-                <a class="btn btn-sm btn-success" href="{% url 'edit-photo' advertising.pk %}">
+                <a class="btn btn-sm btn-success" href="{% url 'edit-advertising' ad.pk %}">
                     <i class="fas fa-edit"></i></a>
             </td>
         </tr>

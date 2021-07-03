@@ -4,23 +4,10 @@
 أضف صوره
 {% endblock title%}
 {% block contain %}
-<div class="container-fluid mt-3">
-    <div class="row">
-        <div class="col-sm-1 col-md-4 col-lg-2">
-        </div>
-        <div class="col-sm-10 col-md-4 col-lg-8">
-            <h1>اضف صوره</h1>
-            <hr>
-            <form method="post" action="{% url 'add-photo' %}" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{form.as_p}}
-                <button type="submit" class="btn btn-primary">اضف</button>
-            </form>
-
-        </div>
-    </div>
-    <div class="col-sm-1 col-md-4 col-lg-2">
-
-    </div>
-</div>
+<h5>اضف صوره</h5>
+<form method="post" action="{% url 'add-photo' %}" enctype="multipart/form-data" style="color:white">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="btn btn-success">اضف</button>
+</form>
 {% endblock contain%}

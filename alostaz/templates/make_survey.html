@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title%}{{survey.question}}{% endblock title%}
+{% block contain %}
+<div class="main">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <div class="spaces">
+                    {% for photo in photos%}
+                        <img src="{{photo.img.url}}" alt="">
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-8 col-lg-8">
+                <div class="blog-details">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-8">
+                            <div class="blog-details-content">
+                                <h5 class="blog-details-content-header">
+                                {{survey.question}}
+                                </h5>
+                                <div class="blog-details-content-par">
+                                    <p>شكرا لمشاركتك فى استطلاع الرأى</p>
+                                </div>
+                                <div class="blog-details-content-par">
+                                    <p>نعم : {{survey.yes_percentage|floatformat:-2}}%</p>
+                                </div>
+                                <div class="blog-details-content-par">
+                                    <p>لا : {{survey.no_percentage|floatformat:-2}}%</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-4">
+                            <div class="">
+                                {% if most_read%}
+                                <div class="section-header">الاكثر قراءة</div>
+                                {% for news in most_read%}
+                                <div class="card card-most-read">
+                                    <a href="{% url 'news_details' news.pk %}" class="card-text">{{news.title}}</a>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <div class="spaces">
+                    {% for advertising in advertisings%}
+                    <a href="">
+                        <img src="{{advertising.img.url}}" alt="">
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock contain%}

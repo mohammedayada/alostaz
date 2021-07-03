@@ -4,27 +4,14 @@
 أضف كلمه دلاليه
 {% endblock title%}
 {% block contain %}
-<div class="container-fluid mt-3">
-    <div class="row">
-        <div class="col-sm-1 col-md-4 col-lg-2">
-        </div>
-        <div class="col-sm-10 col-md-4 col-lg-8">
-            <h1>اضف كلمه دلاليه</h1>
-            <hr>
-            <form method="post" action="{% url 'add-tag' %}">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label>الكلمه الدلاليه</label>
-                    <input type="text" name="text" class="form-control" placeholder="الكلمه الدلاليه">
-                </div>
-
-                <button type="submit" class="btn btn-primary">اضف</button>
-            </form>
-
-        </div>
+<h5>اضف كلمه دلاليه</h5>
+<form method="post" action="{% url 'add-tag' %}" style="color:white">
+    {% csrf_token %}
+    <div class="form-group">
+        <label>الكلمه الدلاليه</label>
+        <input type="text" name="text" class="form-control" placeholder="الكلمه الدلاليه">
     </div>
-    <div class="col-sm-1 col-md-4 col-lg-2">
 
-    </div>
-</div>
+    <button type="submit" class="btn btn-success">اضف</button>
+</form>
 {% endblock contain%}

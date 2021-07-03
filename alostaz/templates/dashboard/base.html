@@ -62,6 +62,10 @@
                             </li>
                             {% endif %}
                             {% if is_chairman%}
+                            <li>
+                                <i class="fas fa-comments"></i>
+                                <a href="{% url 'show-surveys' 1 %}">استطلاعات الرأى</a>
+                            </li>
                             <li class="">
                                 <i class="fas fa-users"></i>
                                 <a href="{% url 'show-users' 1 %}">المستخدمين</a>

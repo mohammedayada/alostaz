@@ -1,34 +1,21 @@
 {% extends 'dashboard/base.html' %}
 {% load static %}
 {% block title %}
-أضف ملاحظه
+أضف عنوان
 {% endblock title%}
 {% block contain %}
-<div class="container-fluid mt-3">
-    <div class="row">
-        <div class="col-sm-1 col-md-4 col-lg-2">
-        </div>
-        <div class="col-sm-10 col-md-4 col-lg-8">
-            <h1>اضف ملاحظه</h1>
-            <hr>
-            <form method="post" action="{% url 'add-note' %}">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label>عنوان</label><br>
-                    <input type="text" name="title" class="form-control" placeholder="عنوان">
-                </div>
-                <div class="form-group">
-                    <label>الرابط</label><br>
-                    <input type="url" name="link" placeholder="الرابط">
-                </div>
-
-                <button type="submit" class="btn btn-primary">اضف ملاحظه</button>
-            </form>
-
-        </div>
+<h5>اضف عنوان</h5>
+<form method="post" action="{% url 'add-note' %}" style="color:white">
+    {% csrf_token %}
+    <div class="form-group">
+        <label>العنوان</label><br>
+        <input type="text" name="title" class="form-control" placeholder="عنوان">
     </div>
-    <div class="col-sm-1 col-md-4 col-lg-2">
-
+    <div class="form-group">
+        <label>الرابط</label><br>
+        <input type="url" name="link" placeholder="الرابط">
     </div>
-</div>
+
+    <button type="submit" class="btn btn-success">اضف</button>
+</form>
 {% endblock contain%}

@@ -1,6 +1,6 @@
 from django import forms
 from news.models import News, Category
-from .models import Photo, Advertising
+from .models import Photo, Advertising, Survey
 
 
 class NewsForm(forms.ModelForm):
@@ -26,3 +26,9 @@ class AdvertisingForm(forms.ModelForm):
     class Meta:
         model = Advertising
         fields = '__all__'
+
+
+class SurveyForm(forms.ModelForm):
+    class Meta:
+        model = Survey
+        exclude = ['yes', 'no', 'all']

@@ -36,6 +36,11 @@ from .views import (
     add_tag_to_news,
     tags_page,
     delete_tag_from_news,
+    show_surveys,
+    add_survey,
+    edit_survey,
+    delete_survey,
+
 )
 
 urlpatterns = [
@@ -119,5 +124,14 @@ urlpatterns = [
     path('show-subscribers/<int:page>', show_subscribers, name='show-subscribers'),
     # delete subscriber
     path('delete-subscriber/<int:pk>', delete_subscriber, name='delete-subscriber'),
+    # surveys -------------------------------------------------------------
+    # show surveys
+    path('show-surveys/<int:page>', show_surveys, name='show-surveys'),
+    # add survey
+    path('add-survey/', add_survey, name='add-survey'),
+    # edit survey
+    path('edit-survey/<int:pk>', edit_survey, name='edit-survey'),
+    # delete survey
+    path('delete-survey/<int:pk>', delete_survey, name='delete-survey'),
 
 ]

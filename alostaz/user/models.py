@@ -26,16 +26,16 @@ class user(User):
 
 
 class Advertising(models.Model):
-    title = models.CharField(max_length=200)
-    img = models.ImageField(upload_to='Advertisement/')
+    title = models.CharField(max_length=200, verbose_name='العنوان')
+    img = models.ImageField(upload_to='Advertisement/', verbose_name='الصوره')
 
     def __str__(self):
         return self.title
 
 
 class Photo(models.Model):
-    title = models.CharField(max_length=200)
-    img = models.ImageField(upload_to='Photos/')
+    title = models.CharField(max_length=200, verbose_name='العنوان')
+    img = models.ImageField(upload_to='Photos/', verbose_name='الصوره')
 
     def __str__(self):
         return self.title
@@ -46,3 +46,26 @@ class Subscriber(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class Survey(models.Model):
+    question = models.CharField(max_length=250, verbose_name='السؤال')
+    yes = models.IntegerField(default=0, verbose_name='لا')
+    no = models.IntegerField(default=0, verbose_name='نعم')
+    all = models.IntegerField(default=0, verbose_name='عدد الأصوات')
+    approval = models.BooleanField(default=True, verbose_name='الأتاحه')
+
+    def __str__(self):
+        return self.question
+
+    def yes_percentage(self):
+        if self.all == 0:
+            return 0
+        else:
+            return (self.yes / self.all) * 100
+
+    def no_percentage(self):
+        if self.all == 0:
+            return 0
+        else:
+            return (self.no / self.all) * 100

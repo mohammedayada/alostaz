@@ -5,7 +5,7 @@ from django.core import serializers
 from django.http import JsonResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import re
-from user.models import user, Photo, Advertising
+from user.models import user, Photo, Advertising, Survey
 
 # Create your views here.
 # Make a regular expression
@@ -54,6 +54,8 @@ def Home(request):
     advertisings = Advertising.objects.all()
     cartons = News.objects.filter(pk=65)[:4]
     more_comments = News.objects.all().order_by('commentCount')[:6]
+    # استطلاعات الرأى surveys
+    surveys = Survey.objects.all()
     context = {
 
         'latest_news': latest_news,
@@ -73,6 +75,7 @@ def Home(request):
         'advertisings': advertisings,
         'cartons': cartons,
         'more_comments': more_comments,
+        'surveys': surveys,
 
     }
     return render(request, 'index.html', context)
@@ -171,17 +174,17 @@ def News_page(request, pk, page):
     photos = Photo.objects.all()[5:10]
     advertisings = Photo.objects.all()[10:15]
     context = {
-               'categories': categories,
-               'news_list': news,
-               'category': category,
-               'most_read': most_read,
-               'notes': notes,
-               'photo1': photo1,
-               'photo2': photo2,
-               'photo3': photo3,
-               'photos': photos,
-               'advertisings': advertisings,
-               }
+        'categories': categories,
+        'news_list': news,
+        'category': category,
+        'most_read': most_read,
+        'notes': notes,
+        'photo1': photo1,
+        'photo2': photo2,
+        'photo3': photo3,
+        'photos': photos,
+        'advertisings': advertisings,
+    }
     return render(request, 'news-page.html', context)
 
 
@@ -226,10 +229,35 @@ def News_tag(request, pk, page):
 def Who_us(request):
     # الأقسام categories
     categories = Category.objects.filter(parent=None)
+    photo1 = Photo.objects.filter(pk=1).last()
+    photo2 = Photo.objects.filter(pk=2).last()
+    photo3 = Photo.objects.filter(pk=3).last()
     return render(request, 'who-us.html', {
         'categories': categories,
+        'photo1': photo1,
+        'photo2': photo2,
+        'photo3': photo3,
     })
 
+def post_your_photo(request):
+    # الأقسام categories
+    categories = Category.objects.filter(parent=None)
+    # Notes العناوين
+    notes = Note.objects.all().order_by('-id')[:3]
+    photo1 = Photo.objects.filter(pk=1).last()
+    photo2 = Photo.objects.filter(pk=2).last()
+    photo3 = Photo.objects.filter(pk=3).last()
+    photos = Photo.objects.all()[5:10]
+    advertisings = Photo.objects.all()[10:15]
+    return render(request, 'post-your-photo.html', {
+        'categories': categories,
+        'notes': notes,
+        'photo1': photo1,
+        'photo2': photo2,
+        'photo3': photo3,
+        'photos': photos,
+        'advertisings': advertisings,
+    })
 
 def Search_news(request, page):
     # الأقسام categories
@@ -294,16 +322,16 @@ def Last_news(request, page):
     advertisings = Photo.objects.all()[10:15]
 
     context = {
-               'categories': categories,
-               'news_list': news,
-               'most_read': most_read,
-               'notes': notes,
-               'photo1': photo1,
-               'photo2': photo2,
-               'photo3': photo3,
-               'photos': photos,
-               'advertisings': advertisings,
-               }
+        'categories': categories,
+        'news_list': news,
+        'most_read': most_read,
+        'notes': notes,
+        'photo1': photo1,
+        'photo2': photo2,
+        'photo3': photo3,
+        'photos': photos,
+        'advertisings': advertisings,
+    }
     return render(request, 'last-news.html', context)
 
 
@@ -329,16 +357,16 @@ def most_read(request, page):
     photos = Photo.objects.all()[5:10]
     advertisings = Photo.objects.all()[10:15]
     context = {
-               'categories': categories,
-               'news_list': news,
-               'last_news': last_news,
-               'notes': notes,
-               'photo1': photo1,
-               'photo2': photo2,
-               'photo3': photo3,
-               'photos': photos,
-               'advertisings': advertisings,
-               }
+        'categories': categories,
+        'news_list': news,
+        'last_news': last_news,
+        'notes': notes,
+        'photo1': photo1,
+        'photo2': photo2,
+        'photo3': photo3,
+        'photos': photos,
+        'advertisings': advertisings,
+    }
     return render(request, 'most-read.html', context)
 
 
@@ -365,16 +393,16 @@ def most_comment(request, page):
     advertisings = Photo.objects.all()[10:15]
 
     context = {
-               'categories': categories,
-               'news_list': news,
-               'last_news': last_news,
-               'notes': notes,
-               'photo1': photo1,
-               'photo2': photo2,
-               'photo3': photo3,
-               'photos': photos,
-               'advertisings': advertisings,
-               }
+        'categories': categories,
+        'news_list': news,
+        'last_news': last_news,
+        'notes': notes,
+        'photo1': photo1,
+        'photo2': photo2,
+        'photo3': photo3,
+        'photos': photos,
+        'advertisings': advertisings,
+    }
     return render(request, 'most-comment.html', context)
 
 
@@ -498,3 +526,37 @@ def create_category(request):
         return redirect('home')
     else:
         return redirect('home')
+
+
+def make_survey(request, pk):
+    # الأقسام categories
+    categories = Category.objects.filter(parent=None)
+    # Most read الأكثر قراءه
+    most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
+    photo1 = Photo.objects.filter(pk=1).last()
+    photo2 = Photo.objects.filter(pk=2).last()
+    photo3 = Photo.objects.filter(pk=3).last()
+    photos = Photo.objects.all()[5:10]
+    advertisings = Photo.objects.all()[10:15]
+    survey = get_object_or_404(Survey, pk=pk)
+    if request.POST:
+        if 'survey' in request.POST:
+            if request.POST['survey'] == 'yes':
+                survey.yes += 1
+                survey.all += 1
+            elif request.POST['survey'] == 'no':
+                survey.no += 1
+                survey.all += 1
+            survey.save()
+    context = {
+        'categories': categories,
+        'most_read': most_read,
+        'photo1': photo1,
+        'photo2': photo2,
+        'photo3': photo3,
+        'photos': photos,
+        'advertisings': advertisings,
+        'survey': survey,
+
+    }
+    return render(request, 'make_survey.html', context)

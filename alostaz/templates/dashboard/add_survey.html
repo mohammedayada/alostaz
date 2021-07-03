@@ -1,0 +1,17 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block title %}
+أضف استطلاع رأى
+{% endblock title%}
+{% block contain %}
+<h5>أضف استطلاع رأى</h5>
+<form method="post" action="{% url 'add-survey' %}" style="color:white">
+    {% csrf_token %}
+    <div class="form-group">
+        <label>السؤال</label>
+        <input type="text" name="question" class="form-control" placeholder="السؤال">
+    </div>
+
+    <button type="submit" class="btn btn-success">اضف</button>
+</form>
+{% endblock contain%}

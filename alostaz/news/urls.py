@@ -11,6 +11,8 @@ from .views import (
     most_read,
     most_comment,
     create_category,
+    make_survey,
+    post_your_photo,
 )
 
 urlpatterns = [
@@ -26,6 +28,8 @@ urlpatterns = [
     path('news-tag/<int:pk>/<int:page>/', News_tag, name='news_tag'),
     # Who us
     path('who-us/', Who_us, name='who-us'),
+    # Post your photo
+    path('post-your-photo/', post_your_photo, name='post-your-photo'),
     # Search page
     path('search-news/<int:page>', Search_news, name='search-news'),
     # Last News
@@ -36,5 +40,7 @@ urlpatterns = [
     path('most-comment/<int:page>/', most_comment, name='most-comment'),
     # create category default settings
     path('default/', create_category, name='default'),
+    # make survey
+    path('make-survey/<int:pk>/', make_survey, name='make-survey'),
 
 ]

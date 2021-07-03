@@ -3,42 +3,30 @@
 {% block contain %}
 <div class="newline">
     <div class="container">
-        <div class="row">
-            <div class="col-sm col-md col-lg-2">
-                <div class="news-img-logo">
-                    <img src="./assets/images/logo.png" alt="">
-                </div>
+        {% if notes%}
+        <div class="my-news-slider" dir="ltr">
+            {% for note in notes%}
+            <div class="slider-item">
+                <a {%if note.link %} href='{{note.link}}' {% endif %}>
+                    {{note.title}}
+                </a>
             </div>
-            <div class="col-sm col-md col-lg-10">
-                <div class="my-news-slider" dir="ltr">
-                    <div class="slider-item">
-                        <a href="">
-                            مصر وليبيا يتفقان على إعادة الطيران المباشر وتوقيع 3 اتفاقيات فى الكهرباء
-                        </a>
-                    </div>
-                    <div class="slider-item">
-                        <a href="">مفتى الجمهورية: إذا منع الاعتكاف فى المساجد سقطت سنة "الاعتكاف"</a>
-                    </div>
-                    <div class="slider-item">
-                        <a href="">
-                            مدبولى من طرابلس: سعيد بوجودى فى ليبيا.. وسنوقع مذكرات تفاهم وتعاون
-                        </a>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
+        {% endif %}
     </div>
 </div>
-
 
 <div class="main">
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12 col-md-2 col-lg-2">
                 <div class="spaces">
+                    {% for photo in photos%}
                     <a href="">
-                        <img src="./assets/images/ramadan2021.webp" alt="">
+                        <img src="{{photo.img.url}}" alt="">
                     </a>
+                    {% endfor %}
                 </div>
             </div>
             <div class="col-sm-12 col-md-8 col-lg-8">
@@ -70,11 +58,11 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-2 col-lg-2">
-                <div class="spaces">
-                    <a href="">
-                        <img src="./assets/images/ramadan2021.webp" alt="">
-                    </a>
-                </div>
+                {% for advertising in advertisings%}
+                <a href="">
+                    <img src="{{advertising.img.url}}" alt="">
+                </a>
+                {% endfor %}
             </div>
         </div>
     </div>
