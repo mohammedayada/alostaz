@@ -2,48 +2,60 @@
 {% load static %}
 {% block title %}
 {% endblock title%}
-التعليقات
+الأقسام
 {% block contain %}
-<h5>التعليقات</h5>
+<h5>الأقسام</h5>
+<div class="add-new-blog">
+    <a href="{% url 'add-category'%}" class="btn btn-success mb-2">اضف قسم</a>
+</div>
 <div class="table-responsive">
     <table class="table table-borderless">
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">اسم المستخدم</th>
-            <th scope="col">البريد الالكترونى</th>
-            <th scope="col">الخبر</th>
-            <th scope="col">التعليق</th>
+            <th scope="col">القسم</th>
+            <th scope="col">القسم الأب</th>
+            <th scope="col">القسم الجد</th>
             <th scope="col">الخيارات</th>
         </tr>
         </thead>
         <tbody>
-        {% for comment in comments %}
+        {% for category in categories %}
         <tr>
             <th scope="row">{{forloop.counter}}</th>
-            <td>{{comment.auther}}</td>
-            <td>{{comment.email}}</td>
-            <td><a href="{% url 'news_details' comment.news.pk %}"
-                   style="color:white">
-                {{comment.news.title}}</a></td>
-            <td>{{comment.text}}</td>
+            <td>{{category.name}}</td>
             <td>
-                <a class="btn btn-sm btn-primary" href="{% url 'approve-comment' comment.pk%}"> <i
-                        class="fas fa-check"></i></a>
-                <a class="btn btn-sm btn-danger" href="{% url 'delete-comment' comment.pk%}"><i
-                        class="fas fa-trash"></i></a></td>
+                {% if category.parent %}
+                {{category.parent}}
+                {% else %}
+                -----
+                {% endif %}
+            </td>
+            <td>
+                {% if category.parent.parent %}
+                {{category.parent.parent}}
+                {% else %}
+                -----
+                {% endif %}
+            </td>
+            <td>
+                <a class="btn btn-sm btn-success" href="{% url 'edit-category' category.pk %}"> <i
+                        class="fas fa-edit"></i></a>
+                <a class="btn btn-sm btn-danger" href="{% url 'delete-category' category.pk %}"><i
+                        class="fas fa-trash"></i></a>
+            </td>
         </tr>
         {% endfor %}
         </tbody>
     </table>
 </div>
 <nav aria-label="Page navigation example">
-    {% if comments.has_other_pages %}
+    {% if categories.has_other_pages %}
     <ul class="pagination">
-        {% if comments.has_previous %}
+        {% if categories.has_previous %}
         <li class="page-item">
             <a class="page-link"
-               href="{% url 'show-comments'  comments.previous_page_number%}"
+               href="{% url 'show-categories'  categories.previous_page_number%}"
                style="background-color:#262b40"
                aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
@@ -51,8 +63,8 @@
             </a>
         </li>
         {% endif %}
-        {% for i in comments.paginator.page_range %}
-        {% if comments.number == i %}
+        {% for i in categories.paginator.page_range %}
+        {% if categories.number == i %}
         <li class="page-item">
             <a class="page-link"
                style="background-color:black" href="#">
@@ -63,16 +75,16 @@
         <li class="page-item">
             <a class="page-link"
                style="background-color:#262b40"
-               href="{% url 'show-comments'  i %}">
+               href="{% url 'show-categories'  i %}">
                 {{ i }}
             </a>
         </li>
         {% endif %}
         {% endfor %}
-        {% if comments.has_next %}
+        {% if categories.has_next %}
         <li class="page-item">
             <a class="page-link" style="background-color:#262b40"
-               href="{% url 'show-comments' comments.next_page_number%}"
+               href="{% url 'show-categories' categories.next_page_number%}"
                aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
                 <span class="sr-only">Next</span>

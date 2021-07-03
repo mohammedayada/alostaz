@@ -57,7 +57,7 @@
         <li class="page-item"><a class="page-link" href="{% url 'show-photos'  i %}">{{ i }}</a></li>
         {% endif %}
         {% endfor %}
-        {% if news_list.has_next %}
+        {% if photos.has_next %}
         <li class="page-item">
             <a class="page-link"
                href="{% url 'show-photos' photos.next_page_number%}"

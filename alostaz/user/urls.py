@@ -40,6 +40,12 @@ from .views import (
     add_survey,
     edit_survey,
     delete_survey,
+    show_categories,
+    add_category,
+    delete_category,
+    edit_category,
+
+
 
 )
 
@@ -133,5 +139,14 @@ urlpatterns = [
     path('edit-survey/<int:pk>', edit_survey, name='edit-survey'),
     # delete survey
     path('delete-survey/<int:pk>', delete_survey, name='delete-survey'),
+    # ------------------------------------------------الأقسام categories
+    # show categories
+    path('show-categories/<int:page>', show_categories, name='show-categories'),
+    # add survey
+    path('add-category/', add_category, name='add-category'),
+    # delete category
+    path('delete-category/<int:pk>', delete_category, name='delete-category'),
+    # edit category
+    path('edit-category/<int:pk>', edit_category, name='edit-category'),
 
 ]

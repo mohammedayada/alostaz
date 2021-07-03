@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import user, Photo, Advertising, Subscriber, Survey
 from news.models import Note, Tag, News, Category, Comment, Tag_news
-from .forms import NewsForm, PhotoForm, AdvertisingForm, SurveyForm
+from .forms import NewsForm, PhotoForm, AdvertisingForm, SurveyForm, CategoryForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
 import re
@@ -848,3 +848,94 @@ def delete_survey(request, pk):
         return redirect('show-surveys', page=1)
     else:
         return redirect('home')
+
+
+# ِshow comments
+@login_required
+def show_categories(request, page):
+    my_user = user.objects.get(id=request.user.id)
+    is_chairman = (my_user.type == 'chairman')
+    is_chef = (my_user.type == 'editor_in_chief')
+    if my_user.type == 'chairman':
+        categories = Category.objects.all()
+        paginator = Paginator(categories, 10)
+        try:
+            categories = paginator.page(page)
+        except PageNotAnInteger:
+            categories = paginator.page(1)
+        except EmptyPage:
+            categories = paginator.page(paginator.num_pages)
+    else:
+        return redirect('home')
+
+    context = {
+        'categories': categories,
+        'is_chairman': is_chairman,
+        'is_chef': is_chef,
+    }
+    return render(request, 'dashboard/show_categories.html', context)
+
+
+# Add photo
+@login_required
+def add_category(request):
+    context = {}
+    my_user = user.objects.get(id=request.user.id)
+    is_chairman = (my_user.type == 'chairman')
+    is_chef = (my_user.type == 'editor_in_chief')
+    context['is_chairman'] = is_chairman
+    context['is_chef'] = is_chef
+    if my_user.type == 'chairman':
+        form = CategoryForm(request.POST or None)
+        print(request.POST)
+        if form.is_valid():
+            if request.POST['parent'] != "":
+                parent = get_object_or_404(Category, pk=request.POST['parent'])
+                Category.objects.create(name=request.POST['name'], parent=parent)
+            else:
+                Category.objects.create(name=request.POST['name'])
+            return redirect('show-categories', page=1)
+        context['form'] = form
+        return render(request, 'dashboard/add_category.html', context)
+    else:
+        return redirect('home')
+
+
+# Delete category
+@login_required
+def delete_category(request, pk):
+    my_user = user.objects.get(id=request.user.id)
+    category = get_object_or_404(Category, pk=pk)
+    if my_user.type == 'chairman':
+        category.delete()
+        return redirect('show-categories', page=1)
+    else:
+        return redirect('home')
+
+
+# Edit category
+@login_required
+def edit_category(request, pk):
+    context = {}
+    my_user = user.objects.get(id=request.user.id)
+    is_chairman = (my_user.type == 'chairman')
+    is_chef = (my_user.type == 'editor_in_chief')
+    context['is_chairman'] = is_chairman
+    context['is_chef'] = is_chef
+    category = get_object_or_404(Category, pk=pk)
+    if my_user.type == 'chairman':
+        context['category'] = category
+        if request.POST:
+            category.name = request.POST['name']
+            if request.POST['parent'] != "":
+                parent = get_object_or_404(Category, pk=request.POST['parent'])
+                category.parent = parent
+            else:
+                category.parent = None
+            category.save()
+            return redirect('show-categories', page=1)
+        else:
+            form = CategoryForm(instance=category)
+            context['form'] = form
+        return render(request, 'dashboard/edit_category.html', context)
+    return redirect('home')

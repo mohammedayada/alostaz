@@ -32,3 +32,9 @@ class SurveyForm(forms.ModelForm):
     class Meta:
         model = Survey
         exclude = ['yes', 'no', 'all']
+
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = '__all__'

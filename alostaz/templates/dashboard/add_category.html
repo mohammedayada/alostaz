@@ -1,0 +1,13 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block title %}
+أضف صوره
+{% endblock title%}
+{% block contain %}
+<h5>اضف قسم</h5>
+<form method="post" action="{% url 'add-category' %}" enctype="multipart/form-data" style="color:white">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="btn btn-success">اضف</button>
+</form>
+{% endblock contain%}
