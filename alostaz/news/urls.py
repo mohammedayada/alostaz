@@ -15,6 +15,8 @@ from .views import (
     post_your_photo,
     book_details,
     books_page,
+    cartons_page,
+    carton_details,
 )
 
 urlpatterns = [
@@ -48,5 +50,9 @@ urlpatterns = [
     path('book/<int:pk>', book_details, name='book_details'),
     # books
     path('books/<int:page>/', books_page, name='books'),
+    # Cartons page
+    path('cartons/<int:page>', cartons_page, name='cartons'),
+    # Carton details page
+    path('carton/<int:pk>', carton_details, name='carton_details'),
 
 ]

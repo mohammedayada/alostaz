@@ -15,6 +15,7 @@
             <th scope="col">#</th>
             <th scope="col">العنوان</th>
             <th scope="col">الكاتب</th>
+            <th scope="col">عدد المشاهدات</th>
             <th scope="col">الخيارات</th>
 
         </tr>
@@ -25,6 +26,7 @@
             <th scope="row">{{forloop.counter}}</th>
             <td><a style="color:white" href="{% url 'book_details' book.id%}">{{book.title}}</a></td>
             <th scope="col">{{book.user.email}}</th>
+            <th scope="col">{{book.viewCount}}</th>
             <td>
                 <a class="btn btn-sm btn-danger" href="{% url 'delete-book' book.pk %}"><i
                         class="fas fa-trash"></i></a>

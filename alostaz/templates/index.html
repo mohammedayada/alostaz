@@ -172,62 +172,76 @@
                                 </div>
                             </div>
                             {% endif %}
+                            {% if videos %}
                             <div class="gallery video">
                                 <div class="section-header">الفيديو
                                     <a href="" class="more">المزيد</a>
                                 </div>
                                 <div class="row mt-3">
+                                    {% for video in videos %}
                                     <div class="col-6 col-md-6 col-lg-12">
                                         <iframe width="100%" height="215"
-                                                src="https://www.youtube.com/embed/pO5dgZrM9Mk"
+                                                src="{{video.link}}"
                                                 title="YouTube video player" frameborder="0"
                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                 allowfullscreen></iframe>
                                     </div>
+                                    {% endfor %}
                                 </div>
                             </div>
+                            {% endif %}
+                            {% if cartons %}
                             <div class="gallery">
                                 <div class="section-header"> رسوم وكاريكاتير
-                                    <a href="{% url 'news_category' 65 1 %}" class="more">المزيد</a>
+                                    <a href="{% url 'cartons' 1 %}" class="more">المزيد</a>
                                 </div>
                                 <div class="row">
                                     {%for carton in cartons%}
                                     <div class="col-6 col-md-6 col-lg-6">
-                                        <a href="{% url 'news_details' carton.pk %}">
+                                        <a href="{% url 'carton_details' carton.pk %}">
                                             <img src="{{carton.img.url}}" alt="">
                                         </a>
                                     </div>
                                     {%endfor%}
                                 </div>
                             </div>
+                            {% endif %}
+                            {% if tvs %}
                             <div class="alostaz-tv mt-4">
                                 <div class="section-header">تلفزيون الاستاذ
                                     <!-- <a href="" class="more">المزيد</a> -->
                                 </div>
                                 <div class="row mt-3">
+                                    {% for tv in tvs %}
                                     <div class="col-6 col-md-6 col-lg-12">
                                         <iframe width="100%" height="215"
-                                                src="https://www.youtube.com/embed/pO5dgZrM9Mk"
+                                                src="{{tv.link}}"
                                                 title="YouTube video player" frameborder="0"
                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                 allowfullscreen></iframe>
                                     </div>
+                                    {% endfor %}
                                 </div>
                             </div>
+                            {% endif %}
+                            {% if audios %}
                             <div class="alostaz-radio mt-4">
                                 <div class="section-header">راديو الاستاذ
                                     <!--                    <a href="https://www.youtube.com/" class="more">المزيد</a>-->
                                 </div>
                                 <div class="row mt-3">
+                                    {% for audio in audios %}
                                     <div class="col-6 col-md-6 col-lg-12">
                                         <iframe width="100%" height="215"
-                                                src="https://www.youtube.com/embed/pO5dgZrM9Mk"
+                                                src="{{audio.link}}"
                                                 title="YouTube video player" frameborder="0"
                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                 allowfullscreen></iframe>
                                     </div>
+                                    {% endfor %}
                                 </div>
                             </div>
+                            {% endif %}
                             {% if images %}
                             <div class="gallery alostaz-tv mt-4">
                                 <div class="section-header">صور الاستاذ

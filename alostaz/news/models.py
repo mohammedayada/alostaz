@@ -104,3 +104,47 @@ class Book(models.Model):
     def incrementViewCount(self):
         self.viewCount += 1
         self.save()
+
+
+class Carton(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.SET_NULL, null=True, blank=True)
+    title = models.CharField(max_length=200, verbose_name='العنوان')
+    Publish_date = models.DateTimeField(auto_now_add=True)
+    details = RichTextField(blank=True, null=True, verbose_name='البيانات')
+    img = models.ImageField(upload_to='books/', verbose_name='الصوره')
+    viewCount = models.IntegerField(default=0, verbose_name='عدد المشاهديين')
+
+    class Meta:
+        ordering = ['-Publish_date']
+
+    def __str__(self):
+        return f'Title: {self.title} user: {self.user}'
+
+    def incrementViewCount(self):
+        self.viewCount += 1
+        self.save()
+
+
+class Video(models.Model):
+    title = models.CharField(max_length=200, verbose_name='العنوان')
+    link = models.URLField(verbose_name='الرابط')
+
+    def __str__(self):
+        return f'Title: {self.title}'
+
+
+class Audio(models.Model):
+    title = models.CharField(max_length=200, verbose_name='العنوان')
+    link = models.URLField(verbose_name='الرابط')
+
+    def __str__(self):
+        return f'Title: {self.title}'
+
+
+class TV(models.Model):
+    title = models.CharField(max_length=200, verbose_name='العنوان')
+    link = models.URLField(verbose_name='الرابط')
+
+    def __str__(self):
+        return f'Title: {self.title}'

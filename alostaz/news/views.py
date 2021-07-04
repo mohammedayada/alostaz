@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import News, Category, Note, Comment, Tag_news, Tag, Book
+from .models import News, Category, Note, Comment, Tag_news, Tag, Book, Carton, Video, Audio, TV
 from django.db.models import Q
 from django.core import serializers
 from django.http import JsonResponse
@@ -48,12 +48,20 @@ def Home(request):
     photo5 = Photo.objects.filter(pk=5).last()
     photos = Photo.objects.all()[5:]
     advertisings = Advertising.objects.all()
-    cartons = News.objects.filter(pk=65)[:4]
+    cartons = Carton.objects.all()[:4]
     more_comments = News.objects.all().order_by('commentCount')[:6]
     # استطلاعات الرأى surveys
     surveys = Survey.objects.all()
+    # Videos
+    videos = Video.objects.all()[:2]
+    # Audios
+    audios = Audio.objects.all()[:2]
+    # TV
+    tvs = TV.objects.all()[:2]
     context = {
-
+        'videos': videos,
+        'audios': audios,
+        'tvs': tvs,
         'latest_news': latest_news,
         'categories': categories,
         'books1': books1,
@@ -621,3 +629,67 @@ def books_page(request, page):
         'advertisings': advertisings,
     }
     return render(request, 'books-page.html', context)
+
+
+# News page
+def cartons_page(request, page):
+    # الأقسام categories
+    categories = Category.objects.filter(parent=None)
+    news_list = Carton.objects.all()
+    paginator = Paginator(news_list, 10)
+    try:
+        news = paginator.page(page)
+    except PageNotAnInteger:
+        news = paginator.page(1)
+    except EmptyPage:
+        news = paginator.page(paginator.num_pages)
+
+    # Most read
+    most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
+    # Notes العناوين
+    notes = Note.objects.all().order_by('-id')[:3]
+    photo1 = Photo.objects.filter(pk=1).last()
+    photo2 = Photo.objects.filter(pk=2).last()
+    photo3 = Photo.objects.filter(pk=3).last()
+    photos = Photo.objects.all()[5:10]
+    advertisings = Photo.objects.all()[10:15]
+    context = {
+        'categories': categories,
+        'news_list': news,
+        'most_read': most_read,
+        'notes': notes,
+        'photo1': photo1,
+        'photo2': photo2,
+        'photo3': photo3,
+        'photos': photos,
+        'advertisings': advertisings,
+    }
+    return render(request, 'cartons-page.html', context)
+
+
+# News details page
+def carton_details(request, pk):
+    # الأقسام categories
+    categories = Category.objects.filter(parent=None)
+    news = get_object_or_404(Carton, pk=pk)
+    # To increament news count
+    news.incrementViewCount()
+    # Most read الأكثر قراءه
+    most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
+    photo1 = Photo.objects.filter(pk=1).last()
+    photo2 = Photo.objects.filter(pk=2).last()
+    photo3 = Photo.objects.filter(pk=3).last()
+    photos = Photo.objects.all()[5:10]
+    advertisings = Photo.objects.all()[10:15]
+
+    context = {
+        'categories': categories,
+        'news': news,
+        'most_read': most_read,
+        'photo1': photo1,
+        'photo2': photo2,
+        'photo3': photo3,
+        'photos': photos,
+        'advertisings': advertisings,
+    }
+    return render(request, 'carton-details.html', context)
