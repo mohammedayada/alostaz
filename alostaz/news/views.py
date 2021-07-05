@@ -55,9 +55,9 @@ def Home(request):
     # Videos
     videos = Video.objects.all()[:2]
     # Audios
-    audios = Audio.objects.all()[:2]
+    audios = Audio.objects.all()
     # TV
-    tvs = TV.objects.all()[:2]
+    tvs = TV.objects.all()
     context = {
         'videos': videos,
         'audios': audios,
@@ -693,3 +693,39 @@ def carton_details(request, pk):
         'advertisings': advertisings,
     }
     return render(request, 'carton-details.html', context)
+
+
+# News page
+def videos_page(request, page):
+    # الأقسام categories
+    categories = Category.objects.filter(parent=None)
+    news_list = Video.objects.all()
+    paginator = Paginator(news_list, 10)
+    try:
+        news = paginator.page(page)
+    except PageNotAnInteger:
+        news = paginator.page(1)
+    except EmptyPage:
+        news = paginator.page(paginator.num_pages)
+
+    # Most read
+    most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
+    # Notes العناوين
+    notes = Note.objects.all().order_by('-id')[:3]
+    photo1 = Photo.objects.filter(pk=1).last()
+    photo2 = Photo.objects.filter(pk=2).last()
+    photo3 = Photo.objects.filter(pk=3).last()
+    photos = Photo.objects.all()[5:10]
+    advertisings = Photo.objects.all()[10:15]
+    context = {
+        'categories': categories,
+        'news_list': news,
+        'most_read': most_read,
+        'notes': notes,
+        'photo1': photo1,
+        'photo2': photo2,
+        'photo3': photo3,
+        'photos': photos,
+        'advertisings': advertisings,
+    }
+    return render(request, 'videos-page.html', context)

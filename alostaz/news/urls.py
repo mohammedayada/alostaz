@@ -17,6 +17,7 @@ from .views import (
     books_page,
     cartons_page,
     carton_details,
+    videos_page,
 )
 
 urlpatterns = [
@@ -54,5 +55,7 @@ urlpatterns = [
     path('cartons/<int:page>', cartons_page, name='cartons'),
     # Carton details page
     path('carton/<int:pk>', carton_details, name='carton_details'),
+    # videos page
+    path('videos/<int:page>', videos_page, name='videos'),
 
 ]

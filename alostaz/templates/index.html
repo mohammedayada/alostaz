@@ -175,7 +175,7 @@
                             {% if videos %}
                             <div class="gallery video">
                                 <div class="section-header">الفيديو
-                                    <a href="" class="more">المزيد</a>
+                                    <a href="{% url 'videos' 1 %}" class="more">المزيد</a>
                                 </div>
                                 <div class="row mt-3">
                                     {% for video in videos %}
