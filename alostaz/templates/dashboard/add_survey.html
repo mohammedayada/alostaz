@@ -7,10 +7,7 @@
 <h5>أضف استطلاع رأى</h5>
 <form method="post" action="{% url 'add-survey' %}" style="color:white">
     {% csrf_token %}
-    <div class="form-group">
-        <label>السؤال</label>
-        <input type="text" name="question" class="form-control" placeholder="السؤال">
-    </div>
+    {{form.as_p}}
 
     <button type="submit" class="btn btn-success">اضف</button>
 </form>

@@ -28,10 +28,12 @@
             <th scope="col">#</th>
             <th scope="col">استطلاع الرأى</th>
             <th scope="col">عدد الأصوات</th>
-            <th scope="col">نعم</th>
-            <th scope="col">النسبه المئويه للموافقه</th>
-            <th scope="col">لا</th>
-            <th scope="col">النسبه المئويه للرفض</th>
+            <th scope="col">الأختيار الأول</th>
+            <th scope="col">عدد الأصوات للأختيار الأول</th>
+            <th scope="col">النسبه المئويه للأختيار الأول</th>
+            <th scope="col">الأختيار الثانى</th>
+            <th scope="col">عدد الأصوات للأختيار الثانى</th>
+            <th scope="col">النسبه المئويه للأختيار الثانى</th>
             <th scope="col">الأتاحه</th>
             <th scope="col">الخيارات</th>
         </tr>
@@ -42,8 +44,10 @@
             <th scope="row">{{forloop.counter}}</th>
             <td>{{survey.question}}</td>
             <td>{{survey.all}}</td>
+            <td>{{survey.first_choice}}</td>
             <td>{{survey.yes}}</td>
             <td>{{survey.yes_percentage|floatformat:-2}}%</td>
+            <td>{{survey.second_choice}}</td>
             <td>{{survey.no}}</td>
             <td>{{survey.no_percentage|floatformat:-2}}%</td>
             <td>

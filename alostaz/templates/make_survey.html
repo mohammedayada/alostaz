@@ -24,10 +24,10 @@
                                     <p>شكرا لمشاركتك فى استطلاع الرأى</p>
                                 </div>
                                 <div class="blog-details-content-par">
-                                    <p>نعم : {{survey.yes_percentage|floatformat:-2}}%</p>
+                                    <p>{{survey.first_choice}} : % {{survey.yes_percentage|floatformat:-2}}</p>
                                 </div>
                                 <div class="blog-details-content-par">
-                                    <p>لا : {{survey.no_percentage|floatformat:-2}}%</p>
+                                    <p>{{survey.second_choice}} : % {{survey.no_percentage|floatformat:-2}}</p>
                                 </div>
 
                             </div>

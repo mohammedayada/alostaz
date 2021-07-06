@@ -764,23 +764,19 @@ def tags_page(request, page, pk):
 # Add survey
 @login_required
 def add_survey(request):
-    # when request POST
+    context = {}
     my_user = user.objects.get(id=request.user.id)
     is_chairman = (my_user.type == 'chairman')
     is_chef = (my_user.type == 'editor_in_chief')
-    if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
-        msg = 'من فضلك ادخل بيانات صحيحه'
-        if request.POST:
-            if request.POST['question'] != "":
-                Survey.objects.create(
-                    question=request.POST['question'],
-                )
-                return redirect('show-surveys', page=1)
-            msg = 'هذه الكلمه الدلاليه موجوده بالفعل'
-        context = {'msg': msg,
-                   'is_chairman': is_chairman,
-                   'is_chef': is_chef,
-                   }
+    context['is_chairman'] = is_chairman
+    context['is_chef'] = is_chef
+    if is_chairman:
+        form = SurveyForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            survey = Survey.objects.create(question=request.POST['question'], first_choice=request.POST['first_choice'],
+                                       second_choice=request.POST['second_choice'])
+            return redirect('show_surveys', page=1)
+        context['form'] = form
         return render(request, 'dashboard/add_survey.html', context)
     else:
         return redirect('home')
@@ -825,6 +821,8 @@ def edit_survey(request, pk):
         context['survey'] = survey
         if request.POST:
             survey.question = request.POST['question']
+            survey.first_choice = request.POST['first_choice']
+            survey.second_choice = request.POST['second_choice']
             if 'approval' in request.POST:
                 survey.approval = True
             else:

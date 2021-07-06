@@ -50,8 +50,10 @@ class Subscriber(models.Model):
 
 class Survey(models.Model):
     question = models.CharField(max_length=250, verbose_name='السؤال')
-    yes = models.IntegerField(default=0, verbose_name='لا')
-    no = models.IntegerField(default=0, verbose_name='نعم')
+    first_choice = models.CharField(max_length=250, verbose_name='الأختيار الأول')
+    yes = models.IntegerField(default=0, verbose_name='نعم')
+    second_choice = models.CharField(max_length=250, verbose_name='الأختيار الثاني')
+    no = models.IntegerField(default=0, verbose_name='لا')
     all = models.IntegerField(default=0, verbose_name='عدد الأصوات')
     approval = models.BooleanField(default=True, verbose_name='الأتاحه')
 
