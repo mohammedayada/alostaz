@@ -48,6 +48,18 @@ from .views import (
     show_books,
     edit_book,
     delete_book,
+    show_videos,
+    add_video,
+    edit_video,
+    delete_video,
+    show_audios,
+    add_audio,
+    edit_audio,
+    delete_audio,
+    show_tvs,
+    add_tv,
+    edit_tv,
+    delete_tv,
 
 
 
@@ -161,5 +173,31 @@ urlpatterns = [
     path('edit-book/<int:pk>', edit_book, name='edit-book'),
     # delete book
     path('delete-book/<int:pk>', delete_book, name='delete-book'),
-
+    # videos الفيديوهات
+    # show video
+    path('show-videos/<int:page>', show_videos, name='show-videos'),
+    # add video
+    path('add-video/', add_video, name='add-video'),
+    # edit video
+    path('edit-video/<int:pk>', edit_video, name='edit-video'),
+    # delete video
+    path('delete-video/<int:pk>', delete_video, name='delete-video'),
+    # Audios راديو الأستاذ
+    # show audio
+    path('show-audios/<int:page>', show_audios, name='show-audios'),
+    # add audio
+    path('add-audio/', add_audio, name='add-audio'),
+    # edit audio
+    path('edit-audio/<int:pk>', edit_audio, name='edit-audio'),
+    # delete audio
+    path('delete-audio/<int:pk>', delete_audio, name='delete-audio'),
+    # Audios تلفزيون الأستاذ
+    # show tv
+    path('show-tvs/<int:page>', show_tvs, name='show-tvs'),
+    # add audio
+    path('add-tv/', add_tv, name='add-tv'),
+    # edit tv
+    path('edit-tv/<int:pk>', edit_tv, name='edit-tv'),
+    # delete tv
+    path('delete-tv/<int:pk>', delete_tv, name='delete-tv'),
 ]

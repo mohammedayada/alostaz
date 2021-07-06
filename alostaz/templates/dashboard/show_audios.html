@@ -1,12 +1,12 @@
 {% extends 'dashboard/base.html' %}
 {% load static %}
 {% block title %}
-الكتب والمقالات
+راديو الأستاذ
 {% endblock title%}
 {% block contain %}
-<h5>الكتب والمقالات</h5>
+<h5>راديو الأستاذ</h5>
 <div class="add-new-blog">
-    <a href="{% url 'add-book'%}" class="btn btn-success mb-2">اضف كتاب</a>
+    <a href="{% url 'add-audio' %}" class="btn btn-success mb-2">اضف فيديو</a>
 </div>
 <div class="table-responsive">
     <table class="table table-borderless">
@@ -14,23 +14,27 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">العنوان</th>
-            <th scope="col">الكاتب</th>
-            <th scope="col">عدد المشاهدات</th>
+            <th scope="col">الفيديو</th>
             <th scope="col">الخيارات</th>
 
         </tr>
         </thead>
         <tbody>
-        {% for book in books %}
+        {% for video in videos %}
         <tr>
             <th scope="row">{{forloop.counter}}</th>
-            <td><a style="color:white" href="{% url 'book_details' book.id%}">{{book.title}}</a></td>
-            <th scope="col">{{book.user.email}}</th>
-            <th scope="col">{{book.viewCount}}</th>
+            <th scope="col">{{video.title}}</th>
+            <th scope="col">
+                <iframe width="100%" height="215"
+                        src="{{video.link}}"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+            </th>
             <td>
-                <a class="btn btn-sm btn-danger" href="{% url 'delete-book' book.pk %}"><i
+                <a class="btn btn-sm btn-danger" href="{% url 'delete-audio' video.pk %}"><i
                         class="fas fa-trash"></i></a>
-                <a class="btn btn-sm btn-success" href="{% url 'edit-book' book.pk %}"><i
+                <a class="btn btn-sm btn-success" href="{% url 'edit-audio' video.pk %}"><i
                         class="fas fa-edit"></i></a>
             </td>
         </tr>
@@ -40,30 +44,30 @@
     </table>
 </div>
 <nav aria-label="Page navigation example ">
-    {% if books.has_other_pages %}
+    {% if videos.has_other_pages %}
     <ul class="pagination">
-        {% if books.has_previous %}
+        {% if videos.has_previous %}
         <li class="page-item">
             <a class="page-link" style="background-color:#262b40"
-               href="{% url 'show-books'  books.previous_page_number%}"
+               href="{% url 'show-audios'  videos.previous_page_number%}"
                aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
                 <span class="sr-only">Previous</span>
             </a>
         </li>
         {% endif %}
-        {% for i in books.paginator.page_range %}
-        {% if books.number == i %}
+        {% for i in videos.paginator.page_range %}
+        {% if videos.number == i %}
         <li class="page-item">
             <a class="page-link" style="background-color:black" href="#">{{ i }}</a>
         </li>
         {% else %}
-        <li class="page-item"><a class="page-link" href="{% url 'show-books'  i %}">{{ i }}</a></li>
+        <li class="page-item"><a class="page-link" href="{% url 'show-audios'  i %}">{{ i }}</a></li>
         {% endif %}
         {% endfor %}
-        {% if books.has_next %}
+        {% if videos.has_next %}
         <li class="page-item">
-            <a class="page-link" style="background-color:#262b40" href="{% url 'show-books' books.next_page_number%}"
+            <a class="page-link" style="background-color:#262b40" href="{% url 'show-audios' videos.next_page_number%}"
                aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
                 <span class="sr-only">Next</span>

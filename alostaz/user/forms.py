@@ -1,5 +1,5 @@
 from django import forms
-from news.models import News, Category, Book
+from news.models import News, Category, Book, Video, Audio, TV
 from .models import Photo, Advertising, Survey
 
 
@@ -43,4 +43,19 @@ class SurveyForm(forms.ModelForm):
 class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
+        fields = '__all__'
+
+class VideoForm(forms.ModelForm):
+    class Meta:
+        model = Video
+        fields = '__all__'
+
+class AudioForm(forms.ModelForm):
+    class Meta:
+        model = Audio
+        fields = '__all__'
+
+class TVForm(forms.ModelForm):
+    class Meta:
+        model = TV
         fields = '__all__'

@@ -1,0 +1,14 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block title %}
+تعديل فيديو
+{% endblock title%}
+{% block contain %}
+<h5>تعديل فيديو</h5>
+<form method="post" action="{% url 'edit-video' video.pk %}" enctype="multipart/form-data" style="color:white">
+    {% csrf_token %}
+    {{form.media}}
+    {{form.as_p}}
+    <button type="submit" class="btn btn-success">عدل</button>
+</form>
+{% endblock contain%}

@@ -2,9 +2,36 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .models import user, Photo, Advertising, Subscriber, Survey
-from news.models import Note, Tag, News, Category, Comment, Tag_news, Book
-from .forms import NewsForm, PhotoForm, AdvertisingForm, SurveyForm, CategoryForm, BookForm
+from .models import (
+    user,
+    Photo,
+    Advertising,
+    Subscriber,
+    Survey
+)
+from news.models import (
+    Note,
+    Tag,
+    News,
+    Category,
+    Comment,
+    Tag_news,
+    Book,
+    Video,
+    Audio,
+    TV
+)
+from .forms import (
+    NewsForm,
+    PhotoForm,
+    AdvertisingForm,
+    SurveyForm,
+    CategoryForm,
+    BookForm,
+    VideoForm,
+    AudioForm,
+    TVForm
+)
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
 import re
@@ -774,7 +801,7 @@ def add_survey(request):
         form = SurveyForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             survey = Survey.objects.create(question=request.POST['question'], first_choice=request.POST['first_choice'],
-                                       second_choice=request.POST['second_choice'])
+                                           second_choice=request.POST['second_choice'])
             return redirect('show_surveys', page=1)
         context['form'] = form
         return render(request, 'dashboard/add_survey.html', context)
@@ -952,7 +979,7 @@ def add_book(request):
         form = BookForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             book = Book.objects.create(img=request.FILES['img'], title=request.POST['title'],
-                                user=request.user, details=request.POST['details'])
+                                       user=request.user, details=request.POST['details'])
             return redirect('book_details', pk=book.pk)
         context['form'] = form
         return render(request, 'dashboard/add_book.html', context)
@@ -984,6 +1011,7 @@ def show_books(request, page):
         'is_chef': is_chef,
     }
     return render(request, 'dashboard/show_books.html', context)
+
 
 # delete book
 @login_required
@@ -1021,3 +1049,252 @@ def edit_book(request, pk):
             context['form'] = form
         return render(request, 'dashboard/edit_book.html', context)
     return redirect('book_details', pk=pk)
+
+
+# ِshow videos
+@login_required
+def show_videos(request, page):
+    my_user = user.objects.get(id=request.user.id)
+    is_chairman = (my_user.type == 'chairman')
+    is_chef = (my_user.type == 'editor_in_chief')
+    if my_user.type == 'chairman':
+        videos = Video.objects.all()
+    else:
+        return redirect('home')
+    paginator = Paginator(videos, 10)
+    try:
+        videos = paginator.page(page)
+    except PageNotAnInteger:
+        videos = paginator.page(1)
+    except EmptyPage:
+        videos = paginator.page(paginator.num_pages)
+
+    context = {
+        'videos': videos,
+        'is_chairman': is_chairman,
+        'is_chef': is_chef,
+    }
+    return render(request, 'dashboard/show_videos.html', context)
+
+
+# Add Video
+@login_required
+def add_video(request):
+    context = {}
+    my_user = user.objects.get(id=request.user.id)
+    is_chairman = (my_user.type == 'chairman')
+    is_chef = (my_user.type == 'editor_in_chief')
+    context['is_chairman'] = is_chairman
+    context['is_chef'] = is_chef
+    if is_chairman:
+        form = VideoForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            video = Video.objects.create(title=request.POST['title'],
+                                         link=request.POST['link'])
+            return redirect('show-videos', page=1)
+        context['form'] = form
+        return render(request, 'dashboard/add_video.html', context)
+    else:
+        return redirect('home')
+
+
+# Edit video
+@login_required
+def edit_video(request, pk):
+    context = {}
+    my_user = user.objects.get(id=request.user.id)
+    is_chairman = (my_user.type == 'chairman')
+    is_chef = (my_user.type == 'editor_in_chief')
+    context['is_chairman'] = is_chairman
+    context['is_chef'] = is_chef
+    video = get_object_or_404(Video, pk=pk)
+    if my_user.type == 'chairman':
+        context['video'] = video
+        if request.POST:
+            video.title = request.POST['title']
+            video.link = request.POST['link']
+            video.save()
+            return redirect('show-videos', page=1)
+        else:
+            form = VideoForm(instance=video)
+            context['form'] = form
+        return render(request, 'dashboard/edit_video.html', context)
+    return redirect('show-videos', page=1)
+
+
+# delete video
+@login_required
+def delete_video(request, pk):
+    my_user = user.objects.get(id=request.user.id)
+    video = get_object_or_404(Video, pk=pk)
+    if my_user.type == 'chairman':
+        video.delete()
+        return redirect('show-videos', page=1)
+    else:
+        return redirect('home')
+
+
+# ِshow audios
+@login_required
+def show_audios(request, page):
+    my_user = user.objects.get(id=request.user.id)
+    is_chairman = (my_user.type == 'chairman')
+    is_chef = (my_user.type == 'editor_in_chief')
+    if my_user.type == 'chairman':
+        videos = Audio.objects.all()
+    else:
+        return redirect('home')
+    paginator = Paginator(videos, 10)
+    try:
+        videos = paginator.page(page)
+    except PageNotAnInteger:
+        videos = paginator.page(1)
+    except EmptyPage:
+        videos = paginator.page(paginator.num_pages)
+
+    context = {
+        'videos': videos,
+        'is_chairman': is_chairman,
+        'is_chef': is_chef,
+    }
+    return render(request, 'dashboard/show_audios.html', context)
+
+
+# Add audio
+@login_required
+def add_audio(request):
+    context = {}
+    my_user = user.objects.get(id=request.user.id)
+    is_chairman = (my_user.type == 'chairman')
+    is_chef = (my_user.type == 'editor_in_chief')
+    context['is_chairman'] = is_chairman
+    context['is_chef'] = is_chef
+    if is_chairman:
+        form = AudioForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            video = Audio.objects.create(title=request.POST['title'],
+                                         link=request.POST['link'])
+            return redirect('show-audios', page=1)
+        context['form'] = form
+        return render(request, 'dashboard/add_audio.html', context)
+    else:
+        return redirect('home')
+
+
+# Edit audio
+@login_required
+def edit_audio(request, pk):
+    context = {}
+    my_user = user.objects.get(id=request.user.id)
+    is_chairman = (my_user.type == 'chairman')
+    is_chef = (my_user.type == 'editor_in_chief')
+    context['is_chairman'] = is_chairman
+    context['is_chef'] = is_chef
+    video = get_object_or_404(Audio, pk=pk)
+    if my_user.type == 'chairman':
+        context['video'] = video
+        if request.POST:
+            video.title = request.POST['title']
+            video.link = request.POST['link']
+            video.save()
+            return redirect('show-audios', page=1)
+        else:
+            form = AudioForm(instance=video)
+            context['form'] = form
+        return render(request, 'dashboard/edit_audio.html', context)
+    return redirect('show-audios', page=1)
+
+
+# delete audio
+@login_required
+def delete_audio(request, pk):
+    my_user = user.objects.get(id=request.user.id)
+    audio = get_object_or_404(Audio, pk=pk)
+    if my_user.type == 'chairman':
+        audio.delete()
+        return redirect('show-audios', page=1)
+    else:
+        return redirect('home')
+
+
+# ِshow tvs
+@login_required
+def show_tvs(request, page):
+    my_user = user.objects.get(id=request.user.id)
+    is_chairman = (my_user.type == 'chairman')
+    is_chef = (my_user.type == 'editor_in_chief')
+    if my_user.type == 'chairman':
+        videos = TV.objects.all()
+    else:
+        return redirect('home')
+    paginator = Paginator(videos, 10)
+    try:
+        videos = paginator.page(page)
+    except PageNotAnInteger:
+        videos = paginator.page(1)
+    except EmptyPage:
+        videos = paginator.page(paginator.num_pages)
+
+    context = {
+        'videos': videos,
+        'is_chairman': is_chairman,
+        'is_chef': is_chef,
+    }
+    return render(request, 'dashboard/show_tvs.html', context)
+
+
+# Add tv
+@login_required
+def add_tv(request):
+    context = {}
+    my_user = user.objects.get(id=request.user.id)
+    is_chairman = (my_user.type == 'chairman')
+    is_chef = (my_user.type == 'editor_in_chief')
+    context['is_chairman'] = is_chairman
+    context['is_chef'] = is_chef
+    if is_chairman:
+        form = TVForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            video = TV.objects.create(title=request.POST['title'],
+                                      link=request.POST['link'])
+            return redirect('show-tvs', page=1)
+        context['form'] = form
+        return render(request, 'dashboard/add_tv.html', context)
+    else:
+        return redirect('home')
+
+
+# Edit tv
+@login_required
+def edit_tv(request, pk):
+    context = {}
+    my_user = user.objects.get(id=request.user.id)
+    is_chairman = (my_user.type == 'chairman')
+    is_chef = (my_user.type == 'editor_in_chief')
+    context['is_chairman'] = is_chairman
+    context['is_chef'] = is_chef
+    video = get_object_or_404(TV, pk=pk)
+    if my_user.type == 'chairman':
+        context['video'] = video
+        if request.POST:
+            video.title = request.POST['title']
+            video.link = request.POST['link']
+            video.save()
+            return redirect('show-tvs', page=1)
+        else:
+            form = TVForm(instance=video)
+            context['form'] = form
+        return render(request, 'dashboard/edit_tv.html', context)
+    return redirect('show-tvs', page=1)
+
+
+# delete tv
+@login_required
+def delete_tv(request, pk):
+    my_user = user.objects.get(id=request.user.id)
+    audio = get_object_or_404(TV, pk=pk)
+    if my_user.type == 'chairman':
+        audio.delete()
+        return redirect('show-tvs', page=1)
+    else:
+        return redirect('home')
