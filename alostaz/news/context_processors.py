@@ -1,5 +1,6 @@
-from .models import News, Category, Note, Comment, Tag_news, Tag, Book, Carton, Video, Audio, TV
-from user.models import user, Photo, Advertising, Survey
+from .models import Category
+from user.models import Photo
+
 
 def categories_processor(request):
     categories = Category.objects.filter(parent=None)

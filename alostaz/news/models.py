@@ -107,9 +107,9 @@ class Book(models.Model):
 
 
 class Carton(models.Model):
+    title = models.CharField(max_length=200, verbose_name='العنوان')
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.SET_NULL, null=True, blank=True)
-    title = models.CharField(max_length=200, verbose_name='العنوان')
     Publish_date = models.DateTimeField(auto_now_add=True)
     details = RichTextField(blank=True, null=True, verbose_name='البيانات')
     img = models.ImageField(upload_to='books/', verbose_name='الصوره')

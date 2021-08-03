@@ -71,6 +71,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'news.context_processors.categories_processor',
+                'user.context_processors.categories_processor',
             ],
         },
     },
@@ -143,3 +144,5 @@ AUTHENTICATION_BACKENDS = (
 )
 SITE_ID = 1
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'user.User'

@@ -5,7 +5,7 @@ from django.core import serializers
 from django.http import JsonResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import re
-from user.models import user, Photo, Advertising, Survey
+from user.models import User, Photo, Advertising, Survey
 
 # Create your views here.
 # Make a regular expression
@@ -81,11 +81,11 @@ def News_details(request, pk):
     news = get_object_or_404(News, pk=pk)
     username = 'غير معروف'
     if news.user:
-        name = get_object_or_404(user, id=news.user.id)
+        name = get_object_or_404(User, id=news.user.id)
         username = name.name
     if news.approval == False:
         if request.user.is_authenticated:
-            my_user = get_object_or_404(user, id=request.user.id)
+            my_user = get_object_or_404(User, id=request.user.id)
             if my_user.type == 'chairman' or my_user.type == 'editor_in_chief' or news.user == my_user:
                 pass
         else:

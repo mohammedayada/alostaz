@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from .models import (
-    user,
+    User,
     Photo,
     Advertising,
     Subscriber,
@@ -58,10 +57,8 @@ def user_login(request):
     # when request POST
     if request.POST:
         email = request.POST['email']
-        username = User.objects.filter(email=email).last().username
         password = request.POST['password']
-
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
             return redirect('show-news', page=1)
@@ -80,30 +77,27 @@ def user_logout(request):
 @login_required
 def add_user(request):
     # when request POST
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         msg = 'من فضلك ادخل بيانات صحيحه'
         if request.POST:
             if request.POST['email'] != "" and request.POST['name'] != "" and request.POST['password'] != "" and \
                     request.POST['type'] != "" and request.POST['phone'] != "":
-                if user.objects.filter(email=request.POST['email']).count() == 0:
-                    user.objects.create_user(
+                if User.objects.filter(email=request.POST['email']).count() == 0:
+                    new_user = User.objects.create_user(
                         name=request.POST['name'],
                         email=request.POST['email'],
-                        username=request.POST['email'],
                         phone=request.POST['phone'],
                         type=request.POST['type'],
                         password=request.POST['password'],
                         is_active=True,
                     )
+                    if request.POST['type'] == 'chairman':
+                        new_user.is_superuser = True
+                        new_user.save()
                     return redirect('show-users', page=1)
                 else:
                     msg = 'من فضلك ادخل بريد الكترونى صحيح'
         context = {'msg': msg,
-                   'is_chairman': is_chairman,
-                   'is_chef': is_chef,
                    }
         return render(request, 'dashboard/add_user.html', context)
     else:
@@ -113,13 +107,10 @@ def add_user(request):
 # Show user
 @login_required
 def show_users(request, page):
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    if my_user.type == 'chairman':
-        users = user.objects.all()
+    if request.user.type == 'chairman':
+        users = User.objects.all()
         if request.GET.get('search'):
-            users = user.objects.filter(name__icontains=request.GET.get('search'))
+            users = User.objects.filter(name__icontains=request.GET.get('search'))
         paginator = Paginator(users, 10)
         try:
             users = paginator.page(page)
@@ -128,8 +119,6 @@ def show_users(request, page):
         except EmptyPage:
             users = paginator.page(paginator.num_pages)
         context = {'users': users,
-                   'is_chairman': is_chairman,
-                   'is_chef': is_chef,
                    }
         return render(request, 'dashboard/show_users.html', context)
     else:
@@ -139,10 +128,7 @@ def show_users(request, page):
 @login_required
 def add_note(request):
     # when request POST
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
+    if request.user.type == 'chairman' or request.user.type == 'editor_in_chief':
         msg = 'من فضلك ادخل بيانات صحيحه'
         if request.POST:
             if request.POST['title'] != "" and request.POST['link'] != "":
@@ -153,8 +139,6 @@ def add_note(request):
                 )
                 return redirect('show-notes', page=1)
         context = {'msg': msg,
-                   'is_chairman': is_chairman,
-                   'is_chef': is_chef
                    }
         return render(request, 'dashboard/add_note.html', context)
     else:
@@ -164,10 +148,7 @@ def add_note(request):
 # Show user
 @login_required
 def show_notes(request, page):
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
+    if request.user.type == 'chairman' or request.user.type == 'editor_in_chief':
         notes = Note.objects.all()
         paginator = Paginator(notes, 10)
         try:
@@ -177,8 +158,6 @@ def show_notes(request, page):
         except EmptyPage:
             notes = paginator.page(paginator.num_pages)
         context = {'notes': notes,
-                   'is_chairman': is_chairman,
-                   'is_chef': is_chef,
                    }
         return render(request, 'dashboard/show_notes.html', context)
     else:
@@ -188,10 +167,7 @@ def show_notes(request, page):
 @login_required
 def add_tag(request):
     # when request POST
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
+    if request.user.type == 'chairman' or request.user.type == 'editor_in_chief':
         msg = 'من فضلك ادخل بيانات صحيحه'
         if request.POST:
             if request.POST['text'] != "":
@@ -202,8 +178,6 @@ def add_tag(request):
                     return redirect('show-tags', page=1)
                 msg = 'هذه الكلمه الدلاليه موجوده بالفعل'
         context = {'msg': msg,
-                   'is_chairman': is_chairman,
-                   'is_chef': is_chef,
                    }
         return render(request, 'dashboard/add_tag.html', context)
     else:
@@ -213,10 +187,7 @@ def add_tag(request):
 # Show tags
 @login_required
 def show_tags(request, page):
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
+    if request.user.type == 'chairman' or request.user.type == 'editor_in_chief':
         tags = Tag.objects.all()
         if request.GET.get('search'):
             tags = Tag.objects.filter(text__icontains=request.GET.get('search'))
@@ -228,8 +199,6 @@ def show_tags(request, page):
         except EmptyPage:
             tags = paginator.page(paginator.num_pages)
         context = {'tags': tags,
-                   'is_chairman': is_chairman,
-                   'is_chef': is_chef,
                    }
         return render(request, 'dashboard/show_tags.html', context)
     else:
@@ -240,11 +209,6 @@ def show_tags(request, page):
 @login_required
 def add_news(request):
     context = {}
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    context['is_chairman'] = is_chairman
-    context['is_chef'] = is_chef
     form = NewsForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         # save the form data to model
@@ -259,13 +223,10 @@ def add_news(request):
 # ِshow news
 @login_required
 def show_news(request, page):
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
     cond = True
-    if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
+    if request.user.type == 'chairman' or request.user.type == 'editor_in_chief':
         news_list = News.objects.filter(approval=False)
-    elif my_user.type == 'editor':
+    elif request.user.type == 'editor':
         news_list = News.objects.filter(approval=False, user=request.user)
     else:
         news_list = News.objects.filter(approval=False, user=request.user)
@@ -281,8 +242,6 @@ def show_news(request, page):
     context = {
         'cond': cond,
         'news_list': news_list,
-        'is_chairman': is_chairman,
-        'is_chef': is_chef,
     }
     return render(request, 'dashboard/show_news.html', context)
 
@@ -290,13 +249,12 @@ def show_news(request, page):
 # Approve news
 @login_required
 def approve_news(request, pk):
-    my_user = user.objects.get(id=request.user.id)
     news = get_object_or_404(News, pk=pk)
-    if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
+    if request.user.type == 'chairman' or request.user.type == 'editor_in_chief':
         news.approval = True
         news.save()
         return redirect('news_details', pk=pk)
-    elif my_user.type == 'editor':
+    elif request.user.type == 'editor':
         news = News.objects.filter(approval=False, user=request.user).last()
         news.approval = True
         news.save()
@@ -308,12 +266,11 @@ def approve_news(request, pk):
 # delete news
 @login_required
 def delete_news(request, pk):
-    my_user = user.objects.get(id=request.user.id)
     news = get_object_or_404(News, pk=pk)
-    if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
+    if request.user.type == 'chairman' or request.user.type == 'editor_in_chief':
         news.delete()
         return redirect('show-news', page=1)
-    elif my_user.type == 'editor':
+    elif request.user.type == 'editor':
         news = News.objects.filter(approval=False, user=request.user).last()
         news.delete()
         return redirect('show-news', page=1)
@@ -325,14 +282,9 @@ def delete_news(request, pk):
 @login_required
 def edit_news(request, pk):
     context = {}
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    context['is_chairman'] = is_chairman
-    context['is_chef'] = is_chef
     news = get_object_or_404(News, pk=pk)
     cond = News.objects.filter(pk=pk, user=request.user).count()
-    if my_user.type == 'chairman' or my_user.type == 'editor_in_chief' or cond > 0:
+    if request.user.type == 'chairman' or request.user.type == 'editor_in_chief' or cond > 0:
         context['news'] = news
         if request.POST:
             category = Category.objects.filter(id=request.POST['category']).last()
@@ -353,10 +305,7 @@ def edit_news(request, pk):
 # ِshow comments
 @login_required
 def show_comments(request, page):
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
+    if request.user.type == 'chairman' or request.user.type == 'editor_in_chief':
         comments = Comment.objects.filter(approval=False)
         paginator = Paginator(comments, 10)
         try:
@@ -370,8 +319,6 @@ def show_comments(request, page):
 
     context = {
         'comments': comments,
-        'is_chairman': is_chairman,
-        'is_chef': is_chef,
     }
     return render(request, 'dashboard/show_comments.html', context)
 
@@ -379,9 +326,8 @@ def show_comments(request, page):
 # Approve comment
 @login_required
 def approve_comment(request, pk):
-    my_user = user.objects.get(id=request.user.id)
     comment = get_object_or_404(Comment, pk=pk)
-    if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
+    if request.user.type == 'chairman' or request.user.type == 'editor_in_chief':
         comment.approval = True
         comment.news.commentCount += 1
         comment.news.save()
@@ -394,9 +340,8 @@ def approve_comment(request, pk):
 # delete comment
 @login_required
 def delete_comment(request, pk):
-    my_user = user.objects.get(id=request.user.id)
     comment = get_object_or_404(Comment, pk=pk)
-    if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
+    if request.user.type == 'chairman' or request.user.type == 'editor_in_chief':
         comment.delete()
         return redirect('show-comments', page=1)
     else:
@@ -406,9 +351,8 @@ def delete_comment(request, pk):
 # delete comment
 @login_required
 def delete_note(request, pk):
-    my_user = user.objects.get(id=request.user.id)
     note = get_object_or_404(Note, pk=pk)
-    if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
+    if request.user.type == 'chairman' or request.user.type == 'editor_in_chief':
         note.delete()
         return redirect('show-notes', page=1)
     else:
@@ -418,9 +362,8 @@ def delete_note(request, pk):
 # delete tag
 @login_required
 def delete_tag(request, pk):
-    my_user = user.objects.get(id=request.user.id)
     tag = get_object_or_404(Tag, pk=pk)
-    if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
+    if request.user.type == 'chairman' or request.user.type == 'editor_in_chief':
         tag.delete()
         return redirect('show-tags', page=1)
     else:
@@ -430,9 +373,8 @@ def delete_tag(request, pk):
 # delete tag
 @login_required
 def delete_user(request, pk):
-    my_user = user.objects.get(id=request.user.id)
-    user1 = get_object_or_404(user, pk=pk)
-    if my_user.type == 'chairman':
+    user1 = get_object_or_404(User, pk=pk)
+    if request.user.type == 'chairman':
         user1.delete()
         return redirect('show-users', page=1)
     else:
@@ -443,13 +385,8 @@ def delete_user(request, pk):
 @login_required
 def edit_user(request, pk):
     context = {}
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    context['is_chairman'] = is_chairman
-    context['is_chef'] = is_chef
-    user1 = get_object_or_404(user, pk=pk)
-    if my_user.type == 'chairman':
+    user1 = get_object_or_404(User, pk=pk)
+    if request.user.type == 'chairman':
         context['user'] = user1
         if request.POST:
             user1.name = request.POST['name']
@@ -467,13 +404,8 @@ def edit_user(request, pk):
 @login_required
 def change_user_pass(request, pk):
     context = {}
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    context['is_chairman'] = is_chairman
-    context['is_chef'] = is_chef
-    user1 = get_object_or_404(user, pk=pk)
-    if my_user.type == 'chairman':
+    user1 = get_object_or_404(User, pk=pk)
+    if request.user.type == 'chairman':
         context['user'] = user1
         if request.POST:
             user1.set_password(request.POST['password'])
@@ -490,10 +422,7 @@ def show_all_news(request, page):
     news_list = News.objects.all()
     if request.GET.get('search'):
         news_list = News.objects.filter(title__icontains=request.GET.get('search'))
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    if is_chef or is_chairman:
+    if (request.user.type == 'chairman') or (request.user.type == 'editor_in_chief'):
         paginator = Paginator(news_list, 10)
         try:
             news_list = paginator.page(page)
@@ -503,8 +432,6 @@ def show_all_news(request, page):
             news_list = paginator.page(paginator.num_pages)
         context = {
             'news_list': news_list,
-            'is_chairman': is_chairman,
-            'is_chef': is_chef,
         }
         return render(request, 'dashboard/show_all_news.html', context)
 
@@ -515,12 +442,7 @@ def show_all_news(request, page):
 @login_required
 def add_photo(request):
     context = {}
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    context['is_chairman'] = is_chairman
-    context['is_chef'] = is_chef
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         form = PhotoForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             Photo.objects.create(img=request.FILES['img'], title=request.POST['title'])
@@ -535,13 +457,8 @@ def add_photo(request):
 @login_required
 def edit_photo(request, pk):
     context = {}
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    context['is_chairman'] = is_chairman
-    context['is_chef'] = is_chef
     photo = get_object_or_404(Photo, pk=pk)
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         context['photo'] = photo
         if request.POST:
             if 'img' in request.FILES:
@@ -559,7 +476,7 @@ def edit_photo(request, pk):
 # Delete photo
 @login_required
 def delete_photo(request, pk):
-    my_user = user.objects.get(id=request.user.id)
+    my_user = User.objects.get(id=request.user.id)
     if pk == 1 or pk == 2 or pk == 3 or pk == 4 or pk == 5:
         return redirect('home')
     photo = get_object_or_404(Photo, pk=pk)
@@ -573,10 +490,7 @@ def delete_photo(request, pk):
 # show all photo
 @login_required
 def show_photos(request, page):
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         photos = Photo.objects.all()
         paginator = Paginator(photos, 10)
         try:
@@ -587,8 +501,6 @@ def show_photos(request, page):
             photos = paginator.page(paginator.num_pages)
         context = {
             'photos': photos,
-            'is_chairman': is_chairman,
-            'is_chef': is_chef,
         }
         return render(request, 'dashboard/show_photos.html', context)
     else:
@@ -599,12 +511,7 @@ def show_photos(request, page):
 @login_required
 def add_advertising(request):
     context = {}
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    context['is_chairman'] = is_chairman
-    context['is_chef'] = is_chef
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         form = AdvertisingForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             Advertising.objects.create(img=request.FILES['img'], title=request.POST['title'])
@@ -619,13 +526,8 @@ def add_advertising(request):
 @login_required
 def edit_advertising(request, pk):
     context = {}
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    context['is_chairman'] = is_chairman
-    context['is_chef'] = is_chef
     advertising = get_object_or_404(Advertising, pk=pk)
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         context['advertising'] = advertising
         if request.POST:
             if 'img' in request.FILES:
@@ -643,7 +545,7 @@ def edit_advertising(request, pk):
 # Delete Advertising
 @login_required
 def delete_advertising(request, pk):
-    my_user = user.objects.get(id=request.user.id)
+    my_user = User.objects.get(id=request.user.id)
     advertising = get_object_or_404(Advertising, pk=pk)
     if my_user.type == 'chairman':
         advertising.delete()
@@ -655,10 +557,7 @@ def delete_advertising(request, pk):
 # show all Advertising
 @login_required
 def show_all_advertising(request, page):
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         advertisings = Advertising.objects.all()
         paginator = Paginator(advertisings, 10)
         try:
@@ -669,8 +568,6 @@ def show_all_advertising(request, page):
             advertisings = paginator.page(paginator.num_pages)
         context = {
             'advertisings': advertisings,
-            'is_chairman': is_chairman,
-            'is_chef': is_chef,
         }
         return render(request, 'dashboard/show_all_advertisings.html', context)
     else:
@@ -680,9 +577,8 @@ def show_all_advertising(request, page):
 # Delete Subscriber
 @login_required
 def delete_subscriber(request, pk):
-    my_user = user.objects.get(id=request.user.id)
     subscriber = get_object_or_404(Subscriber, pk=pk)
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         subscriber.delete()
         return redirect('show-all-advertising', page=1)
     else:
@@ -692,10 +588,7 @@ def delete_subscriber(request, pk):
 # show all subscribers
 @login_required
 def show_subscribers(request, page):
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         subscribers = Subscriber.objects.all()
         if request.GET.get('search'):
             subscribers = Subscriber.objects.filter(email__icontains=request.GET.get('search'))
@@ -708,8 +601,6 @@ def show_subscribers(request, page):
             subscribers = paginator.page(paginator.num_pages)
         context = {
             'subscribers': subscribers,
-            'is_chairman': is_chairman,
-            'is_chef': is_chef,
         }
         return render(request, 'dashboard/show_subscribers.html', context)
     else:
@@ -737,11 +628,10 @@ def postSubscriber(request):
 # Add tag to news
 @login_required
 def add_tag_to_news(request, tag_id, news_id):
-    my_user = user.objects.get(id=request.user.id)
     news = get_object_or_404(News, pk=news_id)
     cond = News.objects.filter(pk=news_id, user=request.user).count()
     tag = Tag.objects.filter(pk=tag_id).last()
-    if my_user.type == 'chairman' or my_user.type == 'editor_in_chief' or cond > 0:
+    if request.user.type == 'chairman' or request.user.type == 'editor_in_chief' or cond > 0:
         if news and tag:
             Tag_news.objects.create(tag=tag, news=news)
     return redirect('news_details', pk=news_id)
@@ -750,11 +640,10 @@ def add_tag_to_news(request, tag_id, news_id):
 # delete tag from news
 @login_required
 def delete_tag_from_news(request, tag_id, news_id):
-    my_user = user.objects.get(id=request.user.id)
     news = get_object_or_404(News, pk=news_id)
     cond = News.objects.filter(pk=news_id, user=request.user).count()
     tag = Tag.objects.filter(pk=tag_id).last()
-    if my_user.type == 'chairman' or my_user.type == 'editor_in_chief' or cond > 0:
+    if request.user.type == 'chairman' or request.user.type == 'editor_in_chief' or cond > 0:
         if news and tag:
             Tag_news.objects.filter(tag=tag, news=news).last().delete()
     return redirect('news_details', pk=news_id)
@@ -762,11 +651,8 @@ def delete_tag_from_news(request, tag_id, news_id):
 
 @login_required
 def tags_page(request, page, pk):
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
     cond = News.objects.filter(pk=pk, user=request.user).count()
-    if my_user.type == 'chairman' or my_user.type == 'editor_in_chief' or cond > 0:
+    if request.user.type == 'chairman' or request.user.type == 'editor_in_chief' or cond > 0:
         tags = Tag.objects.all()
         if request.GET.get('search'):
             tags = Tag.objects.filter(text__icontains=request.GET.get('search'))
@@ -779,8 +665,6 @@ def tags_page(request, page, pk):
             tags = paginator.page(paginator.num_pages)
         news = News.objects.filter(pk=pk).last()
         context = {
-            'is_chairman': is_chairman,
-            'is_chef': is_chef,
             'tags': tags,
             'news': news,
         }
@@ -792,12 +676,7 @@ def tags_page(request, page, pk):
 @login_required
 def add_survey(request):
     context = {}
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    context['is_chairman'] = is_chairman
-    context['is_chef'] = is_chef
-    if is_chairman:
+    if request.user.type == 'editor_in_chief':
         form = SurveyForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             survey = Survey.objects.create(question=request.POST['question'], first_choice=request.POST['first_choice'],
@@ -811,10 +690,7 @@ def add_survey(request):
 
 @login_required
 def show_surveys(request, page):
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    if my_user.type == 'chairman' or my_user.type == 'editor_in_chief':
+    if request.user.type == 'chairman' or request.user.type == 'editor_in_chief':
         surveys = Survey.objects.all()
         if request.GET.get('search'):
             surveys = Survey.objects.filter(question__icontains=request.GET.get('search'))
@@ -826,8 +702,6 @@ def show_surveys(request, page):
         except EmptyPage:
             surveys = paginator.page(paginator.num_pages)
         context = {'surveys': surveys,
-                   'is_chairman': is_chairman,
-                   'is_chef': is_chef,
                    }
         return render(request, 'dashboard/show_surveys.html', context)
     else:
@@ -838,13 +712,8 @@ def show_surveys(request, page):
 @login_required
 def edit_survey(request, pk):
     context = {}
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    context['is_chairman'] = is_chairman
-    context['is_chef'] = is_chef
     survey = get_object_or_404(Survey, pk=pk)
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         context['survey'] = survey
         if request.POST:
             survey.question = request.POST['question']
@@ -866,9 +735,8 @@ def edit_survey(request, pk):
 # Delete survey
 @login_required
 def delete_survey(request, pk):
-    my_user = user.objects.get(id=request.user.id)
     survey = get_object_or_404(Survey, pk=pk)
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         survey.delete()
         return redirect('show-surveys', page=1)
     else:
@@ -878,10 +746,7 @@ def delete_survey(request, pk):
 # ِshow comments
 @login_required
 def show_categories(request, page):
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         categories = Category.objects.all()
         paginator = Paginator(categories, 10)
         try:
@@ -895,8 +760,6 @@ def show_categories(request, page):
 
     context = {
         'categories': categories,
-        'is_chairman': is_chairman,
-        'is_chef': is_chef,
     }
     return render(request, 'dashboard/show_categories.html', context)
 
@@ -905,12 +768,7 @@ def show_categories(request, page):
 @login_required
 def add_category(request):
     context = {}
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    context['is_chairman'] = is_chairman
-    context['is_chef'] = is_chef
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         form = CategoryForm(request.POST or None)
         print(request.POST)
         if form.is_valid():
@@ -929,9 +787,8 @@ def add_category(request):
 # Delete category
 @login_required
 def delete_category(request, pk):
-    my_user = user.objects.get(id=request.user.id)
     category = get_object_or_404(Category, pk=pk)
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         category.delete()
         return redirect('show-categories', page=1)
     else:
@@ -942,13 +799,8 @@ def delete_category(request, pk):
 @login_required
 def edit_category(request, pk):
     context = {}
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    context['is_chairman'] = is_chairman
-    context['is_chef'] = is_chef
     category = get_object_or_404(Category, pk=pk)
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         context['category'] = category
         if request.POST:
             category.name = request.POST['name']
@@ -970,12 +822,7 @@ def edit_category(request, pk):
 @login_required
 def add_book(request):
     context = {}
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    context['is_chairman'] = is_chairman
-    context['is_chef'] = is_chef
-    if is_chairman:
+    if request.user.type == 'editor_in_chief':
         form = BookForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             book = Book.objects.create(img=request.FILES['img'], title=request.POST['title'],
@@ -990,10 +837,7 @@ def add_book(request):
 # ِshow books
 @login_required
 def show_books(request, page):
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         books = Book.objects.all()
     else:
         return redirect('home')
@@ -1007,8 +851,6 @@ def show_books(request, page):
 
     context = {
         'books': books,
-        'is_chairman': is_chairman,
-        'is_chef': is_chef,
     }
     return render(request, 'dashboard/show_books.html', context)
 
@@ -1016,9 +858,8 @@ def show_books(request, page):
 # delete book
 @login_required
 def delete_book(request, pk):
-    my_user = user.objects.get(id=request.user.id)
     book = get_object_or_404(Book, pk=pk)
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         book.delete()
         return redirect('show-books', page=1)
     else:
@@ -1029,13 +870,8 @@ def delete_book(request, pk):
 @login_required
 def edit_book(request, pk):
     context = {}
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    context['is_chairman'] = is_chairman
-    context['is_chef'] = is_chef
     book = get_object_or_404(Book, pk=pk)
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         context['book'] = book
         if request.POST:
             if 'img' in request.FILES:
@@ -1054,10 +890,7 @@ def edit_book(request, pk):
 # ِshow videos
 @login_required
 def show_videos(request, page):
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         videos = Video.objects.all()
     else:
         return redirect('home')
@@ -1071,8 +904,6 @@ def show_videos(request, page):
 
     context = {
         'videos': videos,
-        'is_chairman': is_chairman,
-        'is_chef': is_chef,
     }
     return render(request, 'dashboard/show_videos.html', context)
 
@@ -1081,12 +912,7 @@ def show_videos(request, page):
 @login_required
 def add_video(request):
     context = {}
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    context['is_chairman'] = is_chairman
-    context['is_chef'] = is_chef
-    if is_chairman:
+    if request.user.type == 'chairman':
         form = VideoForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             video = Video.objects.create(title=request.POST['title'],
@@ -1102,13 +928,8 @@ def add_video(request):
 @login_required
 def edit_video(request, pk):
     context = {}
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    context['is_chairman'] = is_chairman
-    context['is_chef'] = is_chef
     video = get_object_or_404(Video, pk=pk)
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         context['video'] = video
         if request.POST:
             video.title = request.POST['title']
@@ -1125,9 +946,8 @@ def edit_video(request, pk):
 # delete video
 @login_required
 def delete_video(request, pk):
-    my_user = user.objects.get(id=request.user.id)
     video = get_object_or_404(Video, pk=pk)
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         video.delete()
         return redirect('show-videos', page=1)
     else:
@@ -1137,10 +957,7 @@ def delete_video(request, pk):
 # ِshow audios
 @login_required
 def show_audios(request, page):
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         videos = Audio.objects.all()
     else:
         return redirect('home')
@@ -1154,8 +971,6 @@ def show_audios(request, page):
 
     context = {
         'videos': videos,
-        'is_chairman': is_chairman,
-        'is_chef': is_chef,
     }
     return render(request, 'dashboard/show_audios.html', context)
 
@@ -1164,12 +979,7 @@ def show_audios(request, page):
 @login_required
 def add_audio(request):
     context = {}
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    context['is_chairman'] = is_chairman
-    context['is_chef'] = is_chef
-    if is_chairman:
+    if request.user.type == 'chairman':
         form = AudioForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             video = Audio.objects.create(title=request.POST['title'],
@@ -1185,13 +995,8 @@ def add_audio(request):
 @login_required
 def edit_audio(request, pk):
     context = {}
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    context['is_chairman'] = is_chairman
-    context['is_chef'] = is_chef
     video = get_object_or_404(Audio, pk=pk)
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         context['video'] = video
         if request.POST:
             video.title = request.POST['title']
@@ -1208,9 +1013,8 @@ def edit_audio(request, pk):
 # delete audio
 @login_required
 def delete_audio(request, pk):
-    my_user = user.objects.get(id=request.user.id)
     audio = get_object_or_404(Audio, pk=pk)
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         audio.delete()
         return redirect('show-audios', page=1)
     else:
@@ -1220,10 +1024,7 @@ def delete_audio(request, pk):
 # ِshow tvs
 @login_required
 def show_tvs(request, page):
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         videos = TV.objects.all()
     else:
         return redirect('home')
@@ -1237,8 +1038,6 @@ def show_tvs(request, page):
 
     context = {
         'videos': videos,
-        'is_chairman': is_chairman,
-        'is_chef': is_chef,
     }
     return render(request, 'dashboard/show_tvs.html', context)
 
@@ -1247,12 +1046,7 @@ def show_tvs(request, page):
 @login_required
 def add_tv(request):
     context = {}
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    context['is_chairman'] = is_chairman
-    context['is_chef'] = is_chef
-    if is_chairman:
+    if request.user.type == 'chairman':
         form = TVForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             video = TV.objects.create(title=request.POST['title'],
@@ -1268,13 +1062,8 @@ def add_tv(request):
 @login_required
 def edit_tv(request, pk):
     context = {}
-    my_user = user.objects.get(id=request.user.id)
-    is_chairman = (my_user.type == 'chairman')
-    is_chef = (my_user.type == 'editor_in_chief')
-    context['is_chairman'] = is_chairman
-    context['is_chef'] = is_chef
     video = get_object_or_404(TV, pk=pk)
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         context['video'] = video
         if request.POST:
             video.title = request.POST['title']
@@ -1291,9 +1080,8 @@ def edit_tv(request, pk):
 # delete tv
 @login_required
 def delete_tv(request, pk):
-    my_user = user.objects.get(id=request.user.id)
     audio = get_object_or_404(TV, pk=pk)
-    if my_user.type == 'chairman':
+    if request.user.type == 'chairman':
         audio.delete()
         return redirect('show-tvs', page=1)
     else:
