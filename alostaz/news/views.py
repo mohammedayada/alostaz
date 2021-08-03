@@ -26,8 +26,6 @@ def check(email):
 
 # Home functions
 def Home(request):
-    # الأقسام categories
-    categories = Category.objects.filter(parent=None)
     # Latest news أحدث الأخبار
     latest_news = News.objects.filter(approval=True).order_by('-Publish_date')[:5]
     # Breaking news أخبار عاجله
@@ -41,9 +39,6 @@ def Home(request):
     # Notes العناوين
     notes = Note.objects.all().order_by('-id')
     # Notes العناوين
-    photo1 = Photo.objects.filter(pk=1).last()
-    photo2 = Photo.objects.filter(pk=2).last()
-    photo3 = Photo.objects.filter(pk=3).last()
     photo4 = Photo.objects.filter(pk=4).last()
     photo5 = Photo.objects.filter(pk=5).last()
     photos = Photo.objects.all()[5:]
@@ -63,16 +58,12 @@ def Home(request):
         'audios': audios,
         'tvs': tvs,
         'latest_news': latest_news,
-        'categories': categories,
         'books1': books1,
         'books2': books2,
         'breaking_news0': breaking_news0,
         'breaking_news1': breaking_news1,
         'most_read': most_read,
         'notes': notes,
-        'photo1': photo1,
-        'photo2': photo2,
-        'photo3': photo3,
         'photo4': photo4,
         'photo5': photo5,
         'photos': photos,
@@ -87,8 +78,6 @@ def Home(request):
 
 # News details page
 def News_details(request, pk):
-    # الأقسام categories
-    categories = Category.objects.filter(parent=None)
     news = get_object_or_404(News, pk=pk)
     username = 'غير معروف'
     if news.user:
@@ -113,23 +102,16 @@ def News_details(request, pk):
     # Related News الموضوعات المتعلقه
     related_news = News.objects.filter(Q(approval=True) & Q(category=news.category) & ~Q(pk=news.pk)).order_by(
         '-Publish_date')[:3]
-    photo1 = Photo.objects.filter(pk=1).last()
-    photo2 = Photo.objects.filter(pk=2).last()
-    photo3 = Photo.objects.filter(pk=3).last()
     photos = Photo.objects.all()[5:10]
     advertisings = Photo.objects.all()[10:15]
 
     context = {
-        'categories': categories,
         'news': news,
         'username': username,
         'most_read': most_read,
         'comments': comments,
         'tag_news': tag_news,
         'related_news': related_news,
-        'photo1': photo1,
-        'photo2': photo2,
-        'photo3': photo3,
         'photos': photos,
         'advertisings': advertisings,
     }
@@ -156,8 +138,6 @@ def postComment(request, pk):
 
 # News page
 def News_page(request, pk, page):
-    # الأقسام categories
-    categories = Category.objects.filter(parent=None)
     category = get_object_or_404(Category, pk=pk)
     news_list = category.all_news()
     paginator = Paginator(news_list, 10)
@@ -172,20 +152,13 @@ def News_page(request, pk, page):
     most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
     # Notes العناوين
     notes = Note.objects.all().order_by('-id')[:3]
-    photo1 = Photo.objects.filter(pk=1).last()
-    photo2 = Photo.objects.filter(pk=2).last()
-    photo3 = Photo.objects.filter(pk=3).last()
     photos = Photo.objects.all()[5:10]
     advertisings = Photo.objects.all()[10:15]
     context = {
-        'categories': categories,
         'news_list': news,
         'category': category,
         'most_read': most_read,
         'notes': notes,
-        'photo1': photo1,
-        'photo2': photo2,
-        'photo3': photo3,
         'photos': photos,
         'advertisings': advertisings,
     }
@@ -194,8 +167,6 @@ def News_page(request, pk, page):
 
 # News tag page
 def News_tag(request, pk, page):
-    # الأقسام categories
-    categories = Category.objects.filter(parent=None)
     tag = Tag.objects.filter(pk=pk).first()
     news_tag_list = Tag_news.objects.filter(tag=tag)
     paginator = Paginator(news_tag_list, 10)
@@ -210,20 +181,13 @@ def News_tag(request, pk, page):
 
     # Notes العناوين
     notes = Note.objects.all().order_by('-id')[:3]
-    photo1 = Photo.objects.filter(pk=1).last()
-    photo2 = Photo.objects.filter(pk=2).last()
-    photo3 = Photo.objects.filter(pk=3).last()
     photos = Photo.objects.all()[5:10]
     advertisings = Photo.objects.all()[10:15]
     context = {
-        'categories': categories,
         'news_tags': news_tags,
         'tag': tag,
         'most_read': most_read,
         'notes': notes,
-        'photo1': photo1,
-        'photo2': photo2,
-        'photo3': photo3,
         'photos': photos,
         'advertisings': advertisings,
     }
@@ -231,41 +195,22 @@ def News_tag(request, pk, page):
 
 
 def Who_us(request):
-    # الأقسام categories
-    categories = Category.objects.filter(parent=None)
-    photo1 = Photo.objects.filter(pk=1).last()
-    photo2 = Photo.objects.filter(pk=2).last()
-    photo3 = Photo.objects.filter(pk=3).last()
-    return render(request, 'who-us.html', {
-        'categories': categories,
-        'photo1': photo1,
-        'photo2': photo2,
-        'photo3': photo3,
-    })
+    return render(request, 'who-us.html')
+
 
 def post_your_photo(request):
-    # الأقسام categories
-    categories = Category.objects.filter(parent=None)
     # Notes العناوين
     notes = Note.objects.all().order_by('-id')[:3]
-    photo1 = Photo.objects.filter(pk=1).last()
-    photo2 = Photo.objects.filter(pk=2).last()
-    photo3 = Photo.objects.filter(pk=3).last()
     photos = Photo.objects.all()[5:10]
     advertisings = Photo.objects.all()[10:15]
     return render(request, 'post-your-photo.html', {
-        'categories': categories,
         'notes': notes,
-        'photo1': photo1,
-        'photo2': photo2,
-        'photo3': photo3,
         'photos': photos,
         'advertisings': advertisings,
     })
 
+
 def Search_news(request, page):
-    # الأقسام categories
-    categories = Category.objects.filter(parent=None)
     news = News.objects.all()
     search = 'الكل'
     if request.GET.get('search'):
@@ -282,20 +227,13 @@ def Search_news(request, page):
     most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
     # Notes العناوين
     notes = Note.objects.all().order_by('-id')[:3]
-    photo1 = Photo.objects.filter(pk=1).last()
-    photo2 = Photo.objects.filter(pk=2).last()
-    photo3 = Photo.objects.filter(pk=3).last()
     photos = Photo.objects.all()[5:10]
     advertisings = Photo.objects.all()[10:15]
     context = {
-        'categories': categories,
         'search': search,
         'news_list': news,
         'most_read': most_read,
         'notes': notes,
-        'photo1': photo1,
-        'photo2': photo2,
-        'photo3': photo3,
         'photos': photos,
         'advertisings': advertisings,
     }
@@ -304,8 +242,6 @@ def Search_news(request, page):
 
 # Last news
 def Last_news(request, page):
-    # الأقسام categories
-    categories = Category.objects.filter(parent=None)
     news_list = News.objects.filter(approval=True).order_by('-id')
     paginator = Paginator(news_list, 10)
     try:
@@ -319,20 +255,13 @@ def Last_news(request, page):
     most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
     # Notes العناوين
     notes = Note.objects.all().order_by('-id')[:3]
-    photo1 = Photo.objects.filter(pk=1).last()
-    photo2 = Photo.objects.filter(pk=2).last()
-    photo3 = Photo.objects.filter(pk=3).last()
     photos = Photo.objects.all()[5:10]
     advertisings = Photo.objects.all()[10:15]
 
     context = {
-        'categories': categories,
         'news_list': news,
         'most_read': most_read,
         'notes': notes,
-        'photo1': photo1,
-        'photo2': photo2,
-        'photo3': photo3,
         'photos': photos,
         'advertisings': advertisings,
     }
@@ -341,8 +270,6 @@ def Last_news(request, page):
 
 # Most read
 def most_read(request, page):
-    # الأقسام categories
-    categories = Category.objects.filter(parent=None)
     news_list = News.objects.filter(approval=True).order_by('-viewCount')
     paginator = Paginator(news_list, 10)
     try:
@@ -354,20 +281,13 @@ def most_read(request, page):
 
     # Notes العناوين
     notes = Note.objects.all().order_by('-id')[:3]
-    photo1 = Photo.objects.filter(pk=1).last()
-    photo2 = Photo.objects.filter(pk=2).last()
-    photo3 = Photo.objects.filter(pk=3).last()
     last_news = News.objects.filter(approval=True).order_by('-id')[:6]
     photos = Photo.objects.all()[5:10]
     advertisings = Photo.objects.all()[10:15]
     context = {
-        'categories': categories,
         'news_list': news,
         'last_news': last_news,
         'notes': notes,
-        'photo1': photo1,
-        'photo2': photo2,
-        'photo3': photo3,
         'photos': photos,
         'advertisings': advertisings,
     }
@@ -376,8 +296,6 @@ def most_read(request, page):
 
 # Most comment
 def most_comment(request, page):
-    # الأقسام categories
-    categories = Category.objects.filter(parent=None)
     news_list = News.objects.filter(approval=True).order_by('-commentCount')
     paginator = Paginator(news_list, 10)
     try:
@@ -389,21 +307,14 @@ def most_comment(request, page):
 
     # Notes العناوين
     notes = Note.objects.all().order_by('-id')[:3]
-    photo1 = Photo.objects.filter(pk=1).last()
-    photo2 = Photo.objects.filter(pk=2).last()
-    photo3 = Photo.objects.filter(pk=3).last()
     last_news = News.objects.filter(approval=True).order_by('-id')[:6]
     photos = Photo.objects.all()[5:10]
     advertisings = Photo.objects.all()[10:15]
 
     context = {
-        'categories': categories,
         'news_list': news,
         'last_news': last_news,
         'notes': notes,
-        'photo1': photo1,
-        'photo2': photo2,
-        'photo3': photo3,
         'photos': photos,
         'advertisings': advertisings,
     }
@@ -533,13 +444,8 @@ def create_category(request):
 
 
 def make_survey(request, pk):
-    # الأقسام categories
-    categories = Category.objects.filter(parent=None)
     # Most read الأكثر قراءه
     most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
-    photo1 = Photo.objects.filter(pk=1).last()
-    photo2 = Photo.objects.filter(pk=2).last()
-    photo3 = Photo.objects.filter(pk=3).last()
     photos = Photo.objects.all()[5:10]
     advertisings = Photo.objects.all()[10:15]
     survey = get_object_or_404(Survey, pk=pk)
@@ -553,11 +459,7 @@ def make_survey(request, pk):
                 survey.all += 1
             survey.save()
     context = {
-        'categories': categories,
         'most_read': most_read,
-        'photo1': photo1,
-        'photo2': photo2,
-        'photo3': photo3,
         'photos': photos,
         'advertisings': advertisings,
         'survey': survey,
@@ -566,39 +468,26 @@ def make_survey(request, pk):
     return render(request, 'make_survey.html', context)
 
 
-
 # book details page
 def book_details(request, pk):
-    # الأقسام categories
-    categories = Category.objects.filter(parent=None)
     book = get_object_or_404(Book, pk=pk)
     # To increament book count
     book.incrementViewCount()
     most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
-    photo1 = Photo.objects.filter(pk=1).last()
-    photo2 = Photo.objects.filter(pk=2).last()
-    photo3 = Photo.objects.filter(pk=3).last()
     photos = Photo.objects.all()[5:10]
     advertisings = Photo.objects.all()[10:15]
 
     context = {
         'book': book,
-        'categories': categories,
         'most_read': most_read,
-        'photo1': photo1,
-        'photo2': photo2,
-        'photo3': photo3,
         'photos': photos,
         'advertisings': advertisings,
     }
     return render(request, 'book-details.html', context)
 
 
-
 # News page
 def books_page(request, page):
-    # الأقسام categories
-    categories = Category.objects.filter(parent=None)
     news_list = Book.objects.all()
     paginator = Paginator(news_list, 10)
     try:
@@ -612,19 +501,12 @@ def books_page(request, page):
     most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
     # Notes العناوين
     notes = Note.objects.all().order_by('-id')[:3]
-    photo1 = Photo.objects.filter(pk=1).last()
-    photo2 = Photo.objects.filter(pk=2).last()
-    photo3 = Photo.objects.filter(pk=3).last()
     photos = Photo.objects.all()[5:10]
     advertisings = Photo.objects.all()[10:15]
     context = {
-        'categories': categories,
         'news_list': news,
         'most_read': most_read,
         'notes': notes,
-        'photo1': photo1,
-        'photo2': photo2,
-        'photo3': photo3,
         'photos': photos,
         'advertisings': advertisings,
     }
@@ -633,8 +515,6 @@ def books_page(request, page):
 
 # News page
 def cartons_page(request, page):
-    # الأقسام categories
-    categories = Category.objects.filter(parent=None)
     news_list = Carton.objects.all()
     paginator = Paginator(news_list, 10)
     try:
@@ -648,19 +528,12 @@ def cartons_page(request, page):
     most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
     # Notes العناوين
     notes = Note.objects.all().order_by('-id')[:3]
-    photo1 = Photo.objects.filter(pk=1).last()
-    photo2 = Photo.objects.filter(pk=2).last()
-    photo3 = Photo.objects.filter(pk=3).last()
     photos = Photo.objects.all()[5:10]
     advertisings = Photo.objects.all()[10:15]
     context = {
-        'categories': categories,
         'news_list': news,
         'most_read': most_read,
         'notes': notes,
-        'photo1': photo1,
-        'photo2': photo2,
-        'photo3': photo3,
         'photos': photos,
         'advertisings': advertisings,
     }
@@ -669,26 +542,17 @@ def cartons_page(request, page):
 
 # News details page
 def carton_details(request, pk):
-    # الأقسام categories
-    categories = Category.objects.filter(parent=None)
     news = get_object_or_404(Carton, pk=pk)
     # To increament news count
     news.incrementViewCount()
     # Most read الأكثر قراءه
     most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
-    photo1 = Photo.objects.filter(pk=1).last()
-    photo2 = Photo.objects.filter(pk=2).last()
-    photo3 = Photo.objects.filter(pk=3).last()
     photos = Photo.objects.all()[5:10]
     advertisings = Photo.objects.all()[10:15]
 
     context = {
-        'categories': categories,
         'news': news,
         'most_read': most_read,
-        'photo1': photo1,
-        'photo2': photo2,
-        'photo3': photo3,
         'photos': photos,
         'advertisings': advertisings,
     }
@@ -697,8 +561,6 @@ def carton_details(request, pk):
 
 # News page
 def videos_page(request, page):
-    # الأقسام categories
-    categories = Category.objects.filter(parent=None)
     news_list = Video.objects.all()
     paginator = Paginator(news_list, 10)
     try:
@@ -712,19 +574,12 @@ def videos_page(request, page):
     most_read = News.objects.filter(approval=True).order_by('-viewCount', '-Publish_date')[:6]
     # Notes العناوين
     notes = Note.objects.all().order_by('-id')[:3]
-    photo1 = Photo.objects.filter(pk=1).last()
-    photo2 = Photo.objects.filter(pk=2).last()
-    photo3 = Photo.objects.filter(pk=3).last()
     photos = Photo.objects.all()[5:10]
     advertisings = Photo.objects.all()[10:15]
     context = {
-        'categories': categories,
         'news_list': news,
         'most_read': most_read,
         'notes': notes,
-        'photo1': photo1,
-        'photo2': photo2,
-        'photo3': photo3,
         'photos': photos,
         'advertisings': advertisings,
     }
